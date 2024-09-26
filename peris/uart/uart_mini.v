@@ -332,4 +332,12 @@ uart_regs regs (
 	.rx_ren          (rxfifo_ren)
 );
 
+`ifdef SIMULATION
+always @ (posedge clk) begin
+    if (csr_en && txfifo_wen) begin
+        $write("%c", txfifo_wdata);
+    end
+end
+`endif
+
 endmodule
