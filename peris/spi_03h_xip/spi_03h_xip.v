@@ -124,9 +124,10 @@ always @ (posedge clk or negedge rst_n) begin
 			if (spi_sck) begin
 				spi_sck <= 1'b0;
 				shift_ctr <= shift_ctr - 1'b1;
-				shift_reg[W_DATA-1:1] <= shift_reg[W_DATA-2:0];
 				if (~|shift_ctr) begin
 					direct_mode_busy <= 1'b0;
+				end else begin
+					shift_reg[W_DATA-1:1] <= shift_reg[W_DATA-2:0];
 				end
 			end else begin
 				spi_sck <= 1'b1;
@@ -169,6 +170,6 @@ end
 
 assign ahbls_hready_resp = shift_state == S_IDLE;
 assign ahbls_hresp = 1'b0;
-assign ahbls_hrdata = shift_reg;
+assign ahbls_hrdata = {shift_reg[7:0], shift_reg[15:8], shift_reg[23:16], shift_reg[31:24]};
 
 endmodule
