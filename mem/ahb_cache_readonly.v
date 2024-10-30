@@ -139,6 +139,27 @@ always @ (posedge clk or negedge rst_n) begin
 	endcase
 end
 
+`ifdef SIMULATION
+localparam COUNTER_BITS = 32;
+
+reg [COUNTER_BITS-1:0] req_counter;
+reg [COUNTER_BITS-1:0] hit_counter;
+
+always @ (posedge clk or negedge rst_n) begin
+	if (!rst_n) begin
+		req_counter <= {COUNTER_BITS{1'b0}};
+		hit_counter <= {COUNTER_BITS{1'b0}};
+	end else begin
+		if (cache_state == S_CHECK) begin
+			req_counter <= req_counter + 1'b1;
+			if (cache_hit) begin
+				hit_counter <= hit_counter + 1'b1;
+			end
+		end
+	end
+end
+`endif
+
 // ----------------------------------------------------------------------------
 // Burst address generation
 
