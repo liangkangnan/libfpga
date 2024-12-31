@@ -1,0 +1,10 @@
+file decoder.v
+file divider.v
+file fifo.v
+file isr.v
+file machine.v
+file osr.v
+file pc.v
+file pio.v
+file pio_regs.v
+file scratch.v

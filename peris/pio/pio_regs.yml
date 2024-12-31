@@ -1,0 +1,591 @@
+name: pio
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: ctrl
+    info: PIO control register
+    bits:
+      - {b: [11, 8], name: clkdiv_restart, access: wf, rst: 0,
+        info: "Restart a state machine’s clock divider."}
+      - {b: [7, 4], name: sm_restart, access: wf, rst: 0,
+        info: "Write 1 to restart state machine."}
+      - {b: [3, 0], name: sm_enable, access: rw, rst: 0,
+        info: "Enable/disable each of the four state machines by writing 1/0 to each of these four bits."}
+
+  - name: irq_inte
+    info: PIO interrupt enable register
+    bits:
+      - {b: 15, name: sm3_txnfull, access: rw, rst: 0,
+        info: "State machine 3 tx fifo not full IRQ enable."}
+      - {b: 14, name: sm2_txnfull, access: rw, rst: 0,
+        info: "State machine 2 tx fifo not full IRQ enable."}
+      - {b: 13, name: sm1_txnfull, access: rw, rst: 0,
+        info: "State machine 1 tx fifo not full IRQ enable."}
+      - {b: 12, name: sm0_txnfull, access: rw, rst: 0,
+        info: "State machine 0 tx fifo not full IRQ enable."}
+      - {b: 11, name: sm3_rxnempty, access: rw, rst: 0,
+        info: "State machine 3 rx fifo not empty IRQ enable."}
+      - {b: 10, name: sm2_rxnempty, access: rw, rst: 0,
+        info: "State machine 2 rx fifo not empty IRQ enable."}
+      - {b: 9, name: sm1_rxnempty, access: rw, rst: 0,
+        info: "State machine 1 rx fifo not empty IRQ enable."}
+      - {b: 8, name: sm0_rxnempty, access: rw, rst: 0,
+        info: "State machine 0 rx fifo not empty IRQ enable."}
+      - {b: [7, 0], name: sm_int, access: rw, rst: 0,
+        info: "State machine interrupt enable."}
+
+  - name: irq_intp
+    info: PIO interrupt pending register
+    bits:
+      - {b: 15, name: sm3_txnfull, access: w1c, rst: 0,
+        info: "State machine 3 tx fifo not full IRQ pending."}
+      - {b: 14, name: sm2_txnfull, access: w1c, rst: 0,
+        info: "State machine 2 tx fifo not full IRQ pending."}
+      - {b: 13, name: sm1_txnfull, access: w1c, rst: 0,
+        info: "State machine 1 tx fifo not full IRQ pending."}
+      - {b: 12, name: sm0_txnfull, access: w1c, rst: 0,
+        info: "State machine 0 tx fifo not full IRQ pending."}
+      - {b: 11, name: sm3_rxnempty, access: w1c, rst: 0,
+        info: "State machine 3 rx fifo not empty IRQ pending."}
+      - {b: 10, name: sm2_rxnempty, access: w1c, rst: 0,
+        info: "State machine 2 rx fifo not empty IRQ pending."}
+      - {b: 9, name: sm1_rxnempty, access: w1c, rst: 0,
+        info: "State machine 1 rx fifo not empty IRQ pending."}
+      - {b: 8, name: sm0_rxnempty, access: w1c, rst: 0,
+        info: "State machine 0 rx fifo not empty IRQ pending."}
+      - {b: [7, 0], name: sm_int, access: rwf, rst: 0,
+        info: "State machine interrupt pending."}
+
+  - name: pins_data
+    info: GPIO input or output data register
+    bits:
+      - {b: [31, 0], name: data, access: rwf, rst: 0,
+        info: "GPIO input or output data."}
+
+  - name: pins_dir
+    info: GPIO direction control register
+    bits:
+      - {b: [31, 0], name: data, access: rwf, rst: 0,
+        info: "GPIO direction control, 1: output, 0: input."}
+
+  - name: clkdiv0
+    info: SM0 clock divider register
+    bits:
+      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+        info: "Clock divisor register for state machine 0."}
+  - name: pinctrl0
+    info: State machine 0 pin control register
+    bits:
+      - {b: [4, 0], name: out_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [9, 5], name: set_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a SET PINS or SET PINDIRS instruction."}
+      - {b: [14, 10], name: side_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a side-set operation."}
+      - {b: [19, 15], name: in_base, access: rw, rst: 0,
+        info: "The pin which is mapped to the least-significant bit of a state machine’s IN data bus."}
+      - {b: [25, 20], name: out_count, access: rw, rst: 0,
+        info: "The number of pins asserted by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [28, 26], name: set_count, access: rw, rst: 0,
+        info: "The number of pins asserted by a SET. In the range 0 to 5 inclusive."}
+      - {b: [31, 29], name: side_count, access: rw, rst: 0,
+        info: "The number of MSBs of the Delay/Side-set instruction field which are used for side-set."}
+  - name: execctrl0
+    info: Execution/behavioural settings register
+    bits:
+      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+        info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
+      - {b: 30, name: sideset_en, access: rw, rst: 0,
+        info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
+      - {b: 29, name: side_pindir, access: rw, rst: 0,
+        info: "If 1, side-set data is asserted to pin directions, instead of pin values."}
+      - {b: [28, 24], name: jmp_pin, access: rw, rst: 0,
+        info: "The GPIO number to use as condition for JMP PIN. Unaffected by input mapping."}
+      - {b: [23, 19], name: out_en_sel, access: rw, rst: 0,
+        info: "Which data bit to use for inline OUT enable."}
+      - {b: 18, name: inline_out_en, access: rw, rst: 0,
+        info: "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with
+               an enable of 0 will deassert the latest pin write."}
+      - {b: 17, name: out_sticky, access: rw, rst: 0,
+        info: "Continuously assert the most recent OUT/SET to the pins."}
+      - {b: [16, 12], name: wrap_top, access: rw, rst: 0,
+        info: "After reaching this address, execution is wrapped to wrap_bottom."}
+      - {b: [11, 7], name: wrap_bottom, access: rw, rst: 0,
+        info: "After reaching wrap_top, execution is wrapped to this address."}
+      - {b: 4, name: status_sel, access: rw, rst: 0,
+        info: "Comparison used for the MOV x, STATUS instruction."}
+      - {b: [3, 0], name: status_n, access: rw, rst: 0,
+        info: "Comparison level for the MOV x, STATUS instruction."}
+  - name: shiftctrl0
+    info: Control behaviour of the input/output shift registers for state machine
+    bits:
+      - {b: [31, 26], name: osr_threshold, access: rw, rst: 0,
+        info: "Pull threshold. Number of bits shifted out of OSR before autopull, or conditional pull (PULL IFEMPTY), will take place."}
+      - {b: [25, 20], name: isr_threshold, access: rw, rst: 0,
+        info: "Push threshold. Number of bits shifted into ISR before autopush, or conditional push (PUSH IFFULL), will take place."}
+      - {b: 19, name: out_shift_dir, access: rw, rst: 0,
+        info: "1 = shift out of output shift register to right. 0 = to left."}
+      - {b: 18, name: in_shift_dir, access: rw, rst: 0,
+        info: "1 = shift input shift register to right (data enters from left). 0 = to left."}
+      - {b: 17, name: auto_pull, access: rw, rst: 0,
+        info: "Pull automatically when the output shift register is emptied, i.e."}
+      - {b: 16, name: auto_push, access: rw, rst: 0,
+        info: "Push automatically when the input shift register is filled, i.e."}
+      - {b: 15, name: clear_rxfifo, access: wf, rst: 0,
+        info: "Write 1 to clear RX fifo."}
+      - {b: 14, name: clear_txfifo, access: wf, rst: 0,
+        info: "Write 1 to clear TX fifo."}
+  - name: instr0
+    info: Immediate instruction register
+    bits:
+      - {b: [15, 0], name: instr, access: wf, rst: 0,
+        info: "Instruction to be exec."}
+  - name: push0
+    info: "TX data FIFO for SM0"
+    bits:
+      - {b: [31, 0], access: wf}
+  - name: pull0
+    info: "RX data FIFO for SM0"
+    bits:
+      - {b: [31, 0], access: rf}
+  - name: fstat0
+    info: FIFO status register for SM0
+    bits:
+      - {b: [2, 0], name: txlevel, access: rov}
+      - {b: 3,  name: txfull,  access: rov}
+      - {b: 4,  name: txempty, access: rov}
+      - {b: [7, 5], name: rxlevel, access: rov}
+      - {b: 8, name: rxfull,  access: rov}
+      - {b: 9, name: rxempty, access: rov}
+
+  - name: clkdiv1
+    info: SM1 clock divider register
+    bits:
+      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+        info: "Clock divisor register for state machine 1."}
+  - name: pinctrl1
+    info: State machine 1 pin control register
+    bits:
+      - {b: [4, 0], name: out_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [9, 5], name: set_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a SET PINS or SET PINDIRS instruction."}
+      - {b: [14, 10], name: side_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a side-set operation."}
+      - {b: [19, 15], name: in_base, access: rw, rst: 0,
+        info: "The pin which is mapped to the least-significant bit of a state machine’s IN data bus."}
+      - {b: [25, 20], name: out_count, access: rw, rst: 0,
+        info: "The number of pins asserted by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [28, 26], name: set_count, access: rw, rst: 0,
+        info: "The number of pins asserted by a SET. In the range 0 to 5 inclusive."}
+      - {b: [31, 29], name: side_count, access: rw, rst: 0,
+        info: "The number of MSBs of the Delay/Side-set instruction field which are used for side-set."}
+  - name: execctrl1
+    info: Execution/behavioural settings register
+    bits:
+      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+        info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
+      - {b: 30, name: sideset_en, access: rw, rst: 0,
+        info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
+      - {b: 29, name: side_pindir, access: rw, rst: 0,
+        info: "If 1, side-set data is asserted to pin directions, instead of pin values."}
+      - {b: [28, 24], name: jmp_pin, access: rw, rst: 0,
+        info: "The GPIO number to use as condition for JMP PIN. Unaffected by input mapping."}
+      - {b: [23, 19], name: out_en_sel, access: rw, rst: 0,
+        info: "Which data bit to use for inline OUT enable."}
+      - {b: 18, name: inline_out_en, access: rw, rst: 0,
+        info: "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with
+               an enable of 0 will deassert the latest pin write."}
+      - {b: 17, name: out_sticky, access: rw, rst: 0,
+        info: "Continuously assert the most recent OUT/SET to the pins."}
+      - {b: [16, 12], name: wrap_top, access: rw, rst: 0,
+        info: "After reaching this address, execution is wrapped to wrap_bottom."}
+      - {b: [11, 7], name: wrap_bottom, access: rw, rst: 0,
+        info: "After reaching wrap_top, execution is wrapped to this address."}
+      - {b: 4, name: status_sel, access: rw, rst: 0,
+        info: "Comparison used for the MOV x, STATUS instruction."}
+      - {b: [3, 0], name: status_n, access: rw, rst: 0,
+        info: "Comparison level for the MOV x, STATUS instruction."}
+  - name: shiftctrl1
+    info: Control behaviour of the input/output shift registers for state machine
+    bits:
+      - {b: [31, 26], name: osr_threshold, access: rw, rst: 0,
+        info: "Pull threshold. Number of bits shifted out of OSR before autopull, or conditional pull (PULL IFEMPTY), will take place."}
+      - {b: [25, 20], name: isr_threshold, access: rw, rst: 0,
+        info: "Push threshold. Number of bits shifted into ISR before autopush, or conditional push (PUSH IFFULL), will take place."}
+      - {b: 19, name: out_shift_dir, access: rw, rst: 0,
+        info: "1 = shift out of output shift register to right. 0 = to left."}
+      - {b: 18, name: in_shift_dir, access: rw, rst: 0,
+        info: "1 = shift input shift register to right (data enters from left). 0 = to left."}
+      - {b: 17, name: auto_pull, access: rw, rst: 0,
+        info: "Pull automatically when the output shift register is emptied, i.e."}
+      - {b: 16, name: auto_push, access: rw, rst: 0,
+        info: "Push automatically when the input shift register is filled, i.e."}
+      - {b: 15, name: clear_rxfifo, access: wf, rst: 0,
+        info: "Write 1 to clear RX fifo."}
+      - {b: 14, name: clear_txfifo, access: wf, rst: 0,
+        info: "Write 1 to clear TX fifo."}
+  - name: instr1
+    info: Immediate instruction register
+    bits:
+      - {b: [15, 0], name: instr, access: wf, rst: 0,
+        info: "Instruction to be exec."}
+  - name: push1
+    info: "TX data FIFO for SM1"
+    bits:
+      - {b: [31, 0], access: wf}
+  - name: pull1
+    info: "RX data FIFO for SM1"
+    bits:
+      - {b: [31, 0], access: rf}
+  - name: fstat1
+    info: FIFO status register for SM1
+    bits:
+      - {b: [2, 0], name: txlevel, access: rov}
+      - {b: 3,  name: txfull,  access: rov}
+      - {b: 4,  name: txempty, access: rov}
+      - {b: [7, 5], name: rxlevel, access: rov}
+      - {b: 8, name: rxfull,  access: rov}
+      - {b: 9, name: rxempty, access: rov}
+
+  - name: clkdiv2
+    info: SM2 clock divider register
+    bits:
+      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+        info: "Clock divisor register for state machine 2."}
+  - name: pinctrl2
+    info: State machine 2 pin control register
+    bits:
+      - {b: [4, 0], name: out_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [9, 5], name: set_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a SET PINS or SET PINDIRS instruction."}
+      - {b: [14, 10], name: side_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a side-set operation."}
+      - {b: [19, 15], name: in_base, access: rw, rst: 0,
+        info: "The pin which is mapped to the least-significant bit of a state machine’s IN data bus."}
+      - {b: [25, 20], name: out_count, access: rw, rst: 0,
+        info: "The number of pins asserted by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [28, 26], name: set_count, access: rw, rst: 0,
+        info: "The number of pins asserted by a SET. In the range 0 to 5 inclusive."}
+      - {b: [31, 29], name: side_count, access: rw, rst: 0,
+        info: "The number of MSBs of the Delay/Side-set instruction field which are used for side-set."}
+  - name: execctrl2
+    info: Execution/behavioural settings register
+    bits:
+      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+        info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
+      - {b: 30, name: sideset_en, access: rw, rst: 0,
+        info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
+      - {b: 29, name: side_pindir, access: rw, rst: 0,
+        info: "If 1, side-set data is asserted to pin directions, instead of pin values."}
+      - {b: [28, 24], name: jmp_pin, access: rw, rst: 0,
+        info: "The GPIO number to use as condition for JMP PIN. Unaffected by input mapping."}
+      - {b: [23, 19], name: out_en_sel, access: rw, rst: 0,
+        info: "Which data bit to use for inline OUT enable."}
+      - {b: 18, name: inline_out_en, access: rw, rst: 0,
+        info: "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with
+               an enable of 0 will deassert the latest pin write."}
+      - {b: 17, name: out_sticky, access: rw, rst: 0,
+        info: "Continuously assert the most recent OUT/SET to the pins."}
+      - {b: [16, 12], name: wrap_top, access: rw, rst: 0,
+        info: "After reaching this address, execution is wrapped to wrap_bottom."}
+      - {b: [11, 7], name: wrap_bottom, access: rw, rst: 0,
+        info: "After reaching wrap_top, execution is wrapped to this address."}
+      - {b: 4, name: status_sel, access: rw, rst: 0,
+        info: "Comparison used for the MOV x, STATUS instruction."}
+      - {b: [3, 0], name: status_n, access: rw, rst: 0,
+        info: "Comparison level for the MOV x, STATUS instruction."}
+  - name: shiftctrl2
+    info: Control behaviour of the input/output shift registers for state machine
+    bits:
+      - {b: [31, 26], name: osr_threshold, access: rw, rst: 0,
+        info: "Pull threshold. Number of bits shifted out of OSR before autopull, or conditional pull (PULL IFEMPTY), will take place."}
+      - {b: [25, 20], name: isr_threshold, access: rw, rst: 0,
+        info: "Push threshold. Number of bits shifted into ISR before autopush, or conditional push (PUSH IFFULL), will take place."}
+      - {b: 19, name: out_shift_dir, access: rw, rst: 0,
+        info: "1 = shift out of output shift register to right. 0 = to left."}
+      - {b: 18, name: in_shift_dir, access: rw, rst: 0,
+        info: "1 = shift input shift register to right (data enters from left). 0 = to left."}
+      - {b: 17, name: auto_pull, access: rw, rst: 0,
+        info: "Pull automatically when the output shift register is emptied, i.e."}
+      - {b: 16, name: auto_push, access: rw, rst: 0,
+        info: "Push automatically when the input shift register is filled, i.e."}
+      - {b: 15, name: clear_rxfifo, access: wf, rst: 0,
+        info: "Write 1 to clear RX fifo."}
+      - {b: 14, name: clear_txfifo, access: wf, rst: 0,
+        info: "Write 1 to clear TX fifo."}
+  - name: instr2
+    info: Immediate instruction register
+    bits:
+      - {b: [15, 0], name: instr, access: wf, rst: 0,
+        info: "Instruction to be exec."}
+  - name: push2
+    info: "TX data FIFO for SM2"
+    bits:
+      - {b: [31, 0], access: wf}
+  - name: pull2
+    info: "RX data FIFO for SM2"
+    bits:
+      - {b: [31, 0], access: rf}
+  - name: fstat2
+    info: FIFO status register for SM2
+    bits:
+      - {b: [2, 0], name: txlevel, access: rov}
+      - {b: 3,  name: txfull,  access: rov}
+      - {b: 4,  name: txempty, access: rov}
+      - {b: [7, 5], name: rxlevel, access: rov}
+      - {b: 8, name: rxfull,  access: rov}
+      - {b: 9, name: rxempty, access: rov}
+
+  - name: clkdiv3
+    info: SM3 clock divider register
+    bits:
+      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+        info: "Clock divisor register for state machine 3."}
+  - name: pinctrl3
+    info: State machine 3 pin control register
+    bits:
+      - {b: [4, 0], name: out_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [9, 5], name: set_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a SET PINS or SET PINDIRS instruction."}
+      - {b: [14, 10], name: side_base, access: rw, rst: 0,
+        info: "The lowest-numbered pin that will be affected by a side-set operation."}
+      - {b: [19, 15], name: in_base, access: rw, rst: 0,
+        info: "The pin which is mapped to the least-significant bit of a state machine’s IN data bus."}
+      - {b: [25, 20], name: out_count, access: rw, rst: 0,
+        info: "The number of pins asserted by an OUT PINS, OUT PINDIRS or MOV PINS instruction."}
+      - {b: [28, 26], name: set_count, access: rw, rst: 0,
+        info: "The number of pins asserted by a SET. In the range 0 to 5 inclusive."}
+      - {b: [31, 29], name: side_count, access: rw, rst: 0,
+        info: "The number of MSBs of the Delay/Side-set instruction field which are used for side-set."}
+  - name: execctrl3
+    info: Execution/behavioural settings register
+    bits:
+      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+        info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
+      - {b: 30, name: sideset_en, access: rw, rst: 0,
+        info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
+      - {b: 29, name: side_pindir, access: rw, rst: 0,
+        info: "If 1, side-set data is asserted to pin directions, instead of pin values."}
+      - {b: [28, 24], name: jmp_pin, access: rw, rst: 0,
+        info: "The GPIO number to use as condition for JMP PIN. Unaffected by input mapping."}
+      - {b: [23, 19], name: out_en_sel, access: rw, rst: 0,
+        info: "Which data bit to use for inline OUT enable."}
+      - {b: 18, name: inline_out_en, access: rw, rst: 0,
+        info: "If 1, use a bit of OUT data as an auxiliary write enable When used in conjunction with OUT_STICKY, writes with
+               an enable of 0 will deassert the latest pin write."}
+      - {b: 17, name: out_sticky, access: rw, rst: 0,
+        info: "Continuously assert the most recent OUT/SET to the pins."}
+      - {b: [16, 12], name: wrap_top, access: rw, rst: 0,
+        info: "After reaching this address, execution is wrapped to wrap_bottom."}
+      - {b: [11, 7], name: wrap_bottom, access: rw, rst: 0,
+        info: "After reaching wrap_top, execution is wrapped to this address."}
+      - {b: 4, name: status_sel, access: rw, rst: 0,
+        info: "Comparison used for the MOV x, STATUS instruction."}
+      - {b: [3, 0], name: status_n, access: rw, rst: 0,
+        info: "Comparison level for the MOV x, STATUS instruction."}
+  - name: shiftctrl3
+    info: Control behaviour of the input/output shift registers for state machine
+    bits:
+      - {b: [31, 26], name: osr_threshold, access: rw, rst: 0,
+        info: "Pull threshold. Number of bits shifted out of OSR before autopull, or conditional pull (PULL IFEMPTY), will take place."}
+      - {b: [25, 20], name: isr_threshold, access: rw, rst: 0,
+        info: "Push threshold. Number of bits shifted into ISR before autopush, or conditional push (PUSH IFFULL), will take place."}
+      - {b: 19, name: out_shift_dir, access: rw, rst: 0,
+        info: "1 = shift out of output shift register to right. 0 = to left."}
+      - {b: 18, name: in_shift_dir, access: rw, rst: 0,
+        info: "1 = shift input shift register to right (data enters from left). 0 = to left."}
+      - {b: 17, name: auto_pull, access: rw, rst: 0,
+        info: "Pull automatically when the output shift register is emptied, i.e."}
+      - {b: 16, name: auto_push, access: rw, rst: 0,
+        info: "Push automatically when the input shift register is filled, i.e."}
+      - {b: 15, name: clear_rxfifo, access: wf, rst: 0,
+        info: "Write 1 to clear RX fifo."}
+      - {b: 14, name: clear_txfifo, access: wf, rst: 0,
+        info: "Write 1 to clear TX fifo."}
+  - name: instr3
+    info: Immediate instruction register
+    bits:
+      - {b: [15, 0], name: instr, access: wf, rst: 0,
+        info: "Instruction to be exec."}
+  - name: push3
+    info: "TX data FIFO for SM3"
+    bits:
+      - {b: [31, 0], access: wf}
+  - name: pull3
+    info: "RX data FIFO for SM3"
+    bits:
+      - {b: [31, 0], access: rf}
+  - name: fstat3
+    info: FIFO status register for SM3
+    bits:
+      - {b: [2, 0], name: txlevel, access: rov}
+      - {b: 3,  name: txfull,  access: rov}
+      - {b: 4,  name: txempty, access: rov}
+      - {b: [7, 5], name: rxlevel, access: rov}
+      - {b: 8, name: rxfull,  access: rov}
+      - {b: 9, name: rxempty, access: rov}
+
+  - name: instrmem0
+    info: Instruction 0 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem1
+    info: Instruction 1 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem2
+    info: Instruction 2 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem3
+    info: Instruction 3 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem4
+    info: Instruction 4 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem5
+    info: Instruction 5 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem6
+    info: Instruction 6 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem7
+    info: Instruction 7 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem8
+    info: Instruction 8 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem9
+    info: Instruction 9 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem10
+    info: Instruction 10 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem11
+    info: Instruction 11 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem12
+    info: Instruction 12 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem13
+    info: Instruction 13 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem14
+    info: Instruction 14 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem15
+    info: Instruction 15 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem16
+    info: Instruction 16 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem17
+    info: Instruction 17 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem18
+    info: Instruction 18 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem19
+    info: Instruction 19 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem20
+    info: Instruction 20 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem21
+    info: Instruction 21 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem22
+    info: Instruction 22 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem23
+    info: Instruction 23 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem24
+    info: Instruction 24 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem25
+    info: Instruction 25 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem26
+    info: Instruction 26 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem27
+    info: Instruction 27 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem28
+    info: Instruction 28 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem29
+    info: Instruction 29 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem30
+    info: Instruction 30 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
+  - name: instrmem31
+    info: Instruction 31 register
+    bits:
+      - {b: [15, 0], name: instr, access: rw, rst: 0,
+        info: "Instruction contend."}
