@@ -66,6 +66,9 @@ module cache_mem_set_associative #(
 	input  wire                clk,
 	input  wire                rst_n,
 
+	input  wire                flush,
+	output wire                flush_busy,
+
 	// Tag memory access (note any write must follow a matching read)
 	input  wire [W_ADDR-1:0]   t_addr,
 	input  wire                t_ren,
@@ -281,6 +284,28 @@ always @ (*) begin: tmem_wdata_fanout
 			tmem_rdata[W_TMEM_WAY * i +: W_TMEM_WAY] : tmem_wdata_way;
 end
 
+reg flush_wen;
+reg [W_INDEX-1:0] flush_cnt;
+
+always @ (posedge clk or negedge rst_n) begin
+	if (!rst_n) begin
+		flush_cnt <= 0;
+		flush_wen <= 0;
+	end else begin
+		if (flush) begin
+			flush_wen <= 1;
+			flush_cnt <= 0;
+		end else if (flush_wen) begin
+			flush_cnt <= flush_cnt + 1;
+			if (flush_cnt >= DEPTH - 1) begin
+				flush_wen <= 0;
+			end
+		end
+	end
+end
+
+assign flush_busy = flush_wen || flush;
+
 sram_sync #(
 	.WIDTH        (W_TMEM),
 	.DEPTH        (DEPTH),
@@ -288,10 +313,10 @@ sram_sync #(
 	.BYTE_ENABLE  (0) // would be nice to have a bit-enable, but RmW works too :)
 ) tmem (
 	.clk   (clk),
-	.wen   (t_wen),
+	.wen   (t_wen || flush_wen),
 	.ren   (t_ren),
 	.addr  (t_addr_index),
-	.wdata (tmem_wdata),
+	.wdata (flush_wen ? {W_TMEM{1'b0}} : tmem_wdata),
 	.rdata (tmem_rdata)
 );
 

@@ -30,6 +30,9 @@ module ahb_cache_readonly #(
 	input wire                clk,
 	input wire                rst_n,
 
+	input  wire               flush,
+	output wire               flush_busy,
+
 	// Upstream AHB-Lite slave
 	output wire               src_hready_resp,
 	input  wire               src_hready,
@@ -245,6 +248,9 @@ cache_mem_set_associative #(
 ) cache_mem (
 	.clk                (clk),
 	.rst_n              (rst_n),
+
+	.flush              (flush),
+	.flush_busy         (flush_busy),
 
 	.t_addr             (cache_addr),
 	.t_ren              (cache_ren),
