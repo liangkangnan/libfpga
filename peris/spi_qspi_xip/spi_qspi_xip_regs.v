@@ -26,12 +26,19 @@ module xip_regs (
 	// Register interfaces
 	output reg  csr_direct_o,
 	input wire  csr_busy_i,
+	output reg  csr_cs_level_o,
 	output reg [7:0] txdata_o,
 	output reg txdata_wen,
 	input wire [7:0] rxdata_i,
 	output reg rxdata_ren,
 	output reg  qspi_ctrl_mode_o,
-	output reg [2:0] qspi_ctrl_dummy_o
+	output reg [2:0] qspi_ctrl_dummy_o,
+	output reg [7:0] clkdiv_div_o,
+	output reg  icache_ctrl_en_o,
+	input wire  icache_ctrl_flush_i,
+	output reg  icache_ctrl_flush_o,
+	output reg icache_ctrl_flush_wen,
+	output reg icache_ctrl_flush_ren
 );
 
 // APB adapter
@@ -39,7 +46,7 @@ wire [31:0] wdata = apbs_pwdata;
 reg [31:0] rdata;
 wire wen = apbs_psel && apbs_penable && apbs_pwrite;
 wire ren = apbs_psel && apbs_penable && !apbs_pwrite;
-wire [15:0] addr = apbs_paddr & 16'hc;
+wire [15:0] addr = apbs_paddr & 16'h1c;
 assign apbs_prdata = rdata;
 assign apbs_pready = 1'b1;
 assign apbs_pslverr = 1'b0;
@@ -48,6 +55,8 @@ localparam ADDR_CSR = 0;
 localparam ADDR_TXDATA = 4;
 localparam ADDR_RXDATA = 8;
 localparam ADDR_QSPI_CTRL = 12;
+localparam ADDR_CLKDIV = 16;
+localparam ADDR_ICACHE_CTRL = 20;
 
 wire __csr_wen = wen && addr == ADDR_CSR;
 wire __csr_ren = ren && addr == ADDR_CSR;
@@ -57,14 +66,21 @@ wire __rxdata_wen = wen && addr == ADDR_RXDATA;
 wire __rxdata_ren = ren && addr == ADDR_RXDATA;
 wire __qspi_ctrl_wen = wen && addr == ADDR_QSPI_CTRL;
 wire __qspi_ctrl_ren = ren && addr == ADDR_QSPI_CTRL;
+wire __clkdiv_wen = wen && addr == ADDR_CLKDIV;
+wire __clkdiv_ren = ren && addr == ADDR_CLKDIV;
+wire __icache_ctrl_wen = wen && addr == ADDR_ICACHE_CTRL;
+wire __icache_ctrl_ren = ren && addr == ADDR_ICACHE_CTRL;
 
 wire  csr_direct_wdata = wdata[0];
 wire  csr_direct_rdata;
 wire  csr_busy_wdata = wdata[1];
 wire  csr_busy_rdata;
-wire [31:0] __csr_rdata = {30'h0, csr_busy_rdata, csr_direct_rdata};
+wire  csr_cs_level_wdata = wdata[2];
+wire  csr_cs_level_rdata;
+wire [31:0] __csr_rdata = {29'h0, csr_cs_level_rdata, csr_busy_rdata, csr_direct_rdata};
 assign csr_direct_rdata = csr_direct_o;
 assign csr_busy_rdata = csr_busy_i;
+assign csr_cs_level_rdata = csr_cs_level_o;
 
 wire [7:0] txdata_wdata = wdata[7:0];
 wire [7:0] txdata_rdata;
@@ -84,31 +100,58 @@ wire [31:0] __qspi_ctrl_rdata = {28'h0, qspi_ctrl_dummy_rdata, qspi_ctrl_mode_rd
 assign qspi_ctrl_mode_rdata = qspi_ctrl_mode_o;
 assign qspi_ctrl_dummy_rdata = qspi_ctrl_dummy_o;
 
+wire [7:0] clkdiv_div_wdata = wdata[7:0];
+wire [7:0] clkdiv_div_rdata;
+wire [31:0] __clkdiv_rdata = {24'h0, clkdiv_div_rdata};
+assign clkdiv_div_rdata = clkdiv_div_o;
+
+wire  icache_ctrl_en_wdata = wdata[0];
+wire  icache_ctrl_en_rdata;
+wire  icache_ctrl_flush_wdata = wdata[1];
+wire  icache_ctrl_flush_rdata;
+wire [31:0] __icache_ctrl_rdata = {30'h0, icache_ctrl_flush_rdata, icache_ctrl_en_rdata};
+assign icache_ctrl_en_rdata = icache_ctrl_en_o;
+assign icache_ctrl_flush_rdata = icache_ctrl_flush_i;
+
 always @ (*) begin
 	case (addr)
 		ADDR_CSR: rdata = __csr_rdata;
 		ADDR_TXDATA: rdata = __txdata_rdata;
 		ADDR_RXDATA: rdata = __rxdata_rdata;
 		ADDR_QSPI_CTRL: rdata = __qspi_ctrl_rdata;
+		ADDR_CLKDIV: rdata = __clkdiv_rdata;
+		ADDR_ICACHE_CTRL: rdata = __icache_ctrl_rdata;
 		default: rdata = 32'h0;
 	endcase
 	txdata_wen = __txdata_wen;
 	txdata_o = txdata_wdata;
 	rxdata_ren = __rxdata_ren;
+	icache_ctrl_flush_wen = __icache_ctrl_wen;
+	icache_ctrl_flush_o = icache_ctrl_flush_wdata;
+	icache_ctrl_flush_ren = __icache_ctrl_ren;
 end
 
 always @ (posedge clk or negedge rst_n) begin
 	if (!rst_n) begin
 		csr_direct_o <= 1'h0;
+		csr_cs_level_o <= 1'h0;
 		qspi_ctrl_mode_o <= 1'h0;
 		qspi_ctrl_dummy_o <= 3'h0;
+		clkdiv_div_o <= 8'h1;
+		icache_ctrl_en_o <= 1'h0;
 	end else begin
 		if (__csr_wen)
 			csr_direct_o <= csr_direct_wdata;
+		if (__csr_wen)
+			csr_cs_level_o <= csr_cs_level_wdata;
 		if (__qspi_ctrl_wen)
 			qspi_ctrl_mode_o <= qspi_ctrl_mode_wdata;
 		if (__qspi_ctrl_wen)
 			qspi_ctrl_dummy_o <= qspi_ctrl_dummy_wdata;
+		if (__clkdiv_wen)
+			clkdiv_div_o <= clkdiv_div_wdata;
+		if (__icache_ctrl_wen)
+			icache_ctrl_en_o <= icache_ctrl_en_wdata;
 	end
 end
 

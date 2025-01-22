@@ -56,6 +56,10 @@ module spi_qspi_xip #(
 	input  wire [W_DATA-1:0]     ahbls_hwdata,
 	output wire [W_DATA-1:0]     ahbls_hrdata,
 
+	output wire                  icache_en,
+	output wire                  icache_flush,
+	input  wire                  icache_flush_busy,
+
 	// SPI interface
 	output reg                   spi_cs_n,
 	output reg                   spi_sck,
@@ -80,7 +84,7 @@ reg  [W_DATA-1:0]  shift_reg;
 reg  [W_STATE-1:0] shift_state;
 
 reg  [23:0]        read_addr;
-reg                qspi_mode_save;
+reg                qspi_mode_saved;
 
 wire               direct_mode;
 reg                direct_mode_busy;
@@ -89,6 +93,11 @@ wire               txdata_wen;
 wire [7:0]         rxdata_i = shift_reg[7:0];
 wire               qspi_mode;
 wire [2:0]         qspi_dummy;
+wire               clk_en;
+wire [7:0]         clkdiv_div;
+wire               cs_level;
+wire               icache_flush_wen;
+wire               icache_flush_out;
 
 assign spi_dout = shift_reg[W_DATA-1:W_DATA-4];
 
@@ -107,14 +116,21 @@ xip_regs regs (
 
 	.csr_direct_o (direct_mode),
 	.csr_busy_i   (direct_mode_busy),
+	.csr_cs_level_o(cs_level),
 	.txdata_o     (txdata_o),
 	.txdata_wen   (txdata_wen),
 	.rxdata_i     (rxdata_i),
 	.rxdata_ren   (/* unused */),
 	.qspi_ctrl_mode_o(qspi_mode),
-	.qspi_ctrl_dummy_o(qspi_dummy)
+	.qspi_ctrl_dummy_o(qspi_dummy),
+	.clkdiv_div_o (clkdiv_div),
+	.icache_ctrl_en_o(icache_en),
+	.icache_ctrl_flush_i(icache_flush_busy),
+	.icache_ctrl_flush_o(icache_flush_out),
+	.icache_ctrl_flush_wen(icache_flush_wen)
 );
 
+assign icache_flush = icache_flush_wen && icache_flush_out;
 
 always @ (posedge clk or negedge rst_n) begin
 	if (!rst_n) begin
@@ -126,111 +142,140 @@ always @ (posedge clk or negedge rst_n) begin
 		spi_douten <= 4'h0;
 		direct_mode_busy <= 1'b0;
 		read_addr <= 24'h0;
-		qspi_mode_save <= 1'b0;
-	end else if (direct_mode) begin
-		shift_state <= S_IDLE;
-		spi_cs_n <= 1'b0;
-		spi_douten <= {3'b0, 1'b1};
-		if (txdata_wen) begin
-			direct_mode_busy <= 1'b1;
-			shift_reg[W_DATA - 4 -: 8] <= txdata_o;
-			shift_ctr <= 5'd7;
-		end else if (direct_mode_busy) begin
-			if (spi_sck) begin
+		qspi_mode_saved <= 1'b0;
+	end else begin
+		// direct mode
+		if (direct_mode) begin
+			shift_state <= S_IDLE;
+			spi_cs_n <= cs_level;
+			spi_douten <= {3'b0, 1'b1};
+			if (txdata_wen) begin
+				direct_mode_busy <= 1'b1;
+				shift_reg[W_DATA - 4 -: 8] <= txdata_o;
+				shift_ctr <= 5'd7;
 				spi_sck <= 1'b0;
-				shift_ctr <= shift_ctr - 1'b1;
-				if (~|shift_ctr) begin
-					direct_mode_busy <= 1'b0;
-				end else begin
-					shift_reg[W_DATA-1:1] <= shift_reg[W_DATA-2:0];
+			end else if (direct_mode_busy) begin
+				if (clk_en) begin
+					if (spi_sck) begin
+						spi_sck <= 1'b0;
+						shift_ctr <= shift_ctr - 1'b1;
+						if (~|shift_ctr) begin
+							direct_mode_busy <= 1'b0;
+						end else begin
+							shift_reg[W_DATA-1:1] <= shift_reg[W_DATA-2:0];
+						end
+					end else begin
+						spi_sck <= 1'b1;
+						shift_reg[0] <= spi_din[1];
+					end
 				end
 			end else begin
-				spi_sck <= 1'b1;
-				shift_reg[0] <= spi_din[1];
+				spi_sck <= 1'b0;
 			end
-		end
-	end else if (shift_state == S_IDLE) begin
-		spi_cs_n <= 1'b1;
-		spi_sck <= 1'b0;
-		spi_douten <= {3'b0, 1'b1};
-		if (ahbls_hready && ahbls_htrans[1]) begin
-			qspi_mode_save <= qspi_mode;
-			if (qspi_mode) begin
-				// command: 0xEB
-				shift_reg <= {3'h0, 4'hE, 4'hB, 21'h0};
-			end else begin
-				// command: 0x03
-				shift_reg <= {3'h0, 4'h0, 4'h3, 21'h0};
-			end
-			shift_ctr <= 7;
-			// save read addr
-			read_addr <= {ahbls_haddr[23:2], 2'b00};
-			spi_cs_n <= 1'b0;
-			shift_state <= S_CMD;
-		end
-	end else if (shift_state == S_CMD) begin
-		if (spi_sck) begin
-			spi_sck <= 1'b0;
-			shift_ctr <= shift_ctr - 1'b1;
-			shift_reg <= (shift_reg << 1);
-			if (~|shift_ctr) begin
-				shift_state <= S_ADDR;
-				if (qspi_mode_save) begin
-					shift_ctr <= 5'd7 + qspi_dummy;
-					shift_reg <= {read_addr, 8'b00};
-				end else begin
-					shift_ctr <= 23;
-					shift_reg <= {3'h0, read_addr, 5'h0};
+		// XIP mode
+		end else begin
+			if (shift_state == S_IDLE) begin
+				spi_cs_n <= 1'b1;
+				spi_sck <= 1'b0;
+				spi_douten <= {3'b0, 1'b1};
+				if (ahbls_hready && ahbls_htrans[1]) begin
+					qspi_mode_saved <= qspi_mode;
+					if (qspi_mode) begin
+						// command: 0xEB
+						shift_reg <= {3'h0, 4'hE, 4'hB, 21'h0};
+					end else begin
+						// command: 0x03
+						shift_reg <= {3'h0, 4'h0, 4'h3, 21'h0};
+					end
+					shift_ctr <= 7;
+					// save read addr
+					read_addr <= {ahbls_haddr[23:2], 2'b00};
+					spi_cs_n <= 1'b0;
+					shift_state <= S_CMD;
 				end
-				spi_douten <= 4'hf;
-			end
-		end else begin
-			spi_sck <= 1'b1;
-		end
-	end else if (shift_state == S_ADDR) begin
-		if (spi_sck) begin
-			spi_sck <= 1'b0;
-			shift_ctr <= shift_ctr - 1'b1;
-			if (qspi_mode_save) begin
-				shift_reg <= (shift_reg << 4);
-			end else begin
-				shift_reg <= (shift_reg << 1);
-			end
-			if (~|shift_ctr) begin
-				shift_state <= S_DATA;
-				shift_reg <= {W_DATA{1'b0}};
-				if (qspi_mode_save) begin
-					shift_ctr <= 2 * BYTES - 1;
-				end else begin
-					shift_ctr <= W_DATA - 1;
+			end else if (shift_state == S_CMD) begin
+				if (clk_en) begin
+					if (spi_sck) begin
+						spi_sck <= 1'b0;
+						shift_ctr <= shift_ctr - 1'b1;
+						shift_reg <= (shift_reg << 1);
+						if (~|shift_ctr) begin
+							shift_state <= S_ADDR;
+							if (qspi_mode_saved) begin
+								shift_ctr <= 5'd7 + qspi_dummy;
+								shift_reg <= {read_addr, 8'b00};
+							end else begin
+								shift_ctr <= 23;
+								shift_reg <= {3'h0, read_addr, 5'h0};
+							end
+							spi_douten <= 4'hf;
+						end
+					end else begin
+						spi_sck <= 1'b1;
+					end
 				end
-				spi_douten <= 4'h0;
+			end else if (shift_state == S_ADDR) begin
+				if (clk_en) begin
+					if (spi_sck) begin
+						spi_sck <= 1'b0;
+						shift_ctr <= shift_ctr - 1'b1;
+						if (qspi_mode_saved) begin
+							shift_reg <= (shift_reg << 4);
+						end else begin
+							shift_reg <= (shift_reg << 1);
+						end
+						if (~|shift_ctr) begin
+							shift_state <= S_DATA;
+							shift_reg <= {W_DATA{1'b0}};
+							if (qspi_mode_saved) begin
+								shift_ctr <= 2 * BYTES - 1;
+							end else begin
+								shift_ctr <= W_DATA - 1;
+							end
+							spi_douten <= 4'h0;
+						end
+					end else begin
+						spi_sck <= 1'b1;
+					end
+				end
+			end else if (shift_state == S_DATA) begin
+				if (clk_en) begin
+					if (spi_sck) begin
+						spi_sck <= 1'b0;
+						shift_ctr <= shift_ctr - 1'b1;
+						if (~|shift_ctr)
+							shift_state <= S_BACKPORCH;
+					end else begin
+						spi_sck <= 1'b1;
+						if (qspi_mode_saved) begin
+							shift_reg <= (shift_reg << 4) | spi_din;
+						end else begin
+							shift_reg <= (shift_reg << 1) | spi_din[1];
+						end
+					end
+				end
+			end else if (shift_state == S_BACKPORCH) begin
+				spi_cs_n <= 1'b1;
+				shift_state <= S_IDLE;
 			end
-		end else begin
-			spi_sck <= 1'b1;
 		end
-	end else if (shift_state == S_DATA) begin
-		if (spi_sck) begin
-			spi_sck <= 1'b0;
-			shift_ctr <= shift_ctr - 1'b1;
-			if (~|shift_ctr)
-				shift_state <= S_BACKPORCH;
-		end else begin
-			spi_sck <= 1'b1;
-			if (qspi_mode_save) begin
-				shift_reg <= (shift_reg << 4) | spi_din;
-			end else begin
-				shift_reg <= (shift_reg << 1) | spi_din[1];
-			end
-		end
-	end else if (shift_state == S_BACKPORCH) begin
-		spi_cs_n <= 1'b1;
-		shift_state <= S_IDLE;
 	end
 end
 
 assign ahbls_hready_resp = shift_state == S_IDLE;
 assign ahbls_hresp = 1'b0;
 assign ahbls_hrdata = {shift_reg[7:0], shift_reg[15:8], shift_reg[23:16], shift_reg[31:24]};
+
+clkdiv_frac #(
+    .W_DIV_INT(8),
+    .W_DIV_FRAC(8)
+) clkdiv (
+    .clk      (clk),
+    .rst_n    (rst_n),
+    .en       (1'b1),
+    .div_int  (clkdiv_div),
+    .div_frac (8'h0),
+    .clk_en   (clk_en)
+);
 
 endmodule

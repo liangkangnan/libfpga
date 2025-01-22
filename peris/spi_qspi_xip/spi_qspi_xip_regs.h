@@ -16,6 +16,8 @@
 #define XIP_TXDATA_OFFS 4
 #define XIP_RXDATA_OFFS 8
 #define XIP_QSPI_CTRL_OFFS 12
+#define XIP_CLKDIV_OFFS 16
+#define XIP_ICACHE_CTRL_OFFS 20
 
 /*******************************************************************************
 *                                     CSR                                      *
@@ -39,6 +41,11 @@
 #define XIP_CSR_BUSY_LSB  1
 #define XIP_CSR_BUSY_BITS 1
 #define XIP_CSR_BUSY_MASK 0x2
+// Field: CSR_CS_LEVEL  Access: RW
+// Control CS pin level when in direct mode.
+#define XIP_CSR_CS_LEVEL_LSB  2
+#define XIP_CSR_CS_LEVEL_BITS 1
+#define XIP_CSR_CS_LEVEL_MASK 0x4
 
 /*******************************************************************************
 *                                    TXDATA                                    *
@@ -79,5 +86,35 @@
 #define XIP_QSPI_CTRL_DUMMY_LSB  1
 #define XIP_QSPI_CTRL_DUMMY_BITS 3
 #define XIP_QSPI_CTRL_DUMMY_MASK 0xe
+
+/*******************************************************************************
+*                                    CLKDIV                                    *
+*******************************************************************************/
+
+// SPI clock divider register
+
+// Field: CLKDIV_DIV  Access: RW
+// spi clk = core_clock / div / 2
+#define XIP_CLKDIV_DIV_LSB  0
+#define XIP_CLKDIV_DIV_BITS 8
+#define XIP_CLKDIV_DIV_MASK 0xff
+
+/*******************************************************************************
+*                                 ICACHE_CTRL                                  *
+*******************************************************************************/
+
+// XIP instruction cache control register
+
+// Field: ICACHE_CTRL_EN  Access: RW
+// 1: enable icache, 0: disable icache
+#define XIP_ICACHE_CTRL_EN_LSB  0
+#define XIP_ICACHE_CTRL_EN_BITS 1
+#define XIP_ICACHE_CTRL_EN_MASK 0x1
+// Field: ICACHE_CTRL_FLUSH  Access: RWF
+// Write 1 to flush the icache. This clears the tag memory, but the data memory
+// retains its contents. Auto clear when completion
+#define XIP_ICACHE_CTRL_FLUSH_LSB  1
+#define XIP_ICACHE_CTRL_FLUSH_BITS 1
+#define XIP_ICACHE_CTRL_FLUSH_MASK 0x2
 
 #endif // _XIP_REGS_H_
