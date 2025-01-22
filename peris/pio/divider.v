@@ -5,38 +5,27 @@ module divider (
     input  wire        clk,
     input  wire        rst_n,
     input  wire        restart,
-    input  wire [23:0] div,
+    input  wire [31:0] div,
     input  wire        use_divider,
     output wire        penable,
     output wire        pclk
 );
 
-    reg [23:0] div_counter;
-    reg        pen;
-    reg        old_pen;
+    wire clk_en;
 
-    always @ (posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            div_counter <= 0;
-            pen <= 1;
-            old_pen <= 0;
-        end else if (restart) begin
-            div_counter <= 0;
-            pen <= 1;
-            old_pen <= 0;
-        end else begin
-            if (use_divider) begin
-                old_pen <= pen;
-                div_counter <= div_counter + 256;
-                if (div_counter >= div - 256) begin
-                    div_counter <= div_counter - (div - 256);
-                end
-                pen <= div_counter < (div >> 1);
-            end
-        end
-    end
+    clkdiv_frac #(
+        .W_DIV_INT(24),
+        .W_DIV_FRAC(8)
+    ) clkdiv (
+        .clk      (clk),
+        .rst_n    (rst_n || !restart),
+        .en       (use_divider),
+        .div_int  (div[31:8]),
+        .div_frac (div[7:0]),
+        .clk_en   (clk_en)
+    );
 
-    assign penable = pen & ~old_pen;
-    assign pclk    = pen;
+    assign penable = use_divider ? clk_en : 1'b1;
+    assign pclk    = penable;
 
 endmodule

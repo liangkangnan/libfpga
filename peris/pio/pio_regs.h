@@ -17,70 +17,72 @@
 #define PIO_IRQ_INTP_OFFS 8
 #define PIO_PINS_DATA_OFFS 12
 #define PIO_PINS_DIR_OFFS 16
-#define PIO_CLKDIV0_OFFS 20
-#define PIO_PINCTRL0_OFFS 24
-#define PIO_EXECCTRL0_OFFS 28
-#define PIO_SHIFTCTRL0_OFFS 32
-#define PIO_INSTR0_OFFS 36
-#define PIO_PUSH0_OFFS 40
-#define PIO_PULL0_OFFS 44
-#define PIO_FSTAT0_OFFS 48
-#define PIO_CLKDIV1_OFFS 52
-#define PIO_PINCTRL1_OFFS 56
-#define PIO_EXECCTRL1_OFFS 60
-#define PIO_SHIFTCTRL1_OFFS 64
-#define PIO_INSTR1_OFFS 68
-#define PIO_PUSH1_OFFS 72
-#define PIO_PULL1_OFFS 76
-#define PIO_FSTAT1_OFFS 80
-#define PIO_CLKDIV2_OFFS 84
-#define PIO_PINCTRL2_OFFS 88
-#define PIO_EXECCTRL2_OFFS 92
-#define PIO_SHIFTCTRL2_OFFS 96
-#define PIO_INSTR2_OFFS 100
-#define PIO_PUSH2_OFFS 104
-#define PIO_PULL2_OFFS 108
-#define PIO_FSTAT2_OFFS 112
-#define PIO_CLKDIV3_OFFS 116
-#define PIO_PINCTRL3_OFFS 120
-#define PIO_EXECCTRL3_OFFS 124
-#define PIO_SHIFTCTRL3_OFFS 128
-#define PIO_INSTR3_OFFS 132
-#define PIO_PUSH3_OFFS 136
-#define PIO_PULL3_OFFS 140
-#define PIO_FSTAT3_OFFS 144
-#define PIO_INSTRMEM0_OFFS 148
-#define PIO_INSTRMEM1_OFFS 152
-#define PIO_INSTRMEM2_OFFS 156
-#define PIO_INSTRMEM3_OFFS 160
-#define PIO_INSTRMEM4_OFFS 164
-#define PIO_INSTRMEM5_OFFS 168
-#define PIO_INSTRMEM6_OFFS 172
-#define PIO_INSTRMEM7_OFFS 176
-#define PIO_INSTRMEM8_OFFS 180
-#define PIO_INSTRMEM9_OFFS 184
-#define PIO_INSTRMEM10_OFFS 188
-#define PIO_INSTRMEM11_OFFS 192
-#define PIO_INSTRMEM12_OFFS 196
-#define PIO_INSTRMEM13_OFFS 200
-#define PIO_INSTRMEM14_OFFS 204
-#define PIO_INSTRMEM15_OFFS 208
-#define PIO_INSTRMEM16_OFFS 212
-#define PIO_INSTRMEM17_OFFS 216
-#define PIO_INSTRMEM18_OFFS 220
-#define PIO_INSTRMEM19_OFFS 224
-#define PIO_INSTRMEM20_OFFS 228
-#define PIO_INSTRMEM21_OFFS 232
-#define PIO_INSTRMEM22_OFFS 236
-#define PIO_INSTRMEM23_OFFS 240
-#define PIO_INSTRMEM24_OFFS 244
-#define PIO_INSTRMEM25_OFFS 248
-#define PIO_INSTRMEM26_OFFS 252
-#define PIO_INSTRMEM27_OFFS 256
-#define PIO_INSTRMEM28_OFFS 260
-#define PIO_INSTRMEM29_OFFS 264
-#define PIO_INSTRMEM30_OFFS 268
-#define PIO_INSTRMEM31_OFFS 272
+#define PIO_PINS_DATA_SET_OFFS 20
+#define PIO_PINS_DATA_CLR_OFFS 24
+#define PIO_CLKDIV0_OFFS 28
+#define PIO_PINCTRL0_OFFS 32
+#define PIO_EXECCTRL0_OFFS 36
+#define PIO_SHIFTCTRL0_OFFS 40
+#define PIO_INSTR0_OFFS 44
+#define PIO_PUSH0_OFFS 48
+#define PIO_PULL0_OFFS 52
+#define PIO_FSTAT0_OFFS 56
+#define PIO_CLKDIV1_OFFS 60
+#define PIO_PINCTRL1_OFFS 64
+#define PIO_EXECCTRL1_OFFS 68
+#define PIO_SHIFTCTRL1_OFFS 72
+#define PIO_INSTR1_OFFS 76
+#define PIO_PUSH1_OFFS 80
+#define PIO_PULL1_OFFS 84
+#define PIO_FSTAT1_OFFS 88
+#define PIO_CLKDIV2_OFFS 92
+#define PIO_PINCTRL2_OFFS 96
+#define PIO_EXECCTRL2_OFFS 100
+#define PIO_SHIFTCTRL2_OFFS 104
+#define PIO_INSTR2_OFFS 108
+#define PIO_PUSH2_OFFS 112
+#define PIO_PULL2_OFFS 116
+#define PIO_FSTAT2_OFFS 120
+#define PIO_CLKDIV3_OFFS 124
+#define PIO_PINCTRL3_OFFS 128
+#define PIO_EXECCTRL3_OFFS 132
+#define PIO_SHIFTCTRL3_OFFS 136
+#define PIO_INSTR3_OFFS 140
+#define PIO_PUSH3_OFFS 144
+#define PIO_PULL3_OFFS 148
+#define PIO_FSTAT3_OFFS 152
+#define PIO_INSTRMEM0_OFFS 156
+#define PIO_INSTRMEM1_OFFS 160
+#define PIO_INSTRMEM2_OFFS 164
+#define PIO_INSTRMEM3_OFFS 168
+#define PIO_INSTRMEM4_OFFS 172
+#define PIO_INSTRMEM5_OFFS 176
+#define PIO_INSTRMEM6_OFFS 180
+#define PIO_INSTRMEM7_OFFS 184
+#define PIO_INSTRMEM8_OFFS 188
+#define PIO_INSTRMEM9_OFFS 192
+#define PIO_INSTRMEM10_OFFS 196
+#define PIO_INSTRMEM11_OFFS 200
+#define PIO_INSTRMEM12_OFFS 204
+#define PIO_INSTRMEM13_OFFS 208
+#define PIO_INSTRMEM14_OFFS 212
+#define PIO_INSTRMEM15_OFFS 216
+#define PIO_INSTRMEM16_OFFS 220
+#define PIO_INSTRMEM17_OFFS 224
+#define PIO_INSTRMEM18_OFFS 228
+#define PIO_INSTRMEM19_OFFS 232
+#define PIO_INSTRMEM20_OFFS 236
+#define PIO_INSTRMEM21_OFFS 240
+#define PIO_INSTRMEM22_OFFS 244
+#define PIO_INSTRMEM23_OFFS 248
+#define PIO_INSTRMEM24_OFFS 252
+#define PIO_INSTRMEM25_OFFS 256
+#define PIO_INSTRMEM26_OFFS 260
+#define PIO_INSTRMEM27_OFFS 264
+#define PIO_INSTRMEM28_OFFS 268
+#define PIO_INSTRMEM29_OFFS 272
+#define PIO_INSTRMEM30_OFFS 276
+#define PIO_INSTRMEM31_OFFS 280
 
 /*******************************************************************************
 *                                     CTRL                                     *
@@ -234,6 +236,30 @@
 #define PIO_PINS_DIR_DATA_MASK 0xffffffff
 
 /*******************************************************************************
+*                                PINS_DATA_SET                                 *
+*******************************************************************************/
+
+// GPIO output data set register
+
+// Field: PINS_DATA_SET_DATA  Access: WF
+// Write 1 set, write 0 no effect.
+#define PIO_PINS_DATA_SET_DATA_LSB  0
+#define PIO_PINS_DATA_SET_DATA_BITS 32
+#define PIO_PINS_DATA_SET_DATA_MASK 0xffffffff
+
+/*******************************************************************************
+*                                PINS_DATA_CLR                                 *
+*******************************************************************************/
+
+// GPIO output data clear register
+
+// Field: PINS_DATA_CLR_DATA  Access: WF
+// Write 1 clear, write 0 no effect.
+#define PIO_PINS_DATA_CLR_DATA_LSB  0
+#define PIO_PINS_DATA_CLR_DATA_BITS 32
+#define PIO_PINS_DATA_CLR_DATA_MASK 0xffffffff
+
+/*******************************************************************************
 *                                   CLKDIV0                                    *
 *******************************************************************************/
 
@@ -242,8 +268,8 @@
 // Field: CLKDIV0_CLKDIV  Access: RW
 // Clock divisor register for state machine 0.
 #define PIO_CLKDIV0_CLKDIV_LSB  0
-#define PIO_CLKDIV0_CLKDIV_BITS 24
-#define PIO_CLKDIV0_CLKDIV_MASK 0xffffff
+#define PIO_CLKDIV0_CLKDIV_BITS 32
+#define PIO_CLKDIV0_CLKDIV_MASK 0xffffffff
 
 /*******************************************************************************
 *                                   PINCTRL0                                   *
@@ -406,6 +432,21 @@
 #define PIO_SHIFTCTRL0_CLEAR_TXFIFO_LSB  14
 #define PIO_SHIFTCTRL0_CLEAR_TXFIFO_BITS 1
 #define PIO_SHIFTCTRL0_CLEAR_TXFIFO_MASK 0x4000
+// Field: SHIFTCTRL0_TXFIFO_PEEK_MODE  Access: RW
+// Use peek mode in txfifo.
+#define PIO_SHIFTCTRL0_TXFIFO_PEEK_MODE_LSB  13
+#define PIO_SHIFTCTRL0_TXFIFO_PEEK_MODE_BITS 1
+#define PIO_SHIFTCTRL0_TXFIFO_PEEK_MODE_MASK 0x2000
+// Field: SHIFTCTRL0_TXFIFO_SHADOW_MODE  Access: RW
+// Use shadow mode in txfifo.
+#define PIO_SHIFTCTRL0_TXFIFO_SHADOW_MODE_LSB  12
+#define PIO_SHIFTCTRL0_TXFIFO_SHADOW_MODE_BITS 1
+#define PIO_SHIFTCTRL0_TXFIFO_SHADOW_MODE_MASK 0x1000
+// Field: SHIFTCTRL0_TXFIFO_SHADOW_UPDATE  Access: RWF
+// Use shadow TX FIFO data to update worked TX FIFO data
+#define PIO_SHIFTCTRL0_TXFIFO_SHADOW_UPDATE_LSB  11
+#define PIO_SHIFTCTRL0_TXFIFO_SHADOW_UPDATE_BITS 1
+#define PIO_SHIFTCTRL0_TXFIFO_SHADOW_UPDATE_MASK 0x800
 
 /*******************************************************************************
 *                                    INSTR0                                    *
@@ -481,8 +522,8 @@
 // Field: CLKDIV1_CLKDIV  Access: RW
 // Clock divisor register for state machine 1.
 #define PIO_CLKDIV1_CLKDIV_LSB  0
-#define PIO_CLKDIV1_CLKDIV_BITS 24
-#define PIO_CLKDIV1_CLKDIV_MASK 0xffffff
+#define PIO_CLKDIV1_CLKDIV_BITS 32
+#define PIO_CLKDIV1_CLKDIV_MASK 0xffffffff
 
 /*******************************************************************************
 *                                   PINCTRL1                                   *
@@ -645,6 +686,21 @@
 #define PIO_SHIFTCTRL1_CLEAR_TXFIFO_LSB  14
 #define PIO_SHIFTCTRL1_CLEAR_TXFIFO_BITS 1
 #define PIO_SHIFTCTRL1_CLEAR_TXFIFO_MASK 0x4000
+// Field: SHIFTCTRL1_TXFIFO_PEEK_MODE  Access: RW
+// Use peek mode in txfifo.
+#define PIO_SHIFTCTRL1_TXFIFO_PEEK_MODE_LSB  13
+#define PIO_SHIFTCTRL1_TXFIFO_PEEK_MODE_BITS 1
+#define PIO_SHIFTCTRL1_TXFIFO_PEEK_MODE_MASK 0x2000
+// Field: SHIFTCTRL1_TXFIFO_SHADOW_MODE  Access: RW
+// Use shadow mode in txfifo.
+#define PIO_SHIFTCTRL1_TXFIFO_SHADOW_MODE_LSB  12
+#define PIO_SHIFTCTRL1_TXFIFO_SHADOW_MODE_BITS 1
+#define PIO_SHIFTCTRL1_TXFIFO_SHADOW_MODE_MASK 0x1000
+// Field: SHIFTCTRL1_TXFIFO_SHADOW_UPDATE  Access: RWF
+// Use shadow TX FIFO data to update worked TX FIFO data
+#define PIO_SHIFTCTRL1_TXFIFO_SHADOW_UPDATE_LSB  11
+#define PIO_SHIFTCTRL1_TXFIFO_SHADOW_UPDATE_BITS 1
+#define PIO_SHIFTCTRL1_TXFIFO_SHADOW_UPDATE_MASK 0x800
 
 /*******************************************************************************
 *                                    INSTR1                                    *
@@ -720,8 +776,8 @@
 // Field: CLKDIV2_CLKDIV  Access: RW
 // Clock divisor register for state machine 2.
 #define PIO_CLKDIV2_CLKDIV_LSB  0
-#define PIO_CLKDIV2_CLKDIV_BITS 24
-#define PIO_CLKDIV2_CLKDIV_MASK 0xffffff
+#define PIO_CLKDIV2_CLKDIV_BITS 32
+#define PIO_CLKDIV2_CLKDIV_MASK 0xffffffff
 
 /*******************************************************************************
 *                                   PINCTRL2                                   *
@@ -884,6 +940,21 @@
 #define PIO_SHIFTCTRL2_CLEAR_TXFIFO_LSB  14
 #define PIO_SHIFTCTRL2_CLEAR_TXFIFO_BITS 1
 #define PIO_SHIFTCTRL2_CLEAR_TXFIFO_MASK 0x4000
+// Field: SHIFTCTRL2_TXFIFO_PEEK_MODE  Access: RW
+// Use peek mode in txfifo.
+#define PIO_SHIFTCTRL2_TXFIFO_PEEK_MODE_LSB  13
+#define PIO_SHIFTCTRL2_TXFIFO_PEEK_MODE_BITS 1
+#define PIO_SHIFTCTRL2_TXFIFO_PEEK_MODE_MASK 0x2000
+// Field: SHIFTCTRL2_TXFIFO_SHADOW_MODE  Access: RW
+// Use shadow mode in txfifo.
+#define PIO_SHIFTCTRL2_TXFIFO_SHADOW_MODE_LSB  12
+#define PIO_SHIFTCTRL2_TXFIFO_SHADOW_MODE_BITS 1
+#define PIO_SHIFTCTRL2_TXFIFO_SHADOW_MODE_MASK 0x1000
+// Field: SHIFTCTRL2_TXFIFO_SHADOW_UPDATE  Access: RWF
+// Use shadow TX FIFO data to update worked TX FIFO data
+#define PIO_SHIFTCTRL2_TXFIFO_SHADOW_UPDATE_LSB  11
+#define PIO_SHIFTCTRL2_TXFIFO_SHADOW_UPDATE_BITS 1
+#define PIO_SHIFTCTRL2_TXFIFO_SHADOW_UPDATE_MASK 0x800
 
 /*******************************************************************************
 *                                    INSTR2                                    *
@@ -959,8 +1030,8 @@
 // Field: CLKDIV3_CLKDIV  Access: RW
 // Clock divisor register for state machine 3.
 #define PIO_CLKDIV3_CLKDIV_LSB  0
-#define PIO_CLKDIV3_CLKDIV_BITS 24
-#define PIO_CLKDIV3_CLKDIV_MASK 0xffffff
+#define PIO_CLKDIV3_CLKDIV_BITS 32
+#define PIO_CLKDIV3_CLKDIV_MASK 0xffffffff
 
 /*******************************************************************************
 *                                   PINCTRL3                                   *
@@ -1123,6 +1194,21 @@
 #define PIO_SHIFTCTRL3_CLEAR_TXFIFO_LSB  14
 #define PIO_SHIFTCTRL3_CLEAR_TXFIFO_BITS 1
 #define PIO_SHIFTCTRL3_CLEAR_TXFIFO_MASK 0x4000
+// Field: SHIFTCTRL3_TXFIFO_PEEK_MODE  Access: RW
+// Use peek mode in txfifo.
+#define PIO_SHIFTCTRL3_TXFIFO_PEEK_MODE_LSB  13
+#define PIO_SHIFTCTRL3_TXFIFO_PEEK_MODE_BITS 1
+#define PIO_SHIFTCTRL3_TXFIFO_PEEK_MODE_MASK 0x2000
+// Field: SHIFTCTRL3_TXFIFO_SHADOW_MODE  Access: RW
+// Use shadow mode in txfifo.
+#define PIO_SHIFTCTRL3_TXFIFO_SHADOW_MODE_LSB  12
+#define PIO_SHIFTCTRL3_TXFIFO_SHADOW_MODE_BITS 1
+#define PIO_SHIFTCTRL3_TXFIFO_SHADOW_MODE_MASK 0x1000
+// Field: SHIFTCTRL3_TXFIFO_SHADOW_UPDATE  Access: RWF
+// Use shadow TX FIFO data to update worked TX FIFO data
+#define PIO_SHIFTCTRL3_TXFIFO_SHADOW_UPDATE_LSB  11
+#define PIO_SHIFTCTRL3_TXFIFO_SHADOW_UPDATE_BITS 1
+#define PIO_SHIFTCTRL3_TXFIFO_SHADOW_UPDATE_MASK 0x800
 
 /*******************************************************************************
 *                                    INSTR3                                    *

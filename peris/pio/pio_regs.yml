@@ -69,10 +69,22 @@ regs:
       - {b: [31, 0], name: data, access: rwf, rst: 0,
         info: "GPIO direction control, 1: output, 0: input."}
 
+  - name: pins_data_set
+    info: GPIO output data set register
+    bits:
+      - {b: [31, 0], name: data, access: wf, rst: 0,
+        info: "Write 1 set, write 0 no effect."}
+
+  - name: pins_data_clr
+    info: GPIO output data clear register
+    bits:
+      - {b: [31, 0], name: data, access: wf, rst: 0,
+        info: "Write 1 clear, write 0 no effect."}
+
   - name: clkdiv0
     info: SM0 clock divider register
     bits:
-      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+      - {b: [31, 0], name: clkdiv, access: rw, rst: 0x100,
         info: "Clock divisor register for state machine 0."}
   - name: pinctrl0
     info: State machine 0 pin control register
@@ -136,6 +148,12 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
+      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
+        info: "Use peek mode in txfifo."}
+      - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
+        info: "Use shadow mode in txfifo."}
+      - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
+        info: "Use shadow TX FIFO data to update worked TX FIFO data"}
   - name: instr0
     info: Immediate instruction register
     bits:
@@ -162,7 +180,7 @@ regs:
   - name: clkdiv1
     info: SM1 clock divider register
     bits:
-      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+      - {b: [31, 0], name: clkdiv, access: rw, rst: 0x100,
         info: "Clock divisor register for state machine 1."}
   - name: pinctrl1
     info: State machine 1 pin control register
@@ -226,6 +244,12 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
+      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
+        info: "Use peek mode in txfifo."}
+      - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
+        info: "Use shadow mode in txfifo."}
+      - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
+        info: "Use shadow TX FIFO data to update worked TX FIFO data"}
   - name: instr1
     info: Immediate instruction register
     bits:
@@ -252,7 +276,7 @@ regs:
   - name: clkdiv2
     info: SM2 clock divider register
     bits:
-      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+      - {b: [31, 0], name: clkdiv, access: rw, rst: 0x100,
         info: "Clock divisor register for state machine 2."}
   - name: pinctrl2
     info: State machine 2 pin control register
@@ -316,6 +340,12 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
+      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
+        info: "Use peek mode in txfifo."}
+      - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
+        info: "Use shadow mode in txfifo."}
+      - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
+        info: "Use shadow TX FIFO data to update worked TX FIFO data"}
   - name: instr2
     info: Immediate instruction register
     bits:
@@ -342,7 +372,7 @@ regs:
   - name: clkdiv3
     info: SM3 clock divider register
     bits:
-      - {b: [23, 0], name: clkdiv, access: rw, rst: 0,
+      - {b: [31, 0], name: clkdiv, access: rw, rst: 0x100,
         info: "Clock divisor register for state machine 3."}
   - name: pinctrl3
     info: State machine 3 pin control register
@@ -406,6 +436,12 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
+      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
+        info: "Use peek mode in txfifo."}
+      - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
+        info: "Use shadow mode in txfifo."}
+      - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
+        info: "Use shadow TX FIFO data to update worked TX FIFO data"}
   - name: instr3
     info: Immediate instruction register
     bits:

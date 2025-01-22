@@ -5,7 +5,7 @@ module machine (
     input  wire        clk,
     input  wire        rst_n,
     input  wire        en,
-    input  wire [23:0] div,
+    input  wire [31:0] div,
     input  wire        use_divider,
     input  wire [31:0] din,
     input  wire [15:0] instr,
@@ -405,7 +405,7 @@ module machine (
                         set_isr(0);
                         waiting = full;
                         auto = 1;
-                        if (source == 0) begin
+                        if ((source == 0) && (!full)) begin
                             // Do not set ISR Zero.
                             set_shift_in = 0;
                             do_in_shift_continuously = 1;
@@ -425,7 +425,7 @@ module machine (
                         auto = 1;
                         // pull and shift at the same time.
                         // PINS
-                        if (destination == 0) begin
+                        if ((destination == 0) && (!empty)) begin
                             set_shift_out_count = op2 == 0 ? 32 : op2;
                             //do_out_shift = 1;
                             pins_out(din);

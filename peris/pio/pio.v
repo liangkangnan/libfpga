@@ -55,7 +55,7 @@ module pio #(
 
 	wire [4:0]   wrap_top        [0:NUM_MACHINES-1];
 	wire [4:0]   wrap_bottom     [0:NUM_MACHINES-1];
-	wire [23:0]  div             [0:NUM_MACHINES-1];
+	wire [31:0]  div             [0:NUM_MACHINES-1];
 	wire [4:0]   pins_in_base    [0:NUM_MACHINES-1];
 	wire [4:0]   pins_out_base   [0:NUM_MACHINES-1];
 	wire [4:0]   pins_set_base   [0:NUM_MACHINES-1];
@@ -89,6 +89,12 @@ module pio #(
 	wire [NUM_MACHINES-1:0]  mpull;
 	wire [NUM_MACHINES-1:0]  tx_full;
 	wire [NUM_MACHINES-1:0]  rx_empty;
+
+	wire [NUM_MACHINES-1:0]  txfifo_peek_mode;
+	wire [NUM_MACHINES-1:0]  txfifo_shadow_mode;
+	wire [NUM_MACHINES-1:0]  txfifo_shadow_update;
+	wire [NUM_MACHINES-1:0]  txfifo_shadow_update_wen;
+	wire [NUM_MACHINES-1:0]  txfifo_shadow_update_state;
 
 	reg  [7:0] irq_pending;
 	wire [7:0] irq_pending_wdata;
@@ -134,6 +140,10 @@ module pio #(
 	wire        pins_dir_data_wen;
 	wire        pins_dir_data_ren;
 	reg  [31:0] gpio_data;
+	wire [31:0] pins_data_set_data;
+	wire        pins_data_set_data_wen;
+	wire [31:0] pins_data_clr_data;
+	wire        pins_data_clr_data_wen;
 
 	(* mem2reg *) reg [15:0]  curr_instr      [0:NUM_MACHINES-1];
 
@@ -170,6 +180,20 @@ module pio #(
 			end
 			if (pins_dir_data_wen) begin
 				gpio_dir <= pins_dir_wdata;
+			end
+			if (pins_data_set_data_wen) begin
+				for (k = 0; k < 32; k = k + 1) begin
+					if (pins_data_set_data[k]) begin
+						gpio_out[k] <= 1'b1;
+					end
+				end
+			end
+			if (pins_data_clr_data_wen) begin
+				for (k = 0; k < 32; k = k + 1) begin
+					if (pins_data_clr_data[k]) begin
+						gpio_out[k] <= 1'b0;
+					end
+				end
 			end
 		end
 	end
@@ -241,7 +265,7 @@ module pio #(
 				.in_shift_dir      (in_shift_dir[j]),
 				.out_shift_dir     (out_shift_dir[j]),
 				.div               (div[j]),
-				.use_divider       (div[j] >= 24'h200),
+				.use_divider       (div[j] >= 32'h200),
 				.instr             (imm[j] ? imm_instr[j] : curr_instr[j]),
 				.imm               (imm[j]),
 				.wrap_top          (wrap_top[j]),
@@ -278,6 +302,10 @@ module pio #(
 				.reset (clear_txfifo[j] & clear_txfifo_en[j]),
 				.push  (push[j]),
 				.pull  (mpull[j]),
+				.peek_mode    (txfifo_peek_mode[j]),
+				.shadow_mode  (txfifo_shadow_mode[j]),
+				.shadow_update(txfifo_shadow_update[j] & txfifo_shadow_update_wen[j]),
+				.shadow_update_state(txfifo_shadow_update_state[j]),
 				.din   (push_data[j]),
 				.dout  (mdin[j]),
 				.empty (mempty[j]),
@@ -291,6 +319,9 @@ module pio #(
 				.reset (clear_rxfifo[j] & clear_rxfifo_en[j]),
 				.push  (mpush[j]),
 				.pull  (pull[j]),
+				.peek_mode    (1'b0),
+				.shadow_mode  (1'b0),
+				.shadow_update(1'b0),
 				.din   (mdout[j]),
 				.dout  (pdout[j]),
 				.full  (mfull[j]),
@@ -364,6 +395,11 @@ module pio #(
 		.pins_dir_data_o(pins_dir_wdata),
 		.pins_dir_data_wen(pins_dir_data_wen),
 		.pins_dir_data_ren(pins_dir_data_ren),
+
+		.pins_data_set_data_o(pins_data_set_data),
+		.pins_data_set_data_wen(pins_data_set_data_wen),
+		.pins_data_clr_data_o(pins_data_clr_data),
+		.pins_data_clr_data_wen(pins_data_clr_data_wen),
 
 		.pinctrl0_out_base_o(pins_out_base[0]),
 		.pinctrl0_set_base_o(pins_set_base[0]),
@@ -449,6 +485,11 @@ module pio #(
 		.shiftctrl0_in_shift_dir_o(in_shift_dir[0]),
 		.shiftctrl0_auto_pull_o(auto_pull[0]),
 		.shiftctrl0_auto_push_o(auto_push[0]),
+		.shiftctrl0_txfifo_peek_mode_o(txfifo_peek_mode[0]),
+		.shiftctrl0_txfifo_shadow_mode_o(txfifo_shadow_mode[0]),
+		.shiftctrl0_txfifo_shadow_update_i(txfifo_shadow_update_state[0]),
+		.shiftctrl0_txfifo_shadow_update_o(txfifo_shadow_update[0]),
+		.shiftctrl0_txfifo_shadow_update_wen(txfifo_shadow_update_wen[0]),
 		.shiftctrl1_clear_rxfifo_o(clear_rxfifo[1]),
 		.shiftctrl1_clear_rxfifo_wen(clear_rxfifo_en[1]),
 		.shiftctrl1_clear_txfifo_o(clear_txfifo[1]),
@@ -459,6 +500,11 @@ module pio #(
 		.shiftctrl1_in_shift_dir_o(in_shift_dir[1]),
 		.shiftctrl1_auto_pull_o(auto_pull[1]),
 		.shiftctrl1_auto_push_o(auto_push[1]),
+		.shiftctrl1_txfifo_peek_mode_o(txfifo_peek_mode[1]),
+		.shiftctrl1_txfifo_shadow_mode_o(txfifo_shadow_mode[1]),
+		.shiftctrl1_txfifo_shadow_update_i(txfifo_shadow_update_state[1]),
+		.shiftctrl1_txfifo_shadow_update_o(txfifo_shadow_update[1]),
+		.shiftctrl1_txfifo_shadow_update_wen(txfifo_shadow_update_wen[1]),
 		.shiftctrl2_clear_rxfifo_o(clear_rxfifo[2]),
 		.shiftctrl2_clear_rxfifo_wen(clear_rxfifo_en[2]),
 		.shiftctrl2_clear_txfifo_o(clear_txfifo[2]),
@@ -469,6 +515,11 @@ module pio #(
 		.shiftctrl2_in_shift_dir_o(in_shift_dir[2]),
 		.shiftctrl2_auto_pull_o(auto_pull[2]),
 		.shiftctrl2_auto_push_o(auto_push[2]),
+		.shiftctrl2_txfifo_peek_mode_o(txfifo_peek_mode[2]),
+		.shiftctrl2_txfifo_shadow_mode_o(txfifo_shadow_mode[2]),
+		.shiftctrl2_txfifo_shadow_update_i(txfifo_shadow_update_state[2]),
+		.shiftctrl2_txfifo_shadow_update_o(txfifo_shadow_update[2]),
+		.shiftctrl2_txfifo_shadow_update_wen(txfifo_shadow_update_wen[2]),
 		.shiftctrl3_clear_rxfifo_o(clear_rxfifo[3]),
 		.shiftctrl3_clear_rxfifo_wen(clear_rxfifo_en[3]),
 		.shiftctrl3_clear_txfifo_o(clear_txfifo[3]),
@@ -479,6 +530,11 @@ module pio #(
 		.shiftctrl3_in_shift_dir_o(in_shift_dir[3]),
 		.shiftctrl3_auto_pull_o(auto_pull[3]),
 		.shiftctrl3_auto_push_o(auto_push[3]),
+		.shiftctrl3_txfifo_peek_mode_o(txfifo_peek_mode[3]),
+		.shiftctrl3_txfifo_shadow_mode_o(txfifo_shadow_mode[3]),
+		.shiftctrl3_txfifo_shadow_update_i(txfifo_shadow_update_state[3]),
+		.shiftctrl3_txfifo_shadow_update_o(txfifo_shadow_update[3]),
+		.shiftctrl3_txfifo_shadow_update_wen(txfifo_shadow_update_wen[3]),
 
 		.instr0_instr_o(imm_instr[0]),
 		.instr0_instr_wen(imm[0]),
