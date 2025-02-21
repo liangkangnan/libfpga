@@ -16,6 +16,14 @@ regs:
   - name: irq_inte
     info: PIO interrupt enable register
     bits:
+      - {b: 19, name: sm3_txempty, access: rw, rst: 0,
+        info: "State machine 3 tx fifo empty IRQ enable."}
+      - {b: 18, name: sm2_txempty, access: rw, rst: 0,
+        info: "State machine 2 tx fifo empty IRQ enable."}
+      - {b: 17, name: sm1_txempty, access: rw, rst: 0,
+        info: "State machine 1 tx fifo empty IRQ enable."}
+      - {b: 16, name: sm0_txempty, access: rw, rst: 0,
+        info: "State machine 0 tx fifo empty IRQ enable."}
       - {b: 15, name: sm3_txnfull, access: rw, rst: 0,
         info: "State machine 3 tx fifo not full IRQ enable."}
       - {b: 14, name: sm2_txnfull, access: rw, rst: 0,
@@ -38,6 +46,14 @@ regs:
   - name: irq_intp
     info: PIO interrupt pending register
     bits:
+      - {b: 19, name: sm3_txempty, access: w1c, rst: 0,
+        info: "State machine 3 tx fifo empty IRQ pending."}
+      - {b: 18, name: sm2_txempty, access: w1c, rst: 0,
+        info: "State machine 2 tx fifo empty IRQ pending."}
+      - {b: 17, name: sm1_txempty, access: w1c, rst: 0,
+        info: "State machine 1 tx fifo empty IRQ pending."}
+      - {b: 16, name: sm0_txempty, access: w1c, rst: 0,
+        info: "State machine 0 tx fifo empty IRQ pending."}
       - {b: 15, name: sm3_txnfull, access: w1c, rst: 0,
         info: "State machine 3 tx fifo not full IRQ pending."}
       - {b: 14, name: sm2_txnfull, access: w1c, rst: 0,
@@ -148,12 +164,14 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
-      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
-        info: "Use peek mode in txfifo."}
       - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: 1, name: fjoin_rx, access: rw, rst: 0,
+        info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
+      - {b: 0, name: fjoin_tx, access: rw, rst: 0,
+        info: "When 1, TX FIFO steals the RX FIFO’s storage, and becomes twice as deep."}
   - name: instr0
     info: Immediate instruction register
     bits:
@@ -170,12 +188,23 @@ regs:
   - name: fstat0
     info: FIFO status register for SM0
     bits:
-      - {b: [2, 0], name: txlevel, access: rov}
-      - {b: 3,  name: txfull,  access: rov}
-      - {b: 4,  name: txempty, access: rov}
-      - {b: [7, 5], name: rxlevel, access: rov}
-      - {b: 8, name: rxfull,  access: rov}
-      - {b: 9, name: rxempty, access: rov}
+      - {b: [3, 0], name: txlevel, access: rov}
+      - {b: 4,  name: txfull,  access: rov}
+      - {b: 5,  name: txempty, access: rov}
+      - {b: [9, 6], name: rxlevel, access: rov}
+      - {b: 10, name: rxfull,  access: rov}
+      - {b: 11, name: rxempty, access: rov}
+  - name: fctrl0
+    info: FIFO control register for SM0
+    bits:
+      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
+      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
+      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
+      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
+      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: clkdiv1
     info: SM1 clock divider register
@@ -244,12 +273,14 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
-      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
-        info: "Use peek mode in txfifo."}
       - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: 1, name: fjoin_rx, access: rw, rst: 0,
+        info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
+      - {b: 0, name: fjoin_tx, access: rw, rst: 0,
+        info: "When 1, TX FIFO steals the RX FIFO’s storage, and becomes twice as deep."}
   - name: instr1
     info: Immediate instruction register
     bits:
@@ -266,12 +297,23 @@ regs:
   - name: fstat1
     info: FIFO status register for SM1
     bits:
-      - {b: [2, 0], name: txlevel, access: rov}
-      - {b: 3,  name: txfull,  access: rov}
-      - {b: 4,  name: txempty, access: rov}
-      - {b: [7, 5], name: rxlevel, access: rov}
-      - {b: 8, name: rxfull,  access: rov}
-      - {b: 9, name: rxempty, access: rov}
+      - {b: [3, 0], name: txlevel, access: rov}
+      - {b: 4,  name: txfull,  access: rov}
+      - {b: 5,  name: txempty, access: rov}
+      - {b: [9, 6], name: rxlevel, access: rov}
+      - {b: 10, name: rxfull,  access: rov}
+      - {b: 11, name: rxempty, access: rov}
+  - name: fctrl1
+    info: FIFO control register for SM1
+    bits:
+      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
+      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
+      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
+      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
+      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: clkdiv2
     info: SM2 clock divider register
@@ -340,12 +382,14 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
-      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
-        info: "Use peek mode in txfifo."}
       - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: 1, name: fjoin_rx, access: rw, rst: 0,
+        info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
+      - {b: 0, name: fjoin_tx, access: rw, rst: 0,
+        info: "When 1, TX FIFO steals the RX FIFO’s storage, and becomes twice as deep."}
   - name: instr2
     info: Immediate instruction register
     bits:
@@ -362,12 +406,23 @@ regs:
   - name: fstat2
     info: FIFO status register for SM2
     bits:
-      - {b: [2, 0], name: txlevel, access: rov}
-      - {b: 3,  name: txfull,  access: rov}
-      - {b: 4,  name: txempty, access: rov}
-      - {b: [7, 5], name: rxlevel, access: rov}
-      - {b: 8, name: rxfull,  access: rov}
-      - {b: 9, name: rxempty, access: rov}
+      - {b: [3, 0], name: txlevel, access: rov}
+      - {b: 4,  name: txfull,  access: rov}
+      - {b: 5,  name: txempty, access: rov}
+      - {b: [9, 6], name: rxlevel, access: rov}
+      - {b: 10, name: rxfull,  access: rov}
+      - {b: 11, name: rxempty, access: rov}
+  - name: fctrl2
+    info: FIFO control register for SM2
+    bits:
+      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
+      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
+      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
+      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
+      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: clkdiv3
     info: SM3 clock divider register
@@ -436,12 +491,14 @@ regs:
         info: "Write 1 to clear RX fifo."}
       - {b: 14, name: clear_txfifo, access: wf, rst: 0,
         info: "Write 1 to clear TX fifo."}
-      - {b: 13, name: txfifo_peek_mode, access: rw, rst: 0,
-        info: "Use peek mode in txfifo."}
       - {b: 12, name: txfifo_shadow_mode, access: rw, rst: 0,
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: 1, name: fjoin_rx, access: rw, rst: 0,
+        info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
+      - {b: 0, name: fjoin_tx, access: rw, rst: 0,
+        info: "When 1, TX FIFO steals the RX FIFO’s storage, and becomes twice as deep."}
   - name: instr3
     info: Immediate instruction register
     bits:
@@ -458,12 +515,23 @@ regs:
   - name: fstat3
     info: FIFO status register for SM3
     bits:
-      - {b: [2, 0], name: txlevel, access: rov}
-      - {b: 3,  name: txfull,  access: rov}
-      - {b: 4,  name: txempty, access: rov}
-      - {b: [7, 5], name: rxlevel, access: rov}
-      - {b: 8, name: rxfull,  access: rov}
-      - {b: 9, name: rxempty, access: rov}
+      - {b: [3, 0], name: txlevel, access: rov}
+      - {b: 4,  name: txfull,  access: rov}
+      - {b: 5,  name: txempty, access: rov}
+      - {b: [9, 6], name: rxlevel, access: rov}
+      - {b: 10, name: rxfull,  access: rov}
+      - {b: 11, name: rxempty, access: rov}
+  - name: fctrl3
+    info: FIFO control register for SM3
+    bits:
+      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
+      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
+      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
+      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
+      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: instrmem0
     info: Instruction 0 register

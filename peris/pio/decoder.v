@@ -24,6 +24,6 @@ module decoder (
     assign op2             = instr[4:0];
     assign delay           = (instr[12:8] << side_whole_bits) >> side_whole_bits;
     assign side_set        = (instr[12:8] << sideset_enable_bit) >> (sideset_enable_bit + delay_bits);
-    assign sideset_enabled = sideset_enable_bit ? instr[12] : 1;
+    assign sideset_enabled = sideset_enable_bit && instr[12];
 
 endmodule

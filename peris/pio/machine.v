@@ -45,7 +45,7 @@ module machine (
     output  reg [31:0] output_pins,
     output  reg [31:0] pin_directions,
     output  reg [ 7:0] irq_flags_out,
-    output  reg        irq_flags_out_write,
+    output  reg [ 7:0] irq_flags_out_write,
     output wire        exec_stalled,
     output wire        pclk
 );
@@ -80,6 +80,7 @@ module machine (
 
     reg         exec1;
     reg [15:0]  exec_instr;
+    reg [2:0]   op_prev;
 
     // Divided clock enable signal 
     wire        penable;
@@ -117,6 +118,8 @@ module machine (
     wire [31:0] null = 0; // NULL source
     wire [5:0]  isr_count, osr_count;
     wire [31:0] in_pins = input_pins >> pins_in_base;
+    reg [63:0] new_in_shift;
+    reg [5:0] in_shift_bits;
 
     // Values for use in gtkwave during simulation
     wire pin0    = output_pins[0];
@@ -128,6 +131,7 @@ module machine (
     wire pin2_dir= pin_directions[2];
     wire pin3_dir= pin_directions[3];
     wire in_pin0 = in_pins[0];
+    wire instr_execing = (enabled && !delaying);
 
     reg [4:0]   delay_cnt;
 
@@ -323,7 +327,7 @@ module machine (
                     for (i = 0; i < 5; i = i + 1) begin
                         if (pins_side_count > i) begin
                             if (side_pindir) begin
-                                pin_directions[pins_set_base+i] <= side_set[i];
+                                pin_directions[pins_side_base+i] <= side_set[i];
                             end else begin
                                 output_pins[pins_side_base+i] <= side_set[i];
                             end
@@ -346,6 +350,16 @@ module machine (
                     for (i = 0; i < 32; i = i + 1)
                         if (pins_out_count > i) pin_directions[pins_out_base+i] <= new_val[i];
                 end
+            end
+        end
+    end
+
+    always @ (posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            op_prev <= 0;
+        end else begin
+            if (instr_execing) begin
+                op_prev <= op;
             end
         end
     end
@@ -379,6 +393,8 @@ module machine (
         irq_flags_out = 0;
         irq_flags_out_write = 0;
         dout = 0;
+        new_in_shift = 0;
+        in_shift_bits = 0;
 
         if (enabled && !delaying) begin
             case (op)
@@ -400,16 +416,16 @@ module machine (
                         1: waiting = input_pins[pins_in_base + index] != polarity; // PIN
                         2: waiting = irq_flags_in[irq_index] != polarity;          // IRQ
                     endcase
-                IN: if (auto_push && isr_count >= isr_threshold) begin // Auto push
+                IN: if (auto_push && isr_count >= isr_threshold - 1) begin // Auto push
                         do_push();
                         set_isr(0);
                         waiting = full;
-                        auto = 1;
+                        //auto = 1;
                         if ((source == 0) && (!full)) begin
-                            // Do not set ISR Zero.
-                            set_shift_in = 0;
-                            do_in_shift_continuously = 1;
-                            do_shift_in(in_pins);
+                            in_shift_bits = (op2 == 0) ? 32 : op2;
+                            new_in_shift = in_shift_dir ? {in_pins, in_shift} >> in_shift_bits
+                                                        : {in_shift, in_pins << (32 - in_shift_bits)} << in_shift_bits;
+                            dout = in_shift_dir ? new_in_shift[31:0] : new_in_shift[63:32];
                         end
                     end else case (source) // Source
                         0: do_shift_in(in_pins);                        // PINS
@@ -422,13 +438,13 @@ module machine (
                 OUT: if (auto_pull && osr_count >= osr_threshold) begin // Auto pull
                         do_pull();
                         waiting = empty;
-                        auto = 1;
+                        //auto = 1;
                         // pull and shift at the same time.
                         // PINS
                         if ((destination == 0) && (!empty)) begin
-                            set_shift_out_count = op2 == 0 ? 32 : op2;
+                            set_shift_out_count = (op2 == 0) ? 32 : op2;
                             //do_out_shift = 1;
-                            pins_out(din);
+                            pins_out(out_shift_dir ? din : (din >> (32 - set_shift_out_count)));
                             already_shift = 1;
                             already_shift_val = out_shift_dir ? (din >> set_shift_out_count) : (din << set_shift_out_count);
                         end
@@ -517,12 +533,24 @@ module machine (
                            endcase
                     endcase
                 IRQ: begin
-                        irq_flags_out_write = 1;
+                        // CLEAR
                         if (op1[1]) begin
-                            irq_flags_out[irq_index] = 0;    // CLEAR
+                            irq_flags_out_write[irq_index] = 1;
+                            irq_flags_out[irq_index] = 0;
+                        // SET
                         end else begin
-                            irq_flags_out[irq_index] = 1;    // SET
-                            waiting = blocking && irq_flags_in[irq_index] != 0; // If wait set, wait for irq cleared
+                            irq_flags_out[irq_index] = 1;
+                            // Only one irq instruction, always set
+                            if (wrap_top == wrap_bottom) begin
+                                irq_flags_out_write[irq_index] = 1;
+                            end
+                            // first exec
+                            if (op_prev != IRQ) begin
+                                irq_flags_out_write[irq_index] = 1;     // Set once time
+                                waiting = blocking;          // If wait set, wait for irq to be cleared
+                            end else begin
+                                waiting = blocking && irq_flags_in[irq_index];
+                            end
                         end
                     end
                 SET: case (destination) // Destination
