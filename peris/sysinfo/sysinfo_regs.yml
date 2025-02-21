@@ -1,0 +1,15 @@
+name: sysinfo
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: chip_id
+    info: JEDEC JEP-106 compliant chip identifier
+    bits:
+      - {b: [31, 28], name: revision, access: ro, rst: 0x1}
+      - {b: [27, 12], name: part, access: ro, rst: 0x1234}
+      - {b: [11, 0], name: manufacturer, access: ro, rst: 0xabc}
+  - name: platform
+    info: Allows software to know what environment it is running in
+    bits:
+      - {b: 0, name: asic, access: ro, rst: 0, info: "0: FPGA, 1: ASIC"}
