@@ -1,0 +1,10 @@
+name: perireset
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: ctrl
+    info: peris reset control register
+    bits:
+      - {b: [15, 0], name: reset, access: rwf, rst: 0,
+        info: "Write 1 to reset peri, and self cleared when reset done."}
