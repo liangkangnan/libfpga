@@ -368,7 +368,7 @@
 
 // Execution/behavioural settings register
 
-// Field: EXECCTRL0_EXEC_STALLED  Access: RW
+// Field: EXECCTRL0_EXEC_STALLED  Access: ROV
 // If 1, an instruction written to INSTR is stalled, and latched by the state
 // machine.
 #define PIO_EXECCTRL0_EXEC_STALLED_LSB  31
@@ -674,7 +674,7 @@
 
 // Execution/behavioural settings register
 
-// Field: EXECCTRL1_EXEC_STALLED  Access: RW
+// Field: EXECCTRL1_EXEC_STALLED  Access: ROV
 // If 1, an instruction written to INSTR is stalled, and latched by the state
 // machine.
 #define PIO_EXECCTRL1_EXEC_STALLED_LSB  31
@@ -980,7 +980,7 @@
 
 // Execution/behavioural settings register
 
-// Field: EXECCTRL2_EXEC_STALLED  Access: RW
+// Field: EXECCTRL2_EXEC_STALLED  Access: ROV
 // If 1, an instruction written to INSTR is stalled, and latched by the state
 // machine.
 #define PIO_EXECCTRL2_EXEC_STALLED_LSB  31
@@ -1286,7 +1286,7 @@
 
 // Execution/behavioural settings register
 
-// Field: EXECCTRL3_EXEC_STALLED  Access: RW
+// Field: EXECCTRL3_EXEC_STALLED  Access: ROV
 // If 1, an instruction written to INSTR is stalled, and latched by the state
 // machine.
 #define PIO_EXECCTRL3_EXEC_STALLED_LSB  31

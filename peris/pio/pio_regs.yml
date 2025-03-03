@@ -122,7 +122,7 @@ regs:
   - name: execctrl0
     info: Execution/behavioural settings register
     bits:
-      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+      - {b: 31, name: exec_stalled, access: rov, rst: 0,
         info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
       - {b: 30, name: sideset_en, access: rw, rst: 0,
         info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
@@ -231,7 +231,7 @@ regs:
   - name: execctrl1
     info: Execution/behavioural settings register
     bits:
-      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+      - {b: 31, name: exec_stalled, access: rov, rst: 0,
         info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
       - {b: 30, name: sideset_en, access: rw, rst: 0,
         info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
@@ -340,7 +340,7 @@ regs:
   - name: execctrl2
     info: Execution/behavioural settings register
     bits:
-      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+      - {b: 31, name: exec_stalled, access: rov, rst: 0,
         info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
       - {b: 30, name: sideset_en, access: rw, rst: 0,
         info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}
@@ -449,7 +449,7 @@ regs:
   - name: execctrl3
     info: Execution/behavioural settings register
     bits:
-      - {b: 31, name: exec_stalled, access: rw, rst: 0,
+      - {b: 31, name: exec_stalled, access: rov, rst: 0,
         info: "If 1, an instruction written to INSTR is stalled, and latched by the state machine."}
       - {b: 30, name: sideset_en, access: rw, rst: 0,
         info: "If 1, the MSB of the Delay/Side-set instruction field is used as side-set enable, rather than a side-set data bit."}

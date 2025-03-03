@@ -42,7 +42,9 @@ module machine (
     output  reg        push, // Send data to RX FIFO
     output  reg        pull, // Get data from TX FIFO
     output  reg [31:0] dout,
+    output  reg [31:0] output_pins_wen,
     output  reg [31:0] output_pins,
+    output  reg [31:0] pin_directions_wen,
     output  reg [31:0] pin_directions,
     output  reg [ 7:0] irq_flags_out,
     output  reg [ 7:0] irq_flags_out_write,
@@ -317,10 +319,17 @@ module machine (
         if (!rst_n) begin
             pin_directions <= 32'h00000000;
             output_pins <= 32'h00000000;
+            output_pins_wen <= 32'h00000000;
+            pin_directions_wen <= 32'h00000000;
         end else if (restart) begin
             pin_directions <= 32'h00000000;
             output_pins <= 32'h00000000;
+            output_pins_wen <= 32'h00000000;
+            pin_directions_wen <= 32'h00000000;
         end else begin
+            output_pins_wen <= 32'h00000000;
+            pin_directions_wen <= 32'h00000000;
+
             if (enabled && !delaying) begin
                 //if (sideset_enabled && !(auto && !waiting)) begin
                 if (sideset_enabled) begin
@@ -328,27 +337,45 @@ module machine (
                         if (pins_side_count > i) begin
                             if (side_pindir) begin
                                 pin_directions[pins_side_base+i] <= side_set[i];
+                                pin_directions_wen[pins_side_base+i] <= 1'b1;
                             end else begin
                                 output_pins[pins_side_base+i] <= side_set[i];
+                                output_pins_wen[pins_side_base+i] <= 1'b1;
                             end
                         end
                     end
                 end
                 if (set_set_pins) begin
-                    for (i = 0; i < 5; i = i + 1)
-                        if (pins_set_count > i) output_pins[pins_set_base+i] <= new_val[i];
+                    for (i = 0; i < 5; i = i + 1) begin
+                        if (pins_set_count > i) begin
+                            output_pins[pins_set_base+i] <= new_val[i];
+                            output_pins_wen[pins_set_base+i] <= 1'b1;
+                        end
+                    end
                 end
                 if (set_set_dirs) begin
-                    for (i = 0; i < 5; i = i + 1)
-                        if (pins_set_count > i) pin_directions[pins_set_base+i] <= new_val[i];
+                    for (i = 0; i < 5; i = i + 1) begin
+                        if (pins_set_count > i) begin
+                            pin_directions[pins_set_base+i] <= new_val[i];
+                            pin_directions_wen[pins_set_base+i] <= 1'b1;
+                        end
+                    end
                 end
                 if (set_out_pins) begin
-                    for (i = 0; i < 32; i = i + 1)
-                        if (pins_out_count > i) output_pins[pins_out_base+i] <= new_val[i];
+                    for (i = 0; i < 32; i = i + 1) begin
+                        if (pins_out_count > i) begin
+                            output_pins[pins_out_base+i] <= new_val[i];
+                            output_pins_wen[pins_out_base+i] <= 1'b1;
+                        end
+                    end
                 end
                 if (set_out_dirs) begin
-                    for (i = 0; i < 32; i = i + 1)
-                        if (pins_out_count > i) pin_directions[pins_out_base+i] <= new_val[i];
+                    for (i = 0; i < 32; i = i + 1) begin
+                        if (pins_out_count > i) begin
+                            pin_directions[pins_out_base+i] <= new_val[i];
+                            pin_directions_wen[pins_out_base+i] <= 1'b1;
+                        end
+                    end
                 end
             end
         end

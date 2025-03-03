@@ -70,10 +70,10 @@ module pio #(
 	wire [4:0]   jmp_pin         [0:NUM_MACHINES-1];
 
 	// Output from machines and fifos
+	wire [31:0] output_pins_wen     [0:NUM_MACHINES-1];
 	wire [31:0] output_pins         [0:NUM_MACHINES-1];
-	reg  [31:0] output_pins_prev    [0:NUM_MACHINES-1];
+	wire [31:0] pin_directions_wen  [0:NUM_MACHINES-1];
 	wire [31:0] pin_directions      [0:NUM_MACHINES-1];
-	reg  [31:0] pin_directions_prev [0:NUM_MACHINES-1];
 	wire [4:0]  pc                  [0:NUM_MACHINES-1];
 	wire [31:0] mdin                [0:NUM_MACHINES-1];
 	wire [31:0] mdout               [0:NUM_MACHINES-1];
@@ -208,10 +208,6 @@ module pio #(
 
 	always @(posedge clk or negedge rst_n) begin
 		if (!rst_n) begin
-			for (k = 0; k < NUM_MACHINES; k = k + 1) begin
-				output_pins_prev[k] <= 0;
-				pin_directions_prev[k] <= 0;
-			end
 			gpio_out <= 0;
 			gpio_dir <= 0;
 		end else begin
@@ -220,13 +216,11 @@ module pio #(
 
 				// Coalesce output pins, making sure the highest PIO wins
 				for (gpio_idx = 0; gpio_idx < 32; gpio_idx = gpio_idx + 1) begin
-					output_pins_prev[i][gpio_idx] <= output_pins[i][gpio_idx];
-					if (output_pins[i][gpio_idx] != output_pins_prev[i][gpio_idx]) begin
+					if (output_pins_wen[i][gpio_idx]) begin
 						gpio_out[gpio_idx] <= output_pins[i][gpio_idx];
 					end
 
-					pin_directions_prev[i][gpio_idx] <= pin_directions[i][gpio_idx];
-					if (pin_directions[i][gpio_idx] != pin_directions_prev[i][gpio_idx]) begin
+					if (pin_directions_wen[i][gpio_idx]) begin
 						gpio_dir[gpio_idx] <= pin_directions[i][gpio_idx];
 					end
 				end
@@ -395,7 +389,9 @@ module pio #(
 				.mindex            (j[1:0]),
 				.jmp_pin           (jmp_pin[j]),
 				.input_pins        (gpio_in),
+				.output_pins_wen   (output_pins_wen[j]),
 				.output_pins       (output_pins[j]),
+				.pin_directions_wen(pin_directions_wen[j]),
 				.pin_directions    (pin_directions[j]),
 				.sideset_enable_bit(pins_side_count[j] > 0 ? sideset_enable_bit[j] : 1'b0),
 				.in_shift_dir      (in_shift_dir[j]),
@@ -607,7 +603,7 @@ module pio #(
 		.pinctrl3_set_count_o(pins_set_count[3]),
 		.pinctrl3_side_count_o(pins_side_count[3]),
 
-		.execctrl0_exec_stalled_o(exec_stalled[0]),
+		.execctrl0_exec_stalled_i(exec_stalled[0]),
 		.execctrl0_sideset_en_o(sideset_enable_bit[0]),
 		.execctrl0_side_pindir_o(side_pindir[0]),
 		.execctrl0_jmp_pin_o(jmp_pin[0]),
@@ -618,7 +614,7 @@ module pio #(
 		.execctrl0_wrap_bottom_o(wrap_bottom[0]),
 		.execctrl0_status_sel_o(status_sel[0]),
 		.execctrl0_status_n_o(status_n[0]),
-		.execctrl1_exec_stalled_o(exec_stalled[1]),
+		.execctrl1_exec_stalled_i(exec_stalled[1]),
 		.execctrl1_sideset_en_o(sideset_enable_bit[1]),
 		.execctrl1_side_pindir_o(side_pindir[1]),
 		.execctrl1_jmp_pin_o(jmp_pin[1]),
@@ -629,7 +625,7 @@ module pio #(
 		.execctrl1_wrap_bottom_o(wrap_bottom[1]),
 		.execctrl1_status_sel_o(status_sel[1]),
 		.execctrl1_status_n_o(status_n[1]),
-		.execctrl2_exec_stalled_o(exec_stalled[2]),
+		.execctrl2_exec_stalled_i(exec_stalled[2]),
 		.execctrl2_sideset_en_o(sideset_enable_bit[2]),
 		.execctrl2_side_pindir_o(side_pindir[2]),
 		.execctrl2_jmp_pin_o(jmp_pin[2]),
@@ -640,7 +636,7 @@ module pio #(
 		.execctrl2_wrap_bottom_o(wrap_bottom[2]),
 		.execctrl2_status_sel_o(status_sel[2]),
 		.execctrl2_status_n_o(status_n[2]),
-		.execctrl3_exec_stalled_o(exec_stalled[3]),
+		.execctrl3_exec_stalled_i(exec_stalled[3]),
 		.execctrl3_sideset_en_o(sideset_enable_bit[3]),
 		.execctrl3_side_pindir_o(side_pindir[3]),
 		.execctrl3_jmp_pin_o(jmp_pin[3]),

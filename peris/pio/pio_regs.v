@@ -90,7 +90,7 @@ module pio_regs (
 	output reg [5:0] pinctrl0_out_count_o,
 	output reg [2:0] pinctrl0_set_count_o,
 	output reg [2:0] pinctrl0_side_count_o,
-	output reg  execctrl0_exec_stalled_o,
+	input wire  execctrl0_exec_stalled_i,
 	output reg  execctrl0_sideset_en_o,
 	output reg  execctrl0_side_pindir_o,
 	output reg [4:0] execctrl0_jmp_pin_o,
@@ -164,7 +164,7 @@ module pio_regs (
 	output reg [5:0] pinctrl1_out_count_o,
 	output reg [2:0] pinctrl1_set_count_o,
 	output reg [2:0] pinctrl1_side_count_o,
-	output reg  execctrl1_exec_stalled_o,
+	input wire  execctrl1_exec_stalled_i,
 	output reg  execctrl1_sideset_en_o,
 	output reg  execctrl1_side_pindir_o,
 	output reg [4:0] execctrl1_jmp_pin_o,
@@ -238,7 +238,7 @@ module pio_regs (
 	output reg [5:0] pinctrl2_out_count_o,
 	output reg [2:0] pinctrl2_set_count_o,
 	output reg [2:0] pinctrl2_side_count_o,
-	output reg  execctrl2_exec_stalled_o,
+	input wire  execctrl2_exec_stalled_i,
 	output reg  execctrl2_sideset_en_o,
 	output reg  execctrl2_side_pindir_o,
 	output reg [4:0] execctrl2_jmp_pin_o,
@@ -312,7 +312,7 @@ module pio_regs (
 	output reg [5:0] pinctrl3_out_count_o,
 	output reg [2:0] pinctrl3_set_count_o,
 	output reg [2:0] pinctrl3_side_count_o,
-	output reg  execctrl3_exec_stalled_o,
+	input wire  execctrl3_exec_stalled_i,
 	output reg  execctrl3_sideset_en_o,
 	output reg  execctrl3_side_pindir_o,
 	output reg [4:0] execctrl3_jmp_pin_o,
@@ -825,7 +825,7 @@ wire  execctrl0_status_sel_rdata;
 wire [3:0] execctrl0_status_n_wdata = wdata[3:0];
 wire [3:0] execctrl0_status_n_rdata;
 wire [31:0] __execctrl0_rdata = {execctrl0_exec_stalled_rdata, execctrl0_sideset_en_rdata, execctrl0_side_pindir_rdata, execctrl0_jmp_pin_rdata, execctrl0_out_en_sel_rdata, execctrl0_inline_out_en_rdata, execctrl0_out_sticky_rdata, execctrl0_wrap_top_rdata, execctrl0_wrap_bottom_rdata, 2'h0, execctrl0_status_sel_rdata, execctrl0_status_n_rdata};
-assign execctrl0_exec_stalled_rdata = execctrl0_exec_stalled_o;
+assign execctrl0_exec_stalled_rdata = execctrl0_exec_stalled_i;
 assign execctrl0_sideset_en_rdata = execctrl0_sideset_en_o;
 assign execctrl0_side_pindir_rdata = execctrl0_side_pindir_o;
 assign execctrl0_jmp_pin_rdata = execctrl0_jmp_pin_o;
@@ -987,7 +987,7 @@ wire  execctrl1_status_sel_rdata;
 wire [3:0] execctrl1_status_n_wdata = wdata[3:0];
 wire [3:0] execctrl1_status_n_rdata;
 wire [31:0] __execctrl1_rdata = {execctrl1_exec_stalled_rdata, execctrl1_sideset_en_rdata, execctrl1_side_pindir_rdata, execctrl1_jmp_pin_rdata, execctrl1_out_en_sel_rdata, execctrl1_inline_out_en_rdata, execctrl1_out_sticky_rdata, execctrl1_wrap_top_rdata, execctrl1_wrap_bottom_rdata, 2'h0, execctrl1_status_sel_rdata, execctrl1_status_n_rdata};
-assign execctrl1_exec_stalled_rdata = execctrl1_exec_stalled_o;
+assign execctrl1_exec_stalled_rdata = execctrl1_exec_stalled_i;
 assign execctrl1_sideset_en_rdata = execctrl1_sideset_en_o;
 assign execctrl1_side_pindir_rdata = execctrl1_side_pindir_o;
 assign execctrl1_jmp_pin_rdata = execctrl1_jmp_pin_o;
@@ -1149,7 +1149,7 @@ wire  execctrl2_status_sel_rdata;
 wire [3:0] execctrl2_status_n_wdata = wdata[3:0];
 wire [3:0] execctrl2_status_n_rdata;
 wire [31:0] __execctrl2_rdata = {execctrl2_exec_stalled_rdata, execctrl2_sideset_en_rdata, execctrl2_side_pindir_rdata, execctrl2_jmp_pin_rdata, execctrl2_out_en_sel_rdata, execctrl2_inline_out_en_rdata, execctrl2_out_sticky_rdata, execctrl2_wrap_top_rdata, execctrl2_wrap_bottom_rdata, 2'h0, execctrl2_status_sel_rdata, execctrl2_status_n_rdata};
-assign execctrl2_exec_stalled_rdata = execctrl2_exec_stalled_o;
+assign execctrl2_exec_stalled_rdata = execctrl2_exec_stalled_i;
 assign execctrl2_sideset_en_rdata = execctrl2_sideset_en_o;
 assign execctrl2_side_pindir_rdata = execctrl2_side_pindir_o;
 assign execctrl2_jmp_pin_rdata = execctrl2_jmp_pin_o;
@@ -1311,7 +1311,7 @@ wire  execctrl3_status_sel_rdata;
 wire [3:0] execctrl3_status_n_wdata = wdata[3:0];
 wire [3:0] execctrl3_status_n_rdata;
 wire [31:0] __execctrl3_rdata = {execctrl3_exec_stalled_rdata, execctrl3_sideset_en_rdata, execctrl3_side_pindir_rdata, execctrl3_jmp_pin_rdata, execctrl3_out_en_sel_rdata, execctrl3_inline_out_en_rdata, execctrl3_out_sticky_rdata, execctrl3_wrap_top_rdata, execctrl3_wrap_bottom_rdata, 2'h0, execctrl3_status_sel_rdata, execctrl3_status_n_rdata};
-assign execctrl3_exec_stalled_rdata = execctrl3_exec_stalled_o;
+assign execctrl3_exec_stalled_rdata = execctrl3_exec_stalled_i;
 assign execctrl3_sideset_en_rdata = execctrl3_sideset_en_o;
 assign execctrl3_side_pindir_rdata = execctrl3_side_pindir_o;
 assign execctrl3_jmp_pin_rdata = execctrl3_jmp_pin_o;
@@ -1848,7 +1848,6 @@ always @ (posedge clk or negedge rst_n) begin
 		pinctrl0_out_count_o <= 6'h0;
 		pinctrl0_set_count_o <= 3'h0;
 		pinctrl0_side_count_o <= 3'h0;
-		execctrl0_exec_stalled_o <= 1'h0;
 		execctrl0_sideset_en_o <= 1'h0;
 		execctrl0_side_pindir_o <= 1'h0;
 		execctrl0_jmp_pin_o <= 5'h0;
@@ -1878,7 +1877,6 @@ always @ (posedge clk or negedge rst_n) begin
 		pinctrl1_out_count_o <= 6'h0;
 		pinctrl1_set_count_o <= 3'h0;
 		pinctrl1_side_count_o <= 3'h0;
-		execctrl1_exec_stalled_o <= 1'h0;
 		execctrl1_sideset_en_o <= 1'h0;
 		execctrl1_side_pindir_o <= 1'h0;
 		execctrl1_jmp_pin_o <= 5'h0;
@@ -1908,7 +1906,6 @@ always @ (posedge clk or negedge rst_n) begin
 		pinctrl2_out_count_o <= 6'h0;
 		pinctrl2_set_count_o <= 3'h0;
 		pinctrl2_side_count_o <= 3'h0;
-		execctrl2_exec_stalled_o <= 1'h0;
 		execctrl2_sideset_en_o <= 1'h0;
 		execctrl2_side_pindir_o <= 1'h0;
 		execctrl2_jmp_pin_o <= 5'h0;
@@ -1938,7 +1935,6 @@ always @ (posedge clk or negedge rst_n) begin
 		pinctrl3_out_count_o <= 6'h0;
 		pinctrl3_set_count_o <= 3'h0;
 		pinctrl3_side_count_o <= 3'h0;
-		execctrl3_exec_stalled_o <= 1'h0;
 		execctrl3_sideset_en_o <= 1'h0;
 		execctrl3_side_pindir_o <= 1'h0;
 		execctrl3_jmp_pin_o <= 5'h0;
@@ -2050,8 +2046,6 @@ always @ (posedge clk or negedge rst_n) begin
 		if (__pinctrl0_wen)
 			pinctrl0_side_count_o <= pinctrl0_side_count_wdata;
 		if (__execctrl0_wen)
-			execctrl0_exec_stalled_o <= execctrl0_exec_stalled_wdata;
-		if (__execctrl0_wen)
 			execctrl0_sideset_en_o <= execctrl0_sideset_en_wdata;
 		if (__execctrl0_wen)
 			execctrl0_side_pindir_o <= execctrl0_side_pindir_wdata;
@@ -2109,8 +2103,6 @@ always @ (posedge clk or negedge rst_n) begin
 			pinctrl1_set_count_o <= pinctrl1_set_count_wdata;
 		if (__pinctrl1_wen)
 			pinctrl1_side_count_o <= pinctrl1_side_count_wdata;
-		if (__execctrl1_wen)
-			execctrl1_exec_stalled_o <= execctrl1_exec_stalled_wdata;
 		if (__execctrl1_wen)
 			execctrl1_sideset_en_o <= execctrl1_sideset_en_wdata;
 		if (__execctrl1_wen)
@@ -2170,8 +2162,6 @@ always @ (posedge clk or negedge rst_n) begin
 		if (__pinctrl2_wen)
 			pinctrl2_side_count_o <= pinctrl2_side_count_wdata;
 		if (__execctrl2_wen)
-			execctrl2_exec_stalled_o <= execctrl2_exec_stalled_wdata;
-		if (__execctrl2_wen)
 			execctrl2_sideset_en_o <= execctrl2_sideset_en_wdata;
 		if (__execctrl2_wen)
 			execctrl2_side_pindir_o <= execctrl2_side_pindir_wdata;
@@ -2229,8 +2219,6 @@ always @ (posedge clk or negedge rst_n) begin
 			pinctrl3_set_count_o <= pinctrl3_set_count_wdata;
 		if (__pinctrl3_wen)
 			pinctrl3_side_count_o <= pinctrl3_side_count_wdata;
-		if (__execctrl3_wen)
-			execctrl3_exec_stalled_o <= execctrl3_exec_stalled_wdata;
 		if (__execctrl3_wen)
 			execctrl3_sideset_en_o <= execctrl3_sideset_en_wdata;
 		if (__execctrl3_wen)
