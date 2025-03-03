@@ -1,0 +1,24 @@
+name: timer
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: csr
+    info: Control and status register
+    bits:
+      - {b: 0, name: en, access: rwf, info: "timer runs when en is high."}
+      - {b: 1, name: int_en, access: rw, info: "generate irq signal when timer expired."}
+      - {b: 2, name: mode, access: rw, info: "0: one shot, 1: auto reload"}
+      - {b: [31, 16], name: div, access: rw, rst: 0x1, info: "timer clk = module clock / div"}
+  - name: int_pending
+    info: timer interrupt pending register
+    bits:
+      - {b: 0, name: pending, access: rwf, rst: 0x0, info: "irq pending, write 1 to clear."}
+  - name: expire_count
+    info: timer expire count register
+    bits:
+      - {b: [31, 0], name: count, access: rw, rst: 0x0, info: "when timer counter == expire_count - 1, mean it expired."}
+  - name: current_count
+    info: timer current count register
+    bits:
+      - {b: [31, 0], name: count, access: rov, rst: 0x0, info: "timer current counter."}
