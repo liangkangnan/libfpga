@@ -617,12 +617,12 @@ module machine (
     // PC
     pc pc_reg (
         .clk        (clk),
-        .penable    (en & penable),
+        .penable    ((en & penable) || (imm & jmp)),
         .rst_n      (rst_n),
         .restart    (restart),
         .din        (new_val[4:0]),
         .jmp        (jmp),
-        .stalled    (waiting || auto || imm || exec1 || delaying),
+        .stalled    (waiting || auto || (imm & !jmp) || exec1 || delaying),
         .wrap_top   (wrap_top),
         .wrap_bottom(wrap_bottom),
         .dout       (pc)

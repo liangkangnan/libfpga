@@ -15,8 +15,9 @@ module pc (
 );
 
     reg [4:0] index;
+    wire [4:0] jmp_addr = din + wrap_bottom;
 
-    assign dout = (penable && !stalled) ? (jmp ? din : index == wrap_top ? wrap_bottom : index + 1) : index;
+    assign dout = (penable && !stalled) ? (jmp ? jmp_addr : index == wrap_top ? wrap_bottom : index + 1) : index;
 
     always @ (posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -26,7 +27,7 @@ module pc (
         end else begin
             if (penable && !stalled) begin
                 if (jmp) begin
-                    index <= din;
+                    index <= jmp_addr;
                 end else begin
                     index <= index == wrap_top ? wrap_bottom : index + 1;
                 end
