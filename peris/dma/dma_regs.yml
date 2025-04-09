@@ -1,0 +1,60 @@
+name: dma
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: ctrl
+    info: Control register
+    bits:
+      - {b: 8, name: count_mode, access: rw, info: "If 0, oneshot mode; 1, circle mode"}
+      - {b: 7, name: half_irq, access: rw, info: "If 1, gen irq when transform half over"}
+      - {b: 6, name: over_irq, access: rw, info: "If 1, gen irq when transform over"}
+      - {b: 5, name: daddrinc, access: rw, info: "If 1, auto increase the dest addr by dwidth"}
+      - {b: 4, name: saddrinc, access: rw, info: "If 1, auto increase the src addr by dwidth"}
+      - {b: [3, 1], name: dwidth, access: rw, info: "the transform data width, 0: 8, 1: 16, 2: 32"}
+      - {b: 0, name: start, access: rwf, info: "write 1 to start the dma"}
+
+  - name: sdaddr
+    info: Source data address register
+    bits:
+      - {b: [31, 0], access: rw, info: "source data address."}
+  - name: ssaddr
+    info: Source status address register
+    bits:
+      - {b: [31, 0], access: rw, info: "source status address."}
+  - name: srbit
+    info: Source ready bit register
+    bits:
+      - {b: [5, 0], access: rw, info: "source data ready bit, 32: always ready"}
+  - name: srpol
+    info: Source ready bit polarity register
+    bits:
+      - {b: 0, access: rw, info: "source data ready polarity"}
+
+  - name: ddaddr
+    info: Destination data address register
+    bits:
+      - {b: [31, 0], access: rw, info: "Destination data address."}
+  - name: dsaddr
+    info: Destination status address register
+    bits:
+      - {b: [31, 0], access: rw, info: "Destination status address."}
+  - name: drbit
+    info: Destination ready bit register
+    bits:
+      - {b: [5, 0], access: rw, info: "destination data ready bit, 32: always ready"}
+  - name: drpol
+    info: Destination ready bit polarity register
+    bits:
+      - {b: 0, access: rw, info: "Destination data ready polarity"}
+
+  - name: count
+    info: Data count register
+    bits:
+      - {b: [31, 0], access: rw, info: "How many data to be transformed, Unit: byte"}
+
+  - name: irq_pend
+    info: Interrupt pending register
+    bits:
+      - {b: 1, name: halfover_pend, access: w1c, info: "transform half over irq pending, write 1 to be clear"}
+      - {b: 0, name: over_pend, access: w1c, info: "transform over irq pending, write 1 to be clear"}
