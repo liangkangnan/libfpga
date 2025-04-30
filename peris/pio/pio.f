@@ -9,3 +9,5 @@ file pio.v
 file pio_regs.v
 file scratch.v
 file pio_multi.v
+
+include .

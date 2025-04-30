@@ -188,23 +188,41 @@ regs:
   - name: fstat0
     info: FIFO status register for SM0
     bits:
-      - {b: [3, 0], name: txlevel, access: rov}
-      - {b: 4,  name: txfull,  access: rov}
-      - {b: 5,  name: txempty, access: rov}
-      - {b: [9, 6], name: rxlevel, access: rov}
-      - {b: 10, name: rxfull,  access: rov}
-      - {b: 11, name: rxempty, access: rov}
+      - {b: [4, 0], name: txlevel, access: rov}
+      - {b: 5,  name: txfull,  access: rov}
+      - {b: 6,  name: txempty, access: rov}
+      - {b: [11, 7], name: rxlevel, access: rov}
+      - {b: 12, name: rxfull,  access: rov}
+      - {b: 13, name: rxempty, access: rov}
   - name: fctrl0
     info: FIFO control register for SM0
     bits:
-      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
-      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
-      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
-      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
-      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
-      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
-      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
-      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
+      - {b: 0, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: 1, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+  - name: tfpsi0
+    info: TX FIFO push index register for SM0
+    bits:
+      - {b: [2, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "set tx fifo push index"}
+  - name: tfpli0
+    info: TX FIFO pull index register for SM0
+    bits:
+      - {b: [2, 0], name: txfifo_pull_index, access: rwf, rst: 0, info: "set tx fifo pull index"}
+  - name: tfdc0
+    info: TX FIFO data count register for SM0
+    bits:
+      - {b: [3, 0], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+  - name: rfpsi0
+    info: RX FIFO push index register for SM0
+    bits:
+      - {b: [2, 0], name: rxfifo_push_index, access: rwf, rst: 0, info: "set rx fifo push index"}
+  - name: rfpli0
+    info: RX FIFO pull index register for SM0
+    bits:
+      - {b: [2, 0], name: rxfifo_pull_index, access: rwf, rst: 0, info: "set rx fifo pull index"}
+  - name: rfdc0
+    info: RX FIFO data count register for SM0
+    bits:
+      - {b: [3, 0], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: clkdiv1
     info: SM1 clock divider register
@@ -297,23 +315,41 @@ regs:
   - name: fstat1
     info: FIFO status register for SM1
     bits:
-      - {b: [3, 0], name: txlevel, access: rov}
-      - {b: 4,  name: txfull,  access: rov}
-      - {b: 5,  name: txempty, access: rov}
-      - {b: [9, 6], name: rxlevel, access: rov}
-      - {b: 10, name: rxfull,  access: rov}
-      - {b: 11, name: rxempty, access: rov}
+      - {b: [4, 0], name: txlevel, access: rov}
+      - {b: 5,  name: txfull,  access: rov}
+      - {b: 6,  name: txempty, access: rov}
+      - {b: [11, 7], name: rxlevel, access: rov}
+      - {b: 12, name: rxfull,  access: rov}
+      - {b: 13, name: rxempty, access: rov}
   - name: fctrl1
     info: FIFO control register for SM1
     bits:
-      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
-      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
-      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
-      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
-      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
-      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
-      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
-      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
+      - {b: 0, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: 1, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+  - name: tfpsi1
+    info: TX FIFO push index register for SM1
+    bits:
+      - {b: [2, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "set tx fifo push index"}
+  - name: tfpli1
+    info: TX FIFO pull index register for SM1
+    bits:
+      - {b: [2, 0], name: txfifo_pull_index, access: rwf, rst: 0, info: "set tx fifo pull index"}
+  - name: tfdc1
+    info: TX FIFO data count register for SM1
+    bits:
+      - {b: [3, 0], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+  - name: rfpsi1
+    info: RX FIFO push index register for SM1
+    bits:
+      - {b: [2, 0], name: rxfifo_push_index, access: rwf, rst: 0, info: "set rx fifo push index"}
+  - name: rfpli1
+    info: RX FIFO pull index register for SM1
+    bits:
+      - {b: [2, 0], name: rxfifo_pull_index, access: rwf, rst: 0, info: "set rx fifo pull index"}
+  - name: rfdc1
+    info: RX FIFO data count register for SM1
+    bits:
+      - {b: [3, 0], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: clkdiv2
     info: SM2 clock divider register
@@ -406,23 +442,41 @@ regs:
   - name: fstat2
     info: FIFO status register for SM2
     bits:
-      - {b: [3, 0], name: txlevel, access: rov}
-      - {b: 4,  name: txfull,  access: rov}
-      - {b: 5,  name: txempty, access: rov}
-      - {b: [9, 6], name: rxlevel, access: rov}
-      - {b: 10, name: rxfull,  access: rov}
-      - {b: 11, name: rxempty, access: rov}
+      - {b: [4, 0], name: txlevel, access: rov}
+      - {b: 5,  name: txfull,  access: rov}
+      - {b: 6,  name: txempty, access: rov}
+      - {b: [11, 7], name: rxlevel, access: rov}
+      - {b: 12, name: rxfull,  access: rov}
+      - {b: 13, name: rxempty, access: rov}
   - name: fctrl2
     info: FIFO control register for SM2
     bits:
-      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
-      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
-      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
-      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
-      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
-      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
-      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
-      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
+      - {b: 0, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: 1, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+  - name: tfpsi2
+    info: TX FIFO push index register for SM2
+    bits:
+      - {b: [2, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "set tx fifo push index"}
+  - name: tfpli2
+    info: TX FIFO pull index register for SM2
+    bits:
+      - {b: [2, 0], name: txfifo_pull_index, access: rwf, rst: 0, info: "set tx fifo pull index"}
+  - name: tfdc2
+    info: TX FIFO data count register for SM2
+    bits:
+      - {b: [3, 0], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+  - name: rfpsi2
+    info: RX FIFO push index register for SM2
+    bits:
+      - {b: [2, 0], name: rxfifo_push_index, access: rwf, rst: 0, info: "set rx fifo push index"}
+  - name: rfpli2
+    info: RX FIFO pull index register for SM2
+    bits:
+      - {b: [2, 0], name: rxfifo_pull_index, access: rwf, rst: 0, info: "set rx fifo pull index"}
+  - name: rfdc2
+    info: RX FIFO data count register for SM2
+    bits:
+      - {b: [3, 0], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: clkdiv3
     info: SM3 clock divider register
@@ -515,23 +569,41 @@ regs:
   - name: fstat3
     info: FIFO status register for SM3
     bits:
-      - {b: [3, 0], name: txlevel, access: rov}
-      - {b: 4,  name: txfull,  access: rov}
-      - {b: 5,  name: txempty, access: rov}
-      - {b: [9, 6], name: rxlevel, access: rov}
-      - {b: 10, name: rxfull,  access: rov}
-      - {b: 11, name: rxempty, access: rov}
+      - {b: [4, 0], name: txlevel, access: rov}
+      - {b: 5,  name: txfull,  access: rov}
+      - {b: 6,  name: txempty, access: rov}
+      - {b: [11, 7], name: rxlevel, access: rov}
+      - {b: 12, name: rxfull,  access: rov}
+      - {b: 13, name: rxempty, access: rov}
   - name: fctrl3
     info: FIFO control register for SM3
     bits:
-      - {b: [1, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "tx fifo push index"}
-      - {b: [3, 2], name: txfifo_pull_index, access: rwf, rst: 0, info: "tx fifo pull index"}
-      - {b: 4, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
-      - {b: [6, 5], name: rxfifo_push_index, access: rwf, rst: 0, info: "rx fifo push index"}
-      - {b: [8, 7], name: rxfifo_pull_index, access: rwf, rst: 0, info: "rx fifo pull index"}
-      - {b: 9, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
-      - {b: [12, 10], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
-      - {b: [15, 13], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
+      - {b: 0, name: txfifo_read_en, access: rw, rst: 0, info: "tx fifo read enable"}
+      - {b: 1, name: rxfifo_write_en, access: rw, rst: 0, info: "rx fifo write enable"}
+  - name: tfpsi3
+    info: TX FIFO push index register for SM3
+    bits:
+      - {b: [2, 0], name: txfifo_push_index, access: rwf, rst: 0, info: "set tx fifo push index"}
+  - name: tfpli3
+    info: TX FIFO pull index register for SM3
+    bits:
+      - {b: [2, 0], name: txfifo_pull_index, access: rwf, rst: 0, info: "set tx fifo pull index"}
+  - name: tfdc3
+    info: TX FIFO data count register for SM3
+    bits:
+      - {b: [3, 0], name: tx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in tx fifo"}
+  - name: rfpsi3
+    info: RX FIFO push index register for SM3
+    bits:
+      - {b: [2, 0], name: rxfifo_push_index, access: rwf, rst: 0, info: "set rx fifo push index"}
+  - name: rfpli3
+    info: RX FIFO pull index register for SM3
+    bits:
+      - {b: [2, 0], name: rxfifo_pull_index, access: rwf, rst: 0, info: "set rx fifo pull index"}
+  - name: rfdc3
+    info: RX FIFO data count register for SM3
+    bits:
+      - {b: [3, 0], name: rx_fifo_data_count, access: rwf, rst: 0, info: "set how many data count in rx fifo"}
 
   - name: instrmem0
     info: Instruction 0 register

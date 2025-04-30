@@ -133,13 +133,13 @@ module machine (
     wire pin2_dir= pin_directions[2];
     wire pin3_dir= pin_directions[3];
     wire in_pin0 = in_pins[0];
-    wire instr_execing = (enabled && !delaying);
 
     reg [4:0]   delay_cnt;
 
     // States
     wire enabled  = exec1 || imm || (en && penable); // Instruction execution enabled
     wire delaying = delay_cnt > 0;
+    wire instr_execing = (enabled && !delaying);
 
     assign exec_stalled = waiting || delaying;
 

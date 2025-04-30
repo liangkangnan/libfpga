@@ -124,38 +124,38 @@ module pio_regs (
 	output reg push0_wen,
 	input wire [31:0] pull0_i,
 	output reg pull0_ren,
-	input wire [3:0] fstat0_txlevel_i,
+	input wire [4:0] fstat0_txlevel_i,
 	input wire  fstat0_txfull_i,
 	input wire  fstat0_txempty_i,
-	input wire [3:0] fstat0_rxlevel_i,
+	input wire [4:0] fstat0_rxlevel_i,
 	input wire  fstat0_rxfull_i,
 	input wire  fstat0_rxempty_i,
-	input wire [1:0] fctrl0_txfifo_push_index_i,
-	output reg [1:0] fctrl0_txfifo_push_index_o,
-	output reg fctrl0_txfifo_push_index_wen,
-	output reg fctrl0_txfifo_push_index_ren,
-	input wire [1:0] fctrl0_txfifo_pull_index_i,
-	output reg [1:0] fctrl0_txfifo_pull_index_o,
-	output reg fctrl0_txfifo_pull_index_wen,
-	output reg fctrl0_txfifo_pull_index_ren,
 	output reg  fctrl0_txfifo_read_en_o,
-	input wire [1:0] fctrl0_rxfifo_push_index_i,
-	output reg [1:0] fctrl0_rxfifo_push_index_o,
-	output reg fctrl0_rxfifo_push_index_wen,
-	output reg fctrl0_rxfifo_push_index_ren,
-	input wire [1:0] fctrl0_rxfifo_pull_index_i,
-	output reg [1:0] fctrl0_rxfifo_pull_index_o,
-	output reg fctrl0_rxfifo_pull_index_wen,
-	output reg fctrl0_rxfifo_pull_index_ren,
 	output reg  fctrl0_rxfifo_write_en_o,
-	input wire [2:0] fctrl0_tx_fifo_data_count_i,
-	output reg [2:0] fctrl0_tx_fifo_data_count_o,
-	output reg fctrl0_tx_fifo_data_count_wen,
-	output reg fctrl0_tx_fifo_data_count_ren,
-	input wire [2:0] fctrl0_rx_fifo_data_count_i,
-	output reg [2:0] fctrl0_rx_fifo_data_count_o,
-	output reg fctrl0_rx_fifo_data_count_wen,
-	output reg fctrl0_rx_fifo_data_count_ren,
+	input wire [2:0] tfpsi0_txfifo_push_index_i,
+	output reg [2:0] tfpsi0_txfifo_push_index_o,
+	output reg tfpsi0_txfifo_push_index_wen,
+	output reg tfpsi0_txfifo_push_index_ren,
+	input wire [2:0] tfpli0_txfifo_pull_index_i,
+	output reg [2:0] tfpli0_txfifo_pull_index_o,
+	output reg tfpli0_txfifo_pull_index_wen,
+	output reg tfpli0_txfifo_pull_index_ren,
+	input wire [3:0] tfdc0_tx_fifo_data_count_i,
+	output reg [3:0] tfdc0_tx_fifo_data_count_o,
+	output reg tfdc0_tx_fifo_data_count_wen,
+	output reg tfdc0_tx_fifo_data_count_ren,
+	input wire [2:0] rfpsi0_rxfifo_push_index_i,
+	output reg [2:0] rfpsi0_rxfifo_push_index_o,
+	output reg rfpsi0_rxfifo_push_index_wen,
+	output reg rfpsi0_rxfifo_push_index_ren,
+	input wire [2:0] rfpli0_rxfifo_pull_index_i,
+	output reg [2:0] rfpli0_rxfifo_pull_index_o,
+	output reg rfpli0_rxfifo_pull_index_wen,
+	output reg rfpli0_rxfifo_pull_index_ren,
+	input wire [3:0] rfdc0_rx_fifo_data_count_i,
+	output reg [3:0] rfdc0_rx_fifo_data_count_o,
+	output reg rfdc0_rx_fifo_data_count_wen,
+	output reg rfdc0_rx_fifo_data_count_ren,
 	output reg [31:0] clkdiv1_clkdiv_o,
 	output reg [4:0] pinctrl1_out_base_o,
 	output reg [4:0] pinctrl1_set_base_o,
@@ -198,38 +198,38 @@ module pio_regs (
 	output reg push1_wen,
 	input wire [31:0] pull1_i,
 	output reg pull1_ren,
-	input wire [3:0] fstat1_txlevel_i,
+	input wire [4:0] fstat1_txlevel_i,
 	input wire  fstat1_txfull_i,
 	input wire  fstat1_txempty_i,
-	input wire [3:0] fstat1_rxlevel_i,
+	input wire [4:0] fstat1_rxlevel_i,
 	input wire  fstat1_rxfull_i,
 	input wire  fstat1_rxempty_i,
-	input wire [1:0] fctrl1_txfifo_push_index_i,
-	output reg [1:0] fctrl1_txfifo_push_index_o,
-	output reg fctrl1_txfifo_push_index_wen,
-	output reg fctrl1_txfifo_push_index_ren,
-	input wire [1:0] fctrl1_txfifo_pull_index_i,
-	output reg [1:0] fctrl1_txfifo_pull_index_o,
-	output reg fctrl1_txfifo_pull_index_wen,
-	output reg fctrl1_txfifo_pull_index_ren,
 	output reg  fctrl1_txfifo_read_en_o,
-	input wire [1:0] fctrl1_rxfifo_push_index_i,
-	output reg [1:0] fctrl1_rxfifo_push_index_o,
-	output reg fctrl1_rxfifo_push_index_wen,
-	output reg fctrl1_rxfifo_push_index_ren,
-	input wire [1:0] fctrl1_rxfifo_pull_index_i,
-	output reg [1:0] fctrl1_rxfifo_pull_index_o,
-	output reg fctrl1_rxfifo_pull_index_wen,
-	output reg fctrl1_rxfifo_pull_index_ren,
 	output reg  fctrl1_rxfifo_write_en_o,
-	input wire [2:0] fctrl1_tx_fifo_data_count_i,
-	output reg [2:0] fctrl1_tx_fifo_data_count_o,
-	output reg fctrl1_tx_fifo_data_count_wen,
-	output reg fctrl1_tx_fifo_data_count_ren,
-	input wire [2:0] fctrl1_rx_fifo_data_count_i,
-	output reg [2:0] fctrl1_rx_fifo_data_count_o,
-	output reg fctrl1_rx_fifo_data_count_wen,
-	output reg fctrl1_rx_fifo_data_count_ren,
+	input wire [2:0] tfpsi1_txfifo_push_index_i,
+	output reg [2:0] tfpsi1_txfifo_push_index_o,
+	output reg tfpsi1_txfifo_push_index_wen,
+	output reg tfpsi1_txfifo_push_index_ren,
+	input wire [2:0] tfpli1_txfifo_pull_index_i,
+	output reg [2:0] tfpli1_txfifo_pull_index_o,
+	output reg tfpli1_txfifo_pull_index_wen,
+	output reg tfpli1_txfifo_pull_index_ren,
+	input wire [3:0] tfdc1_tx_fifo_data_count_i,
+	output reg [3:0] tfdc1_tx_fifo_data_count_o,
+	output reg tfdc1_tx_fifo_data_count_wen,
+	output reg tfdc1_tx_fifo_data_count_ren,
+	input wire [2:0] rfpsi1_rxfifo_push_index_i,
+	output reg [2:0] rfpsi1_rxfifo_push_index_o,
+	output reg rfpsi1_rxfifo_push_index_wen,
+	output reg rfpsi1_rxfifo_push_index_ren,
+	input wire [2:0] rfpli1_rxfifo_pull_index_i,
+	output reg [2:0] rfpli1_rxfifo_pull_index_o,
+	output reg rfpli1_rxfifo_pull_index_wen,
+	output reg rfpli1_rxfifo_pull_index_ren,
+	input wire [3:0] rfdc1_rx_fifo_data_count_i,
+	output reg [3:0] rfdc1_rx_fifo_data_count_o,
+	output reg rfdc1_rx_fifo_data_count_wen,
+	output reg rfdc1_rx_fifo_data_count_ren,
 	output reg [31:0] clkdiv2_clkdiv_o,
 	output reg [4:0] pinctrl2_out_base_o,
 	output reg [4:0] pinctrl2_set_base_o,
@@ -272,38 +272,38 @@ module pio_regs (
 	output reg push2_wen,
 	input wire [31:0] pull2_i,
 	output reg pull2_ren,
-	input wire [3:0] fstat2_txlevel_i,
+	input wire [4:0] fstat2_txlevel_i,
 	input wire  fstat2_txfull_i,
 	input wire  fstat2_txempty_i,
-	input wire [3:0] fstat2_rxlevel_i,
+	input wire [4:0] fstat2_rxlevel_i,
 	input wire  fstat2_rxfull_i,
 	input wire  fstat2_rxempty_i,
-	input wire [1:0] fctrl2_txfifo_push_index_i,
-	output reg [1:0] fctrl2_txfifo_push_index_o,
-	output reg fctrl2_txfifo_push_index_wen,
-	output reg fctrl2_txfifo_push_index_ren,
-	input wire [1:0] fctrl2_txfifo_pull_index_i,
-	output reg [1:0] fctrl2_txfifo_pull_index_o,
-	output reg fctrl2_txfifo_pull_index_wen,
-	output reg fctrl2_txfifo_pull_index_ren,
 	output reg  fctrl2_txfifo_read_en_o,
-	input wire [1:0] fctrl2_rxfifo_push_index_i,
-	output reg [1:0] fctrl2_rxfifo_push_index_o,
-	output reg fctrl2_rxfifo_push_index_wen,
-	output reg fctrl2_rxfifo_push_index_ren,
-	input wire [1:0] fctrl2_rxfifo_pull_index_i,
-	output reg [1:0] fctrl2_rxfifo_pull_index_o,
-	output reg fctrl2_rxfifo_pull_index_wen,
-	output reg fctrl2_rxfifo_pull_index_ren,
 	output reg  fctrl2_rxfifo_write_en_o,
-	input wire [2:0] fctrl2_tx_fifo_data_count_i,
-	output reg [2:0] fctrl2_tx_fifo_data_count_o,
-	output reg fctrl2_tx_fifo_data_count_wen,
-	output reg fctrl2_tx_fifo_data_count_ren,
-	input wire [2:0] fctrl2_rx_fifo_data_count_i,
-	output reg [2:0] fctrl2_rx_fifo_data_count_o,
-	output reg fctrl2_rx_fifo_data_count_wen,
-	output reg fctrl2_rx_fifo_data_count_ren,
+	input wire [2:0] tfpsi2_txfifo_push_index_i,
+	output reg [2:0] tfpsi2_txfifo_push_index_o,
+	output reg tfpsi2_txfifo_push_index_wen,
+	output reg tfpsi2_txfifo_push_index_ren,
+	input wire [2:0] tfpli2_txfifo_pull_index_i,
+	output reg [2:0] tfpli2_txfifo_pull_index_o,
+	output reg tfpli2_txfifo_pull_index_wen,
+	output reg tfpli2_txfifo_pull_index_ren,
+	input wire [3:0] tfdc2_tx_fifo_data_count_i,
+	output reg [3:0] tfdc2_tx_fifo_data_count_o,
+	output reg tfdc2_tx_fifo_data_count_wen,
+	output reg tfdc2_tx_fifo_data_count_ren,
+	input wire [2:0] rfpsi2_rxfifo_push_index_i,
+	output reg [2:0] rfpsi2_rxfifo_push_index_o,
+	output reg rfpsi2_rxfifo_push_index_wen,
+	output reg rfpsi2_rxfifo_push_index_ren,
+	input wire [2:0] rfpli2_rxfifo_pull_index_i,
+	output reg [2:0] rfpli2_rxfifo_pull_index_o,
+	output reg rfpli2_rxfifo_pull_index_wen,
+	output reg rfpli2_rxfifo_pull_index_ren,
+	input wire [3:0] rfdc2_rx_fifo_data_count_i,
+	output reg [3:0] rfdc2_rx_fifo_data_count_o,
+	output reg rfdc2_rx_fifo_data_count_wen,
+	output reg rfdc2_rx_fifo_data_count_ren,
 	output reg [31:0] clkdiv3_clkdiv_o,
 	output reg [4:0] pinctrl3_out_base_o,
 	output reg [4:0] pinctrl3_set_base_o,
@@ -346,38 +346,38 @@ module pio_regs (
 	output reg push3_wen,
 	input wire [31:0] pull3_i,
 	output reg pull3_ren,
-	input wire [3:0] fstat3_txlevel_i,
+	input wire [4:0] fstat3_txlevel_i,
 	input wire  fstat3_txfull_i,
 	input wire  fstat3_txempty_i,
-	input wire [3:0] fstat3_rxlevel_i,
+	input wire [4:0] fstat3_rxlevel_i,
 	input wire  fstat3_rxfull_i,
 	input wire  fstat3_rxempty_i,
-	input wire [1:0] fctrl3_txfifo_push_index_i,
-	output reg [1:0] fctrl3_txfifo_push_index_o,
-	output reg fctrl3_txfifo_push_index_wen,
-	output reg fctrl3_txfifo_push_index_ren,
-	input wire [1:0] fctrl3_txfifo_pull_index_i,
-	output reg [1:0] fctrl3_txfifo_pull_index_o,
-	output reg fctrl3_txfifo_pull_index_wen,
-	output reg fctrl3_txfifo_pull_index_ren,
 	output reg  fctrl3_txfifo_read_en_o,
-	input wire [1:0] fctrl3_rxfifo_push_index_i,
-	output reg [1:0] fctrl3_rxfifo_push_index_o,
-	output reg fctrl3_rxfifo_push_index_wen,
-	output reg fctrl3_rxfifo_push_index_ren,
-	input wire [1:0] fctrl3_rxfifo_pull_index_i,
-	output reg [1:0] fctrl3_rxfifo_pull_index_o,
-	output reg fctrl3_rxfifo_pull_index_wen,
-	output reg fctrl3_rxfifo_pull_index_ren,
 	output reg  fctrl3_rxfifo_write_en_o,
-	input wire [2:0] fctrl3_tx_fifo_data_count_i,
-	output reg [2:0] fctrl3_tx_fifo_data_count_o,
-	output reg fctrl3_tx_fifo_data_count_wen,
-	output reg fctrl3_tx_fifo_data_count_ren,
-	input wire [2:0] fctrl3_rx_fifo_data_count_i,
-	output reg [2:0] fctrl3_rx_fifo_data_count_o,
-	output reg fctrl3_rx_fifo_data_count_wen,
-	output reg fctrl3_rx_fifo_data_count_ren,
+	input wire [2:0] tfpsi3_txfifo_push_index_i,
+	output reg [2:0] tfpsi3_txfifo_push_index_o,
+	output reg tfpsi3_txfifo_push_index_wen,
+	output reg tfpsi3_txfifo_push_index_ren,
+	input wire [2:0] tfpli3_txfifo_pull_index_i,
+	output reg [2:0] tfpli3_txfifo_pull_index_o,
+	output reg tfpli3_txfifo_pull_index_wen,
+	output reg tfpli3_txfifo_pull_index_ren,
+	input wire [3:0] tfdc3_tx_fifo_data_count_i,
+	output reg [3:0] tfdc3_tx_fifo_data_count_o,
+	output reg tfdc3_tx_fifo_data_count_wen,
+	output reg tfdc3_tx_fifo_data_count_ren,
+	input wire [2:0] rfpsi3_rxfifo_push_index_i,
+	output reg [2:0] rfpsi3_rxfifo_push_index_o,
+	output reg rfpsi3_rxfifo_push_index_wen,
+	output reg rfpsi3_rxfifo_push_index_ren,
+	input wire [2:0] rfpli3_rxfifo_pull_index_i,
+	output reg [2:0] rfpli3_rxfifo_pull_index_o,
+	output reg rfpli3_rxfifo_pull_index_wen,
+	output reg rfpli3_rxfifo_pull_index_ren,
+	input wire [3:0] rfdc3_rx_fifo_data_count_i,
+	output reg [3:0] rfdc3_rx_fifo_data_count_o,
+	output reg rfdc3_rx_fifo_data_count_wen,
+	output reg rfdc3_rx_fifo_data_count_ren,
 	output reg [15:0] instrmem0_instr_o,
 	output reg [15:0] instrmem1_instr_o,
 	output reg [15:0] instrmem2_instr_o,
@@ -438,65 +438,89 @@ localparam ADDR_PUSH0 = 48;
 localparam ADDR_PULL0 = 52;
 localparam ADDR_FSTAT0 = 56;
 localparam ADDR_FCTRL0 = 60;
-localparam ADDR_CLKDIV1 = 64;
-localparam ADDR_PINCTRL1 = 68;
-localparam ADDR_EXECCTRL1 = 72;
-localparam ADDR_SHIFTCTRL1 = 76;
-localparam ADDR_INSTR1 = 80;
-localparam ADDR_PUSH1 = 84;
-localparam ADDR_PULL1 = 88;
-localparam ADDR_FSTAT1 = 92;
-localparam ADDR_FCTRL1 = 96;
-localparam ADDR_CLKDIV2 = 100;
-localparam ADDR_PINCTRL2 = 104;
-localparam ADDR_EXECCTRL2 = 108;
-localparam ADDR_SHIFTCTRL2 = 112;
-localparam ADDR_INSTR2 = 116;
-localparam ADDR_PUSH2 = 120;
-localparam ADDR_PULL2 = 124;
-localparam ADDR_FSTAT2 = 128;
-localparam ADDR_FCTRL2 = 132;
-localparam ADDR_CLKDIV3 = 136;
-localparam ADDR_PINCTRL3 = 140;
-localparam ADDR_EXECCTRL3 = 144;
-localparam ADDR_SHIFTCTRL3 = 148;
-localparam ADDR_INSTR3 = 152;
-localparam ADDR_PUSH3 = 156;
-localparam ADDR_PULL3 = 160;
-localparam ADDR_FSTAT3 = 164;
-localparam ADDR_FCTRL3 = 168;
-localparam ADDR_INSTRMEM0 = 172;
-localparam ADDR_INSTRMEM1 = 176;
-localparam ADDR_INSTRMEM2 = 180;
-localparam ADDR_INSTRMEM3 = 184;
-localparam ADDR_INSTRMEM4 = 188;
-localparam ADDR_INSTRMEM5 = 192;
-localparam ADDR_INSTRMEM6 = 196;
-localparam ADDR_INSTRMEM7 = 200;
-localparam ADDR_INSTRMEM8 = 204;
-localparam ADDR_INSTRMEM9 = 208;
-localparam ADDR_INSTRMEM10 = 212;
-localparam ADDR_INSTRMEM11 = 216;
-localparam ADDR_INSTRMEM12 = 220;
-localparam ADDR_INSTRMEM13 = 224;
-localparam ADDR_INSTRMEM14 = 228;
-localparam ADDR_INSTRMEM15 = 232;
-localparam ADDR_INSTRMEM16 = 236;
-localparam ADDR_INSTRMEM17 = 240;
-localparam ADDR_INSTRMEM18 = 244;
-localparam ADDR_INSTRMEM19 = 248;
-localparam ADDR_INSTRMEM20 = 252;
-localparam ADDR_INSTRMEM21 = 256;
-localparam ADDR_INSTRMEM22 = 260;
-localparam ADDR_INSTRMEM23 = 264;
-localparam ADDR_INSTRMEM24 = 268;
-localparam ADDR_INSTRMEM25 = 272;
-localparam ADDR_INSTRMEM26 = 276;
-localparam ADDR_INSTRMEM27 = 280;
-localparam ADDR_INSTRMEM28 = 284;
-localparam ADDR_INSTRMEM29 = 288;
-localparam ADDR_INSTRMEM30 = 292;
-localparam ADDR_INSTRMEM31 = 296;
+localparam ADDR_TFPSI0 = 64;
+localparam ADDR_TFPLI0 = 68;
+localparam ADDR_TFDC0 = 72;
+localparam ADDR_RFPSI0 = 76;
+localparam ADDR_RFPLI0 = 80;
+localparam ADDR_RFDC0 = 84;
+localparam ADDR_CLKDIV1 = 88;
+localparam ADDR_PINCTRL1 = 92;
+localparam ADDR_EXECCTRL1 = 96;
+localparam ADDR_SHIFTCTRL1 = 100;
+localparam ADDR_INSTR1 = 104;
+localparam ADDR_PUSH1 = 108;
+localparam ADDR_PULL1 = 112;
+localparam ADDR_FSTAT1 = 116;
+localparam ADDR_FCTRL1 = 120;
+localparam ADDR_TFPSI1 = 124;
+localparam ADDR_TFPLI1 = 128;
+localparam ADDR_TFDC1 = 132;
+localparam ADDR_RFPSI1 = 136;
+localparam ADDR_RFPLI1 = 140;
+localparam ADDR_RFDC1 = 144;
+localparam ADDR_CLKDIV2 = 148;
+localparam ADDR_PINCTRL2 = 152;
+localparam ADDR_EXECCTRL2 = 156;
+localparam ADDR_SHIFTCTRL2 = 160;
+localparam ADDR_INSTR2 = 164;
+localparam ADDR_PUSH2 = 168;
+localparam ADDR_PULL2 = 172;
+localparam ADDR_FSTAT2 = 176;
+localparam ADDR_FCTRL2 = 180;
+localparam ADDR_TFPSI2 = 184;
+localparam ADDR_TFPLI2 = 188;
+localparam ADDR_TFDC2 = 192;
+localparam ADDR_RFPSI2 = 196;
+localparam ADDR_RFPLI2 = 200;
+localparam ADDR_RFDC2 = 204;
+localparam ADDR_CLKDIV3 = 208;
+localparam ADDR_PINCTRL3 = 212;
+localparam ADDR_EXECCTRL3 = 216;
+localparam ADDR_SHIFTCTRL3 = 220;
+localparam ADDR_INSTR3 = 224;
+localparam ADDR_PUSH3 = 228;
+localparam ADDR_PULL3 = 232;
+localparam ADDR_FSTAT3 = 236;
+localparam ADDR_FCTRL3 = 240;
+localparam ADDR_TFPSI3 = 244;
+localparam ADDR_TFPLI3 = 248;
+localparam ADDR_TFDC3 = 252;
+localparam ADDR_RFPSI3 = 256;
+localparam ADDR_RFPLI3 = 260;
+localparam ADDR_RFDC3 = 264;
+localparam ADDR_INSTRMEM0 = 268;
+localparam ADDR_INSTRMEM1 = 272;
+localparam ADDR_INSTRMEM2 = 276;
+localparam ADDR_INSTRMEM3 = 280;
+localparam ADDR_INSTRMEM4 = 284;
+localparam ADDR_INSTRMEM5 = 288;
+localparam ADDR_INSTRMEM6 = 292;
+localparam ADDR_INSTRMEM7 = 296;
+localparam ADDR_INSTRMEM8 = 300;
+localparam ADDR_INSTRMEM9 = 304;
+localparam ADDR_INSTRMEM10 = 308;
+localparam ADDR_INSTRMEM11 = 312;
+localparam ADDR_INSTRMEM12 = 316;
+localparam ADDR_INSTRMEM13 = 320;
+localparam ADDR_INSTRMEM14 = 324;
+localparam ADDR_INSTRMEM15 = 328;
+localparam ADDR_INSTRMEM16 = 332;
+localparam ADDR_INSTRMEM17 = 336;
+localparam ADDR_INSTRMEM18 = 340;
+localparam ADDR_INSTRMEM19 = 344;
+localparam ADDR_INSTRMEM20 = 348;
+localparam ADDR_INSTRMEM21 = 352;
+localparam ADDR_INSTRMEM22 = 356;
+localparam ADDR_INSTRMEM23 = 360;
+localparam ADDR_INSTRMEM24 = 364;
+localparam ADDR_INSTRMEM25 = 368;
+localparam ADDR_INSTRMEM26 = 372;
+localparam ADDR_INSTRMEM27 = 376;
+localparam ADDR_INSTRMEM28 = 380;
+localparam ADDR_INSTRMEM29 = 384;
+localparam ADDR_INSTRMEM30 = 388;
+localparam ADDR_INSTRMEM31 = 392;
 
 wire __ctrl_wen = wen && addr == ADDR_CTRL;
 wire __ctrl_ren = ren && addr == ADDR_CTRL;
@@ -530,6 +554,18 @@ wire __fstat0_wen = wen && addr == ADDR_FSTAT0;
 wire __fstat0_ren = ren && addr == ADDR_FSTAT0;
 wire __fctrl0_wen = wen && addr == ADDR_FCTRL0;
 wire __fctrl0_ren = ren && addr == ADDR_FCTRL0;
+wire __tfpsi0_wen = wen && addr == ADDR_TFPSI0;
+wire __tfpsi0_ren = ren && addr == ADDR_TFPSI0;
+wire __tfpli0_wen = wen && addr == ADDR_TFPLI0;
+wire __tfpli0_ren = ren && addr == ADDR_TFPLI0;
+wire __tfdc0_wen = wen && addr == ADDR_TFDC0;
+wire __tfdc0_ren = ren && addr == ADDR_TFDC0;
+wire __rfpsi0_wen = wen && addr == ADDR_RFPSI0;
+wire __rfpsi0_ren = ren && addr == ADDR_RFPSI0;
+wire __rfpli0_wen = wen && addr == ADDR_RFPLI0;
+wire __rfpli0_ren = ren && addr == ADDR_RFPLI0;
+wire __rfdc0_wen = wen && addr == ADDR_RFDC0;
+wire __rfdc0_ren = ren && addr == ADDR_RFDC0;
 wire __clkdiv1_wen = wen && addr == ADDR_CLKDIV1;
 wire __clkdiv1_ren = ren && addr == ADDR_CLKDIV1;
 wire __pinctrl1_wen = wen && addr == ADDR_PINCTRL1;
@@ -548,6 +584,18 @@ wire __fstat1_wen = wen && addr == ADDR_FSTAT1;
 wire __fstat1_ren = ren && addr == ADDR_FSTAT1;
 wire __fctrl1_wen = wen && addr == ADDR_FCTRL1;
 wire __fctrl1_ren = ren && addr == ADDR_FCTRL1;
+wire __tfpsi1_wen = wen && addr == ADDR_TFPSI1;
+wire __tfpsi1_ren = ren && addr == ADDR_TFPSI1;
+wire __tfpli1_wen = wen && addr == ADDR_TFPLI1;
+wire __tfpli1_ren = ren && addr == ADDR_TFPLI1;
+wire __tfdc1_wen = wen && addr == ADDR_TFDC1;
+wire __tfdc1_ren = ren && addr == ADDR_TFDC1;
+wire __rfpsi1_wen = wen && addr == ADDR_RFPSI1;
+wire __rfpsi1_ren = ren && addr == ADDR_RFPSI1;
+wire __rfpli1_wen = wen && addr == ADDR_RFPLI1;
+wire __rfpli1_ren = ren && addr == ADDR_RFPLI1;
+wire __rfdc1_wen = wen && addr == ADDR_RFDC1;
+wire __rfdc1_ren = ren && addr == ADDR_RFDC1;
 wire __clkdiv2_wen = wen && addr == ADDR_CLKDIV2;
 wire __clkdiv2_ren = ren && addr == ADDR_CLKDIV2;
 wire __pinctrl2_wen = wen && addr == ADDR_PINCTRL2;
@@ -566,6 +614,18 @@ wire __fstat2_wen = wen && addr == ADDR_FSTAT2;
 wire __fstat2_ren = ren && addr == ADDR_FSTAT2;
 wire __fctrl2_wen = wen && addr == ADDR_FCTRL2;
 wire __fctrl2_ren = ren && addr == ADDR_FCTRL2;
+wire __tfpsi2_wen = wen && addr == ADDR_TFPSI2;
+wire __tfpsi2_ren = ren && addr == ADDR_TFPSI2;
+wire __tfpli2_wen = wen && addr == ADDR_TFPLI2;
+wire __tfpli2_ren = ren && addr == ADDR_TFPLI2;
+wire __tfdc2_wen = wen && addr == ADDR_TFDC2;
+wire __tfdc2_ren = ren && addr == ADDR_TFDC2;
+wire __rfpsi2_wen = wen && addr == ADDR_RFPSI2;
+wire __rfpsi2_ren = ren && addr == ADDR_RFPSI2;
+wire __rfpli2_wen = wen && addr == ADDR_RFPLI2;
+wire __rfpli2_ren = ren && addr == ADDR_RFPLI2;
+wire __rfdc2_wen = wen && addr == ADDR_RFDC2;
+wire __rfdc2_ren = ren && addr == ADDR_RFDC2;
 wire __clkdiv3_wen = wen && addr == ADDR_CLKDIV3;
 wire __clkdiv3_ren = ren && addr == ADDR_CLKDIV3;
 wire __pinctrl3_wen = wen && addr == ADDR_PINCTRL3;
@@ -584,6 +644,18 @@ wire __fstat3_wen = wen && addr == ADDR_FSTAT3;
 wire __fstat3_ren = ren && addr == ADDR_FSTAT3;
 wire __fctrl3_wen = wen && addr == ADDR_FCTRL3;
 wire __fctrl3_ren = ren && addr == ADDR_FCTRL3;
+wire __tfpsi3_wen = wen && addr == ADDR_TFPSI3;
+wire __tfpsi3_ren = ren && addr == ADDR_TFPSI3;
+wire __tfpli3_wen = wen && addr == ADDR_TFPLI3;
+wire __tfpli3_ren = ren && addr == ADDR_TFPLI3;
+wire __tfdc3_wen = wen && addr == ADDR_TFDC3;
+wire __tfdc3_ren = ren && addr == ADDR_TFDC3;
+wire __rfpsi3_wen = wen && addr == ADDR_RFPSI3;
+wire __rfpsi3_ren = ren && addr == ADDR_RFPSI3;
+wire __rfpli3_wen = wen && addr == ADDR_RFPLI3;
+wire __rfpli3_ren = ren && addr == ADDR_RFPLI3;
+wire __rfdc3_wen = wen && addr == ADDR_RFDC3;
+wire __rfdc3_ren = ren && addr == ADDR_RFDC3;
 wire __instrmem0_wen = wen && addr == ADDR_INSTRMEM0;
 wire __instrmem0_ren = ren && addr == ADDR_INSTRMEM0;
 wire __instrmem1_wen = wen && addr == ADDR_INSTRMEM1;
@@ -890,19 +962,19 @@ wire [31:0] pull0_rdata;
 wire [31:0] __pull0_rdata = {pull0_rdata};
 assign pull0_rdata = pull0_i;
 
-wire [3:0] fstat0_txlevel_wdata = wdata[3:0];
-wire [3:0] fstat0_txlevel_rdata;
-wire  fstat0_txfull_wdata = wdata[4];
+wire [4:0] fstat0_txlevel_wdata = wdata[4:0];
+wire [4:0] fstat0_txlevel_rdata;
+wire  fstat0_txfull_wdata = wdata[5];
 wire  fstat0_txfull_rdata;
-wire  fstat0_txempty_wdata = wdata[5];
+wire  fstat0_txempty_wdata = wdata[6];
 wire  fstat0_txempty_rdata;
-wire [3:0] fstat0_rxlevel_wdata = wdata[9:6];
-wire [3:0] fstat0_rxlevel_rdata;
-wire  fstat0_rxfull_wdata = wdata[10];
+wire [4:0] fstat0_rxlevel_wdata = wdata[11:7];
+wire [4:0] fstat0_rxlevel_rdata;
+wire  fstat0_rxfull_wdata = wdata[12];
 wire  fstat0_rxfull_rdata;
-wire  fstat0_rxempty_wdata = wdata[11];
+wire  fstat0_rxempty_wdata = wdata[13];
 wire  fstat0_rxempty_rdata;
-wire [31:0] __fstat0_rdata = {20'h0, fstat0_rxempty_rdata, fstat0_rxfull_rdata, fstat0_rxlevel_rdata, fstat0_txempty_rdata, fstat0_txfull_rdata, fstat0_txlevel_rdata};
+wire [31:0] __fstat0_rdata = {18'h0, fstat0_rxempty_rdata, fstat0_rxfull_rdata, fstat0_rxlevel_rdata, fstat0_txempty_rdata, fstat0_txfull_rdata, fstat0_txlevel_rdata};
 assign fstat0_txlevel_rdata = fstat0_txlevel_i;
 assign fstat0_txfull_rdata = fstat0_txfull_i;
 assign fstat0_txempty_rdata = fstat0_txempty_i;
@@ -910,31 +982,43 @@ assign fstat0_rxlevel_rdata = fstat0_rxlevel_i;
 assign fstat0_rxfull_rdata = fstat0_rxfull_i;
 assign fstat0_rxempty_rdata = fstat0_rxempty_i;
 
-wire [1:0] fctrl0_txfifo_push_index_wdata = wdata[1:0];
-wire [1:0] fctrl0_txfifo_push_index_rdata;
-wire [1:0] fctrl0_txfifo_pull_index_wdata = wdata[3:2];
-wire [1:0] fctrl0_txfifo_pull_index_rdata;
-wire  fctrl0_txfifo_read_en_wdata = wdata[4];
+wire  fctrl0_txfifo_read_en_wdata = wdata[0];
 wire  fctrl0_txfifo_read_en_rdata;
-wire [1:0] fctrl0_rxfifo_push_index_wdata = wdata[6:5];
-wire [1:0] fctrl0_rxfifo_push_index_rdata;
-wire [1:0] fctrl0_rxfifo_pull_index_wdata = wdata[8:7];
-wire [1:0] fctrl0_rxfifo_pull_index_rdata;
-wire  fctrl0_rxfifo_write_en_wdata = wdata[9];
+wire  fctrl0_rxfifo_write_en_wdata = wdata[1];
 wire  fctrl0_rxfifo_write_en_rdata;
-wire [2:0] fctrl0_tx_fifo_data_count_wdata = wdata[12:10];
-wire [2:0] fctrl0_tx_fifo_data_count_rdata;
-wire [2:0] fctrl0_rx_fifo_data_count_wdata = wdata[15:13];
-wire [2:0] fctrl0_rx_fifo_data_count_rdata;
-wire [31:0] __fctrl0_rdata = {16'h0, fctrl0_rx_fifo_data_count_rdata, fctrl0_tx_fifo_data_count_rdata, fctrl0_rxfifo_write_en_rdata, fctrl0_rxfifo_pull_index_rdata, fctrl0_rxfifo_push_index_rdata, fctrl0_txfifo_read_en_rdata, fctrl0_txfifo_pull_index_rdata, fctrl0_txfifo_push_index_rdata};
-assign fctrl0_txfifo_push_index_rdata = fctrl0_txfifo_push_index_i;
-assign fctrl0_txfifo_pull_index_rdata = fctrl0_txfifo_pull_index_i;
+wire [31:0] __fctrl0_rdata = {30'h0, fctrl0_rxfifo_write_en_rdata, fctrl0_txfifo_read_en_rdata};
 assign fctrl0_txfifo_read_en_rdata = fctrl0_txfifo_read_en_o;
-assign fctrl0_rxfifo_push_index_rdata = fctrl0_rxfifo_push_index_i;
-assign fctrl0_rxfifo_pull_index_rdata = fctrl0_rxfifo_pull_index_i;
 assign fctrl0_rxfifo_write_en_rdata = fctrl0_rxfifo_write_en_o;
-assign fctrl0_tx_fifo_data_count_rdata = fctrl0_tx_fifo_data_count_i;
-assign fctrl0_rx_fifo_data_count_rdata = fctrl0_rx_fifo_data_count_i;
+
+wire [2:0] tfpsi0_txfifo_push_index_wdata = wdata[2:0];
+wire [2:0] tfpsi0_txfifo_push_index_rdata;
+wire [31:0] __tfpsi0_rdata = {29'h0, tfpsi0_txfifo_push_index_rdata};
+assign tfpsi0_txfifo_push_index_rdata = tfpsi0_txfifo_push_index_i;
+
+wire [2:0] tfpli0_txfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] tfpli0_txfifo_pull_index_rdata;
+wire [31:0] __tfpli0_rdata = {29'h0, tfpli0_txfifo_pull_index_rdata};
+assign tfpli0_txfifo_pull_index_rdata = tfpli0_txfifo_pull_index_i;
+
+wire [3:0] tfdc0_tx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] tfdc0_tx_fifo_data_count_rdata;
+wire [31:0] __tfdc0_rdata = {28'h0, tfdc0_tx_fifo_data_count_rdata};
+assign tfdc0_tx_fifo_data_count_rdata = tfdc0_tx_fifo_data_count_i;
+
+wire [2:0] rfpsi0_rxfifo_push_index_wdata = wdata[2:0];
+wire [2:0] rfpsi0_rxfifo_push_index_rdata;
+wire [31:0] __rfpsi0_rdata = {29'h0, rfpsi0_rxfifo_push_index_rdata};
+assign rfpsi0_rxfifo_push_index_rdata = rfpsi0_rxfifo_push_index_i;
+
+wire [2:0] rfpli0_rxfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] rfpli0_rxfifo_pull_index_rdata;
+wire [31:0] __rfpli0_rdata = {29'h0, rfpli0_rxfifo_pull_index_rdata};
+assign rfpli0_rxfifo_pull_index_rdata = rfpli0_rxfifo_pull_index_i;
+
+wire [3:0] rfdc0_rx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] rfdc0_rx_fifo_data_count_rdata;
+wire [31:0] __rfdc0_rdata = {28'h0, rfdc0_rx_fifo_data_count_rdata};
+assign rfdc0_rx_fifo_data_count_rdata = rfdc0_rx_fifo_data_count_i;
 
 wire [31:0] clkdiv1_clkdiv_wdata = wdata[31:0];
 wire [31:0] clkdiv1_clkdiv_rdata;
@@ -1052,19 +1136,19 @@ wire [31:0] pull1_rdata;
 wire [31:0] __pull1_rdata = {pull1_rdata};
 assign pull1_rdata = pull1_i;
 
-wire [3:0] fstat1_txlevel_wdata = wdata[3:0];
-wire [3:0] fstat1_txlevel_rdata;
-wire  fstat1_txfull_wdata = wdata[4];
+wire [4:0] fstat1_txlevel_wdata = wdata[4:0];
+wire [4:0] fstat1_txlevel_rdata;
+wire  fstat1_txfull_wdata = wdata[5];
 wire  fstat1_txfull_rdata;
-wire  fstat1_txempty_wdata = wdata[5];
+wire  fstat1_txempty_wdata = wdata[6];
 wire  fstat1_txempty_rdata;
-wire [3:0] fstat1_rxlevel_wdata = wdata[9:6];
-wire [3:0] fstat1_rxlevel_rdata;
-wire  fstat1_rxfull_wdata = wdata[10];
+wire [4:0] fstat1_rxlevel_wdata = wdata[11:7];
+wire [4:0] fstat1_rxlevel_rdata;
+wire  fstat1_rxfull_wdata = wdata[12];
 wire  fstat1_rxfull_rdata;
-wire  fstat1_rxempty_wdata = wdata[11];
+wire  fstat1_rxempty_wdata = wdata[13];
 wire  fstat1_rxempty_rdata;
-wire [31:0] __fstat1_rdata = {20'h0, fstat1_rxempty_rdata, fstat1_rxfull_rdata, fstat1_rxlevel_rdata, fstat1_txempty_rdata, fstat1_txfull_rdata, fstat1_txlevel_rdata};
+wire [31:0] __fstat1_rdata = {18'h0, fstat1_rxempty_rdata, fstat1_rxfull_rdata, fstat1_rxlevel_rdata, fstat1_txempty_rdata, fstat1_txfull_rdata, fstat1_txlevel_rdata};
 assign fstat1_txlevel_rdata = fstat1_txlevel_i;
 assign fstat1_txfull_rdata = fstat1_txfull_i;
 assign fstat1_txempty_rdata = fstat1_txempty_i;
@@ -1072,31 +1156,43 @@ assign fstat1_rxlevel_rdata = fstat1_rxlevel_i;
 assign fstat1_rxfull_rdata = fstat1_rxfull_i;
 assign fstat1_rxempty_rdata = fstat1_rxempty_i;
 
-wire [1:0] fctrl1_txfifo_push_index_wdata = wdata[1:0];
-wire [1:0] fctrl1_txfifo_push_index_rdata;
-wire [1:0] fctrl1_txfifo_pull_index_wdata = wdata[3:2];
-wire [1:0] fctrl1_txfifo_pull_index_rdata;
-wire  fctrl1_txfifo_read_en_wdata = wdata[4];
+wire  fctrl1_txfifo_read_en_wdata = wdata[0];
 wire  fctrl1_txfifo_read_en_rdata;
-wire [1:0] fctrl1_rxfifo_push_index_wdata = wdata[6:5];
-wire [1:0] fctrl1_rxfifo_push_index_rdata;
-wire [1:0] fctrl1_rxfifo_pull_index_wdata = wdata[8:7];
-wire [1:0] fctrl1_rxfifo_pull_index_rdata;
-wire  fctrl1_rxfifo_write_en_wdata = wdata[9];
+wire  fctrl1_rxfifo_write_en_wdata = wdata[1];
 wire  fctrl1_rxfifo_write_en_rdata;
-wire [2:0] fctrl1_tx_fifo_data_count_wdata = wdata[12:10];
-wire [2:0] fctrl1_tx_fifo_data_count_rdata;
-wire [2:0] fctrl1_rx_fifo_data_count_wdata = wdata[15:13];
-wire [2:0] fctrl1_rx_fifo_data_count_rdata;
-wire [31:0] __fctrl1_rdata = {16'h0, fctrl1_rx_fifo_data_count_rdata, fctrl1_tx_fifo_data_count_rdata, fctrl1_rxfifo_write_en_rdata, fctrl1_rxfifo_pull_index_rdata, fctrl1_rxfifo_push_index_rdata, fctrl1_txfifo_read_en_rdata, fctrl1_txfifo_pull_index_rdata, fctrl1_txfifo_push_index_rdata};
-assign fctrl1_txfifo_push_index_rdata = fctrl1_txfifo_push_index_i;
-assign fctrl1_txfifo_pull_index_rdata = fctrl1_txfifo_pull_index_i;
+wire [31:0] __fctrl1_rdata = {30'h0, fctrl1_rxfifo_write_en_rdata, fctrl1_txfifo_read_en_rdata};
 assign fctrl1_txfifo_read_en_rdata = fctrl1_txfifo_read_en_o;
-assign fctrl1_rxfifo_push_index_rdata = fctrl1_rxfifo_push_index_i;
-assign fctrl1_rxfifo_pull_index_rdata = fctrl1_rxfifo_pull_index_i;
 assign fctrl1_rxfifo_write_en_rdata = fctrl1_rxfifo_write_en_o;
-assign fctrl1_tx_fifo_data_count_rdata = fctrl1_tx_fifo_data_count_i;
-assign fctrl1_rx_fifo_data_count_rdata = fctrl1_rx_fifo_data_count_i;
+
+wire [2:0] tfpsi1_txfifo_push_index_wdata = wdata[2:0];
+wire [2:0] tfpsi1_txfifo_push_index_rdata;
+wire [31:0] __tfpsi1_rdata = {29'h0, tfpsi1_txfifo_push_index_rdata};
+assign tfpsi1_txfifo_push_index_rdata = tfpsi1_txfifo_push_index_i;
+
+wire [2:0] tfpli1_txfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] tfpli1_txfifo_pull_index_rdata;
+wire [31:0] __tfpli1_rdata = {29'h0, tfpli1_txfifo_pull_index_rdata};
+assign tfpli1_txfifo_pull_index_rdata = tfpli1_txfifo_pull_index_i;
+
+wire [3:0] tfdc1_tx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] tfdc1_tx_fifo_data_count_rdata;
+wire [31:0] __tfdc1_rdata = {28'h0, tfdc1_tx_fifo_data_count_rdata};
+assign tfdc1_tx_fifo_data_count_rdata = tfdc1_tx_fifo_data_count_i;
+
+wire [2:0] rfpsi1_rxfifo_push_index_wdata = wdata[2:0];
+wire [2:0] rfpsi1_rxfifo_push_index_rdata;
+wire [31:0] __rfpsi1_rdata = {29'h0, rfpsi1_rxfifo_push_index_rdata};
+assign rfpsi1_rxfifo_push_index_rdata = rfpsi1_rxfifo_push_index_i;
+
+wire [2:0] rfpli1_rxfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] rfpli1_rxfifo_pull_index_rdata;
+wire [31:0] __rfpli1_rdata = {29'h0, rfpli1_rxfifo_pull_index_rdata};
+assign rfpli1_rxfifo_pull_index_rdata = rfpli1_rxfifo_pull_index_i;
+
+wire [3:0] rfdc1_rx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] rfdc1_rx_fifo_data_count_rdata;
+wire [31:0] __rfdc1_rdata = {28'h0, rfdc1_rx_fifo_data_count_rdata};
+assign rfdc1_rx_fifo_data_count_rdata = rfdc1_rx_fifo_data_count_i;
 
 wire [31:0] clkdiv2_clkdiv_wdata = wdata[31:0];
 wire [31:0] clkdiv2_clkdiv_rdata;
@@ -1214,19 +1310,19 @@ wire [31:0] pull2_rdata;
 wire [31:0] __pull2_rdata = {pull2_rdata};
 assign pull2_rdata = pull2_i;
 
-wire [3:0] fstat2_txlevel_wdata = wdata[3:0];
-wire [3:0] fstat2_txlevel_rdata;
-wire  fstat2_txfull_wdata = wdata[4];
+wire [4:0] fstat2_txlevel_wdata = wdata[4:0];
+wire [4:0] fstat2_txlevel_rdata;
+wire  fstat2_txfull_wdata = wdata[5];
 wire  fstat2_txfull_rdata;
-wire  fstat2_txempty_wdata = wdata[5];
+wire  fstat2_txempty_wdata = wdata[6];
 wire  fstat2_txempty_rdata;
-wire [3:0] fstat2_rxlevel_wdata = wdata[9:6];
-wire [3:0] fstat2_rxlevel_rdata;
-wire  fstat2_rxfull_wdata = wdata[10];
+wire [4:0] fstat2_rxlevel_wdata = wdata[11:7];
+wire [4:0] fstat2_rxlevel_rdata;
+wire  fstat2_rxfull_wdata = wdata[12];
 wire  fstat2_rxfull_rdata;
-wire  fstat2_rxempty_wdata = wdata[11];
+wire  fstat2_rxempty_wdata = wdata[13];
 wire  fstat2_rxempty_rdata;
-wire [31:0] __fstat2_rdata = {20'h0, fstat2_rxempty_rdata, fstat2_rxfull_rdata, fstat2_rxlevel_rdata, fstat2_txempty_rdata, fstat2_txfull_rdata, fstat2_txlevel_rdata};
+wire [31:0] __fstat2_rdata = {18'h0, fstat2_rxempty_rdata, fstat2_rxfull_rdata, fstat2_rxlevel_rdata, fstat2_txempty_rdata, fstat2_txfull_rdata, fstat2_txlevel_rdata};
 assign fstat2_txlevel_rdata = fstat2_txlevel_i;
 assign fstat2_txfull_rdata = fstat2_txfull_i;
 assign fstat2_txempty_rdata = fstat2_txempty_i;
@@ -1234,31 +1330,43 @@ assign fstat2_rxlevel_rdata = fstat2_rxlevel_i;
 assign fstat2_rxfull_rdata = fstat2_rxfull_i;
 assign fstat2_rxempty_rdata = fstat2_rxempty_i;
 
-wire [1:0] fctrl2_txfifo_push_index_wdata = wdata[1:0];
-wire [1:0] fctrl2_txfifo_push_index_rdata;
-wire [1:0] fctrl2_txfifo_pull_index_wdata = wdata[3:2];
-wire [1:0] fctrl2_txfifo_pull_index_rdata;
-wire  fctrl2_txfifo_read_en_wdata = wdata[4];
+wire  fctrl2_txfifo_read_en_wdata = wdata[0];
 wire  fctrl2_txfifo_read_en_rdata;
-wire [1:0] fctrl2_rxfifo_push_index_wdata = wdata[6:5];
-wire [1:0] fctrl2_rxfifo_push_index_rdata;
-wire [1:0] fctrl2_rxfifo_pull_index_wdata = wdata[8:7];
-wire [1:0] fctrl2_rxfifo_pull_index_rdata;
-wire  fctrl2_rxfifo_write_en_wdata = wdata[9];
+wire  fctrl2_rxfifo_write_en_wdata = wdata[1];
 wire  fctrl2_rxfifo_write_en_rdata;
-wire [2:0] fctrl2_tx_fifo_data_count_wdata = wdata[12:10];
-wire [2:0] fctrl2_tx_fifo_data_count_rdata;
-wire [2:0] fctrl2_rx_fifo_data_count_wdata = wdata[15:13];
-wire [2:0] fctrl2_rx_fifo_data_count_rdata;
-wire [31:0] __fctrl2_rdata = {16'h0, fctrl2_rx_fifo_data_count_rdata, fctrl2_tx_fifo_data_count_rdata, fctrl2_rxfifo_write_en_rdata, fctrl2_rxfifo_pull_index_rdata, fctrl2_rxfifo_push_index_rdata, fctrl2_txfifo_read_en_rdata, fctrl2_txfifo_pull_index_rdata, fctrl2_txfifo_push_index_rdata};
-assign fctrl2_txfifo_push_index_rdata = fctrl2_txfifo_push_index_i;
-assign fctrl2_txfifo_pull_index_rdata = fctrl2_txfifo_pull_index_i;
+wire [31:0] __fctrl2_rdata = {30'h0, fctrl2_rxfifo_write_en_rdata, fctrl2_txfifo_read_en_rdata};
 assign fctrl2_txfifo_read_en_rdata = fctrl2_txfifo_read_en_o;
-assign fctrl2_rxfifo_push_index_rdata = fctrl2_rxfifo_push_index_i;
-assign fctrl2_rxfifo_pull_index_rdata = fctrl2_rxfifo_pull_index_i;
 assign fctrl2_rxfifo_write_en_rdata = fctrl2_rxfifo_write_en_o;
-assign fctrl2_tx_fifo_data_count_rdata = fctrl2_tx_fifo_data_count_i;
-assign fctrl2_rx_fifo_data_count_rdata = fctrl2_rx_fifo_data_count_i;
+
+wire [2:0] tfpsi2_txfifo_push_index_wdata = wdata[2:0];
+wire [2:0] tfpsi2_txfifo_push_index_rdata;
+wire [31:0] __tfpsi2_rdata = {29'h0, tfpsi2_txfifo_push_index_rdata};
+assign tfpsi2_txfifo_push_index_rdata = tfpsi2_txfifo_push_index_i;
+
+wire [2:0] tfpli2_txfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] tfpli2_txfifo_pull_index_rdata;
+wire [31:0] __tfpli2_rdata = {29'h0, tfpli2_txfifo_pull_index_rdata};
+assign tfpli2_txfifo_pull_index_rdata = tfpli2_txfifo_pull_index_i;
+
+wire [3:0] tfdc2_tx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] tfdc2_tx_fifo_data_count_rdata;
+wire [31:0] __tfdc2_rdata = {28'h0, tfdc2_tx_fifo_data_count_rdata};
+assign tfdc2_tx_fifo_data_count_rdata = tfdc2_tx_fifo_data_count_i;
+
+wire [2:0] rfpsi2_rxfifo_push_index_wdata = wdata[2:0];
+wire [2:0] rfpsi2_rxfifo_push_index_rdata;
+wire [31:0] __rfpsi2_rdata = {29'h0, rfpsi2_rxfifo_push_index_rdata};
+assign rfpsi2_rxfifo_push_index_rdata = rfpsi2_rxfifo_push_index_i;
+
+wire [2:0] rfpli2_rxfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] rfpli2_rxfifo_pull_index_rdata;
+wire [31:0] __rfpli2_rdata = {29'h0, rfpli2_rxfifo_pull_index_rdata};
+assign rfpli2_rxfifo_pull_index_rdata = rfpli2_rxfifo_pull_index_i;
+
+wire [3:0] rfdc2_rx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] rfdc2_rx_fifo_data_count_rdata;
+wire [31:0] __rfdc2_rdata = {28'h0, rfdc2_rx_fifo_data_count_rdata};
+assign rfdc2_rx_fifo_data_count_rdata = rfdc2_rx_fifo_data_count_i;
 
 wire [31:0] clkdiv3_clkdiv_wdata = wdata[31:0];
 wire [31:0] clkdiv3_clkdiv_rdata;
@@ -1376,19 +1484,19 @@ wire [31:0] pull3_rdata;
 wire [31:0] __pull3_rdata = {pull3_rdata};
 assign pull3_rdata = pull3_i;
 
-wire [3:0] fstat3_txlevel_wdata = wdata[3:0];
-wire [3:0] fstat3_txlevel_rdata;
-wire  fstat3_txfull_wdata = wdata[4];
+wire [4:0] fstat3_txlevel_wdata = wdata[4:0];
+wire [4:0] fstat3_txlevel_rdata;
+wire  fstat3_txfull_wdata = wdata[5];
 wire  fstat3_txfull_rdata;
-wire  fstat3_txempty_wdata = wdata[5];
+wire  fstat3_txempty_wdata = wdata[6];
 wire  fstat3_txempty_rdata;
-wire [3:0] fstat3_rxlevel_wdata = wdata[9:6];
-wire [3:0] fstat3_rxlevel_rdata;
-wire  fstat3_rxfull_wdata = wdata[10];
+wire [4:0] fstat3_rxlevel_wdata = wdata[11:7];
+wire [4:0] fstat3_rxlevel_rdata;
+wire  fstat3_rxfull_wdata = wdata[12];
 wire  fstat3_rxfull_rdata;
-wire  fstat3_rxempty_wdata = wdata[11];
+wire  fstat3_rxempty_wdata = wdata[13];
 wire  fstat3_rxempty_rdata;
-wire [31:0] __fstat3_rdata = {20'h0, fstat3_rxempty_rdata, fstat3_rxfull_rdata, fstat3_rxlevel_rdata, fstat3_txempty_rdata, fstat3_txfull_rdata, fstat3_txlevel_rdata};
+wire [31:0] __fstat3_rdata = {18'h0, fstat3_rxempty_rdata, fstat3_rxfull_rdata, fstat3_rxlevel_rdata, fstat3_txempty_rdata, fstat3_txfull_rdata, fstat3_txlevel_rdata};
 assign fstat3_txlevel_rdata = fstat3_txlevel_i;
 assign fstat3_txfull_rdata = fstat3_txfull_i;
 assign fstat3_txempty_rdata = fstat3_txempty_i;
@@ -1396,31 +1504,43 @@ assign fstat3_rxlevel_rdata = fstat3_rxlevel_i;
 assign fstat3_rxfull_rdata = fstat3_rxfull_i;
 assign fstat3_rxempty_rdata = fstat3_rxempty_i;
 
-wire [1:0] fctrl3_txfifo_push_index_wdata = wdata[1:0];
-wire [1:0] fctrl3_txfifo_push_index_rdata;
-wire [1:0] fctrl3_txfifo_pull_index_wdata = wdata[3:2];
-wire [1:0] fctrl3_txfifo_pull_index_rdata;
-wire  fctrl3_txfifo_read_en_wdata = wdata[4];
+wire  fctrl3_txfifo_read_en_wdata = wdata[0];
 wire  fctrl3_txfifo_read_en_rdata;
-wire [1:0] fctrl3_rxfifo_push_index_wdata = wdata[6:5];
-wire [1:0] fctrl3_rxfifo_push_index_rdata;
-wire [1:0] fctrl3_rxfifo_pull_index_wdata = wdata[8:7];
-wire [1:0] fctrl3_rxfifo_pull_index_rdata;
-wire  fctrl3_rxfifo_write_en_wdata = wdata[9];
+wire  fctrl3_rxfifo_write_en_wdata = wdata[1];
 wire  fctrl3_rxfifo_write_en_rdata;
-wire [2:0] fctrl3_tx_fifo_data_count_wdata = wdata[12:10];
-wire [2:0] fctrl3_tx_fifo_data_count_rdata;
-wire [2:0] fctrl3_rx_fifo_data_count_wdata = wdata[15:13];
-wire [2:0] fctrl3_rx_fifo_data_count_rdata;
-wire [31:0] __fctrl3_rdata = {16'h0, fctrl3_rx_fifo_data_count_rdata, fctrl3_tx_fifo_data_count_rdata, fctrl3_rxfifo_write_en_rdata, fctrl3_rxfifo_pull_index_rdata, fctrl3_rxfifo_push_index_rdata, fctrl3_txfifo_read_en_rdata, fctrl3_txfifo_pull_index_rdata, fctrl3_txfifo_push_index_rdata};
-assign fctrl3_txfifo_push_index_rdata = fctrl3_txfifo_push_index_i;
-assign fctrl3_txfifo_pull_index_rdata = fctrl3_txfifo_pull_index_i;
+wire [31:0] __fctrl3_rdata = {30'h0, fctrl3_rxfifo_write_en_rdata, fctrl3_txfifo_read_en_rdata};
 assign fctrl3_txfifo_read_en_rdata = fctrl3_txfifo_read_en_o;
-assign fctrl3_rxfifo_push_index_rdata = fctrl3_rxfifo_push_index_i;
-assign fctrl3_rxfifo_pull_index_rdata = fctrl3_rxfifo_pull_index_i;
 assign fctrl3_rxfifo_write_en_rdata = fctrl3_rxfifo_write_en_o;
-assign fctrl3_tx_fifo_data_count_rdata = fctrl3_tx_fifo_data_count_i;
-assign fctrl3_rx_fifo_data_count_rdata = fctrl3_rx_fifo_data_count_i;
+
+wire [2:0] tfpsi3_txfifo_push_index_wdata = wdata[2:0];
+wire [2:0] tfpsi3_txfifo_push_index_rdata;
+wire [31:0] __tfpsi3_rdata = {29'h0, tfpsi3_txfifo_push_index_rdata};
+assign tfpsi3_txfifo_push_index_rdata = tfpsi3_txfifo_push_index_i;
+
+wire [2:0] tfpli3_txfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] tfpli3_txfifo_pull_index_rdata;
+wire [31:0] __tfpli3_rdata = {29'h0, tfpli3_txfifo_pull_index_rdata};
+assign tfpli3_txfifo_pull_index_rdata = tfpli3_txfifo_pull_index_i;
+
+wire [3:0] tfdc3_tx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] tfdc3_tx_fifo_data_count_rdata;
+wire [31:0] __tfdc3_rdata = {28'h0, tfdc3_tx_fifo_data_count_rdata};
+assign tfdc3_tx_fifo_data_count_rdata = tfdc3_tx_fifo_data_count_i;
+
+wire [2:0] rfpsi3_rxfifo_push_index_wdata = wdata[2:0];
+wire [2:0] rfpsi3_rxfifo_push_index_rdata;
+wire [31:0] __rfpsi3_rdata = {29'h0, rfpsi3_rxfifo_push_index_rdata};
+assign rfpsi3_rxfifo_push_index_rdata = rfpsi3_rxfifo_push_index_i;
+
+wire [2:0] rfpli3_rxfifo_pull_index_wdata = wdata[2:0];
+wire [2:0] rfpli3_rxfifo_pull_index_rdata;
+wire [31:0] __rfpli3_rdata = {29'h0, rfpli3_rxfifo_pull_index_rdata};
+assign rfpli3_rxfifo_pull_index_rdata = rfpli3_rxfifo_pull_index_i;
+
+wire [3:0] rfdc3_rx_fifo_data_count_wdata = wdata[3:0];
+wire [3:0] rfdc3_rx_fifo_data_count_rdata;
+wire [31:0] __rfdc3_rdata = {28'h0, rfdc3_rx_fifo_data_count_rdata};
+assign rfdc3_rx_fifo_data_count_rdata = rfdc3_rx_fifo_data_count_i;
 
 wire [15:0] instrmem0_instr_wdata = wdata[15:0];
 wire [15:0] instrmem0_instr_rdata;
@@ -1600,6 +1720,12 @@ always @ (*) begin
 		ADDR_PULL0: rdata = __pull0_rdata;
 		ADDR_FSTAT0: rdata = __fstat0_rdata;
 		ADDR_FCTRL0: rdata = __fctrl0_rdata;
+		ADDR_TFPSI0: rdata = __tfpsi0_rdata;
+		ADDR_TFPLI0: rdata = __tfpli0_rdata;
+		ADDR_TFDC0: rdata = __tfdc0_rdata;
+		ADDR_RFPSI0: rdata = __rfpsi0_rdata;
+		ADDR_RFPLI0: rdata = __rfpli0_rdata;
+		ADDR_RFDC0: rdata = __rfdc0_rdata;
 		ADDR_CLKDIV1: rdata = __clkdiv1_rdata;
 		ADDR_PINCTRL1: rdata = __pinctrl1_rdata;
 		ADDR_EXECCTRL1: rdata = __execctrl1_rdata;
@@ -1609,6 +1735,12 @@ always @ (*) begin
 		ADDR_PULL1: rdata = __pull1_rdata;
 		ADDR_FSTAT1: rdata = __fstat1_rdata;
 		ADDR_FCTRL1: rdata = __fctrl1_rdata;
+		ADDR_TFPSI1: rdata = __tfpsi1_rdata;
+		ADDR_TFPLI1: rdata = __tfpli1_rdata;
+		ADDR_TFDC1: rdata = __tfdc1_rdata;
+		ADDR_RFPSI1: rdata = __rfpsi1_rdata;
+		ADDR_RFPLI1: rdata = __rfpli1_rdata;
+		ADDR_RFDC1: rdata = __rfdc1_rdata;
 		ADDR_CLKDIV2: rdata = __clkdiv2_rdata;
 		ADDR_PINCTRL2: rdata = __pinctrl2_rdata;
 		ADDR_EXECCTRL2: rdata = __execctrl2_rdata;
@@ -1618,6 +1750,12 @@ always @ (*) begin
 		ADDR_PULL2: rdata = __pull2_rdata;
 		ADDR_FSTAT2: rdata = __fstat2_rdata;
 		ADDR_FCTRL2: rdata = __fctrl2_rdata;
+		ADDR_TFPSI2: rdata = __tfpsi2_rdata;
+		ADDR_TFPLI2: rdata = __tfpli2_rdata;
+		ADDR_TFDC2: rdata = __tfdc2_rdata;
+		ADDR_RFPSI2: rdata = __rfpsi2_rdata;
+		ADDR_RFPLI2: rdata = __rfpli2_rdata;
+		ADDR_RFDC2: rdata = __rfdc2_rdata;
 		ADDR_CLKDIV3: rdata = __clkdiv3_rdata;
 		ADDR_PINCTRL3: rdata = __pinctrl3_rdata;
 		ADDR_EXECCTRL3: rdata = __execctrl3_rdata;
@@ -1627,6 +1765,12 @@ always @ (*) begin
 		ADDR_PULL3: rdata = __pull3_rdata;
 		ADDR_FSTAT3: rdata = __fstat3_rdata;
 		ADDR_FCTRL3: rdata = __fctrl3_rdata;
+		ADDR_TFPSI3: rdata = __tfpsi3_rdata;
+		ADDR_TFPLI3: rdata = __tfpli3_rdata;
+		ADDR_TFDC3: rdata = __tfdc3_rdata;
+		ADDR_RFPSI3: rdata = __rfpsi3_rdata;
+		ADDR_RFPLI3: rdata = __rfpli3_rdata;
+		ADDR_RFDC3: rdata = __rfdc3_rdata;
 		ADDR_INSTRMEM0: rdata = __instrmem0_rdata;
 		ADDR_INSTRMEM1: rdata = __instrmem1_rdata;
 		ADDR_INSTRMEM2: rdata = __instrmem2_rdata;
@@ -1702,24 +1846,24 @@ always @ (*) begin
 	push0_wen = __push0_wen;
 	push0_o = push0_wdata;
 	pull0_ren = __pull0_ren;
-	fctrl0_txfifo_push_index_wen = __fctrl0_wen;
-	fctrl0_txfifo_push_index_o = fctrl0_txfifo_push_index_wdata;
-	fctrl0_txfifo_push_index_ren = __fctrl0_ren;
-	fctrl0_txfifo_pull_index_wen = __fctrl0_wen;
-	fctrl0_txfifo_pull_index_o = fctrl0_txfifo_pull_index_wdata;
-	fctrl0_txfifo_pull_index_ren = __fctrl0_ren;
-	fctrl0_rxfifo_push_index_wen = __fctrl0_wen;
-	fctrl0_rxfifo_push_index_o = fctrl0_rxfifo_push_index_wdata;
-	fctrl0_rxfifo_push_index_ren = __fctrl0_ren;
-	fctrl0_rxfifo_pull_index_wen = __fctrl0_wen;
-	fctrl0_rxfifo_pull_index_o = fctrl0_rxfifo_pull_index_wdata;
-	fctrl0_rxfifo_pull_index_ren = __fctrl0_ren;
-	fctrl0_tx_fifo_data_count_wen = __fctrl0_wen;
-	fctrl0_tx_fifo_data_count_o = fctrl0_tx_fifo_data_count_wdata;
-	fctrl0_tx_fifo_data_count_ren = __fctrl0_ren;
-	fctrl0_rx_fifo_data_count_wen = __fctrl0_wen;
-	fctrl0_rx_fifo_data_count_o = fctrl0_rx_fifo_data_count_wdata;
-	fctrl0_rx_fifo_data_count_ren = __fctrl0_ren;
+	tfpsi0_txfifo_push_index_wen = __tfpsi0_wen;
+	tfpsi0_txfifo_push_index_o = tfpsi0_txfifo_push_index_wdata;
+	tfpsi0_txfifo_push_index_ren = __tfpsi0_ren;
+	tfpli0_txfifo_pull_index_wen = __tfpli0_wen;
+	tfpli0_txfifo_pull_index_o = tfpli0_txfifo_pull_index_wdata;
+	tfpli0_txfifo_pull_index_ren = __tfpli0_ren;
+	tfdc0_tx_fifo_data_count_wen = __tfdc0_wen;
+	tfdc0_tx_fifo_data_count_o = tfdc0_tx_fifo_data_count_wdata;
+	tfdc0_tx_fifo_data_count_ren = __tfdc0_ren;
+	rfpsi0_rxfifo_push_index_wen = __rfpsi0_wen;
+	rfpsi0_rxfifo_push_index_o = rfpsi0_rxfifo_push_index_wdata;
+	rfpsi0_rxfifo_push_index_ren = __rfpsi0_ren;
+	rfpli0_rxfifo_pull_index_wen = __rfpli0_wen;
+	rfpli0_rxfifo_pull_index_o = rfpli0_rxfifo_pull_index_wdata;
+	rfpli0_rxfifo_pull_index_ren = __rfpli0_ren;
+	rfdc0_rx_fifo_data_count_wen = __rfdc0_wen;
+	rfdc0_rx_fifo_data_count_o = rfdc0_rx_fifo_data_count_wdata;
+	rfdc0_rx_fifo_data_count_ren = __rfdc0_ren;
 	shiftctrl1_clear_rxfifo_wen = __shiftctrl1_wen;
 	shiftctrl1_clear_rxfifo_o = shiftctrl1_clear_rxfifo_wdata;
 	shiftctrl1_clear_txfifo_wen = __shiftctrl1_wen;
@@ -1732,24 +1876,24 @@ always @ (*) begin
 	push1_wen = __push1_wen;
 	push1_o = push1_wdata;
 	pull1_ren = __pull1_ren;
-	fctrl1_txfifo_push_index_wen = __fctrl1_wen;
-	fctrl1_txfifo_push_index_o = fctrl1_txfifo_push_index_wdata;
-	fctrl1_txfifo_push_index_ren = __fctrl1_ren;
-	fctrl1_txfifo_pull_index_wen = __fctrl1_wen;
-	fctrl1_txfifo_pull_index_o = fctrl1_txfifo_pull_index_wdata;
-	fctrl1_txfifo_pull_index_ren = __fctrl1_ren;
-	fctrl1_rxfifo_push_index_wen = __fctrl1_wen;
-	fctrl1_rxfifo_push_index_o = fctrl1_rxfifo_push_index_wdata;
-	fctrl1_rxfifo_push_index_ren = __fctrl1_ren;
-	fctrl1_rxfifo_pull_index_wen = __fctrl1_wen;
-	fctrl1_rxfifo_pull_index_o = fctrl1_rxfifo_pull_index_wdata;
-	fctrl1_rxfifo_pull_index_ren = __fctrl1_ren;
-	fctrl1_tx_fifo_data_count_wen = __fctrl1_wen;
-	fctrl1_tx_fifo_data_count_o = fctrl1_tx_fifo_data_count_wdata;
-	fctrl1_tx_fifo_data_count_ren = __fctrl1_ren;
-	fctrl1_rx_fifo_data_count_wen = __fctrl1_wen;
-	fctrl1_rx_fifo_data_count_o = fctrl1_rx_fifo_data_count_wdata;
-	fctrl1_rx_fifo_data_count_ren = __fctrl1_ren;
+	tfpsi1_txfifo_push_index_wen = __tfpsi1_wen;
+	tfpsi1_txfifo_push_index_o = tfpsi1_txfifo_push_index_wdata;
+	tfpsi1_txfifo_push_index_ren = __tfpsi1_ren;
+	tfpli1_txfifo_pull_index_wen = __tfpli1_wen;
+	tfpli1_txfifo_pull_index_o = tfpli1_txfifo_pull_index_wdata;
+	tfpli1_txfifo_pull_index_ren = __tfpli1_ren;
+	tfdc1_tx_fifo_data_count_wen = __tfdc1_wen;
+	tfdc1_tx_fifo_data_count_o = tfdc1_tx_fifo_data_count_wdata;
+	tfdc1_tx_fifo_data_count_ren = __tfdc1_ren;
+	rfpsi1_rxfifo_push_index_wen = __rfpsi1_wen;
+	rfpsi1_rxfifo_push_index_o = rfpsi1_rxfifo_push_index_wdata;
+	rfpsi1_rxfifo_push_index_ren = __rfpsi1_ren;
+	rfpli1_rxfifo_pull_index_wen = __rfpli1_wen;
+	rfpli1_rxfifo_pull_index_o = rfpli1_rxfifo_pull_index_wdata;
+	rfpli1_rxfifo_pull_index_ren = __rfpli1_ren;
+	rfdc1_rx_fifo_data_count_wen = __rfdc1_wen;
+	rfdc1_rx_fifo_data_count_o = rfdc1_rx_fifo_data_count_wdata;
+	rfdc1_rx_fifo_data_count_ren = __rfdc1_ren;
 	shiftctrl2_clear_rxfifo_wen = __shiftctrl2_wen;
 	shiftctrl2_clear_rxfifo_o = shiftctrl2_clear_rxfifo_wdata;
 	shiftctrl2_clear_txfifo_wen = __shiftctrl2_wen;
@@ -1762,24 +1906,24 @@ always @ (*) begin
 	push2_wen = __push2_wen;
 	push2_o = push2_wdata;
 	pull2_ren = __pull2_ren;
-	fctrl2_txfifo_push_index_wen = __fctrl2_wen;
-	fctrl2_txfifo_push_index_o = fctrl2_txfifo_push_index_wdata;
-	fctrl2_txfifo_push_index_ren = __fctrl2_ren;
-	fctrl2_txfifo_pull_index_wen = __fctrl2_wen;
-	fctrl2_txfifo_pull_index_o = fctrl2_txfifo_pull_index_wdata;
-	fctrl2_txfifo_pull_index_ren = __fctrl2_ren;
-	fctrl2_rxfifo_push_index_wen = __fctrl2_wen;
-	fctrl2_rxfifo_push_index_o = fctrl2_rxfifo_push_index_wdata;
-	fctrl2_rxfifo_push_index_ren = __fctrl2_ren;
-	fctrl2_rxfifo_pull_index_wen = __fctrl2_wen;
-	fctrl2_rxfifo_pull_index_o = fctrl2_rxfifo_pull_index_wdata;
-	fctrl2_rxfifo_pull_index_ren = __fctrl2_ren;
-	fctrl2_tx_fifo_data_count_wen = __fctrl2_wen;
-	fctrl2_tx_fifo_data_count_o = fctrl2_tx_fifo_data_count_wdata;
-	fctrl2_tx_fifo_data_count_ren = __fctrl2_ren;
-	fctrl2_rx_fifo_data_count_wen = __fctrl2_wen;
-	fctrl2_rx_fifo_data_count_o = fctrl2_rx_fifo_data_count_wdata;
-	fctrl2_rx_fifo_data_count_ren = __fctrl2_ren;
+	tfpsi2_txfifo_push_index_wen = __tfpsi2_wen;
+	tfpsi2_txfifo_push_index_o = tfpsi2_txfifo_push_index_wdata;
+	tfpsi2_txfifo_push_index_ren = __tfpsi2_ren;
+	tfpli2_txfifo_pull_index_wen = __tfpli2_wen;
+	tfpli2_txfifo_pull_index_o = tfpli2_txfifo_pull_index_wdata;
+	tfpli2_txfifo_pull_index_ren = __tfpli2_ren;
+	tfdc2_tx_fifo_data_count_wen = __tfdc2_wen;
+	tfdc2_tx_fifo_data_count_o = tfdc2_tx_fifo_data_count_wdata;
+	tfdc2_tx_fifo_data_count_ren = __tfdc2_ren;
+	rfpsi2_rxfifo_push_index_wen = __rfpsi2_wen;
+	rfpsi2_rxfifo_push_index_o = rfpsi2_rxfifo_push_index_wdata;
+	rfpsi2_rxfifo_push_index_ren = __rfpsi2_ren;
+	rfpli2_rxfifo_pull_index_wen = __rfpli2_wen;
+	rfpli2_rxfifo_pull_index_o = rfpli2_rxfifo_pull_index_wdata;
+	rfpli2_rxfifo_pull_index_ren = __rfpli2_ren;
+	rfdc2_rx_fifo_data_count_wen = __rfdc2_wen;
+	rfdc2_rx_fifo_data_count_o = rfdc2_rx_fifo_data_count_wdata;
+	rfdc2_rx_fifo_data_count_ren = __rfdc2_ren;
 	shiftctrl3_clear_rxfifo_wen = __shiftctrl3_wen;
 	shiftctrl3_clear_rxfifo_o = shiftctrl3_clear_rxfifo_wdata;
 	shiftctrl3_clear_txfifo_wen = __shiftctrl3_wen;
@@ -1792,24 +1936,24 @@ always @ (*) begin
 	push3_wen = __push3_wen;
 	push3_o = push3_wdata;
 	pull3_ren = __pull3_ren;
-	fctrl3_txfifo_push_index_wen = __fctrl3_wen;
-	fctrl3_txfifo_push_index_o = fctrl3_txfifo_push_index_wdata;
-	fctrl3_txfifo_push_index_ren = __fctrl3_ren;
-	fctrl3_txfifo_pull_index_wen = __fctrl3_wen;
-	fctrl3_txfifo_pull_index_o = fctrl3_txfifo_pull_index_wdata;
-	fctrl3_txfifo_pull_index_ren = __fctrl3_ren;
-	fctrl3_rxfifo_push_index_wen = __fctrl3_wen;
-	fctrl3_rxfifo_push_index_o = fctrl3_rxfifo_push_index_wdata;
-	fctrl3_rxfifo_push_index_ren = __fctrl3_ren;
-	fctrl3_rxfifo_pull_index_wen = __fctrl3_wen;
-	fctrl3_rxfifo_pull_index_o = fctrl3_rxfifo_pull_index_wdata;
-	fctrl3_rxfifo_pull_index_ren = __fctrl3_ren;
-	fctrl3_tx_fifo_data_count_wen = __fctrl3_wen;
-	fctrl3_tx_fifo_data_count_o = fctrl3_tx_fifo_data_count_wdata;
-	fctrl3_tx_fifo_data_count_ren = __fctrl3_ren;
-	fctrl3_rx_fifo_data_count_wen = __fctrl3_wen;
-	fctrl3_rx_fifo_data_count_o = fctrl3_rx_fifo_data_count_wdata;
-	fctrl3_rx_fifo_data_count_ren = __fctrl3_ren;
+	tfpsi3_txfifo_push_index_wen = __tfpsi3_wen;
+	tfpsi3_txfifo_push_index_o = tfpsi3_txfifo_push_index_wdata;
+	tfpsi3_txfifo_push_index_ren = __tfpsi3_ren;
+	tfpli3_txfifo_pull_index_wen = __tfpli3_wen;
+	tfpli3_txfifo_pull_index_o = tfpli3_txfifo_pull_index_wdata;
+	tfpli3_txfifo_pull_index_ren = __tfpli3_ren;
+	tfdc3_tx_fifo_data_count_wen = __tfdc3_wen;
+	tfdc3_tx_fifo_data_count_o = tfdc3_tx_fifo_data_count_wdata;
+	tfdc3_tx_fifo_data_count_ren = __tfdc3_ren;
+	rfpsi3_rxfifo_push_index_wen = __rfpsi3_wen;
+	rfpsi3_rxfifo_push_index_o = rfpsi3_rxfifo_push_index_wdata;
+	rfpsi3_rxfifo_push_index_ren = __rfpsi3_ren;
+	rfpli3_rxfifo_pull_index_wen = __rfpli3_wen;
+	rfpli3_rxfifo_pull_index_o = rfpli3_rxfifo_pull_index_wdata;
+	rfpli3_rxfifo_pull_index_ren = __rfpli3_ren;
+	rfdc3_rx_fifo_data_count_wen = __rfdc3_wen;
+	rfdc3_rx_fifo_data_count_o = rfdc3_rx_fifo_data_count_wdata;
+	rfdc3_rx_fifo_data_count_ren = __rfdc3_ren;
 end
 
 always @ (posedge clk or negedge rst_n) begin

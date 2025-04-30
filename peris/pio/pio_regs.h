@@ -28,65 +28,89 @@
 #define PIO_PULL0_OFFS 52
 #define PIO_FSTAT0_OFFS 56
 #define PIO_FCTRL0_OFFS 60
-#define PIO_CLKDIV1_OFFS 64
-#define PIO_PINCTRL1_OFFS 68
-#define PIO_EXECCTRL1_OFFS 72
-#define PIO_SHIFTCTRL1_OFFS 76
-#define PIO_INSTR1_OFFS 80
-#define PIO_PUSH1_OFFS 84
-#define PIO_PULL1_OFFS 88
-#define PIO_FSTAT1_OFFS 92
-#define PIO_FCTRL1_OFFS 96
-#define PIO_CLKDIV2_OFFS 100
-#define PIO_PINCTRL2_OFFS 104
-#define PIO_EXECCTRL2_OFFS 108
-#define PIO_SHIFTCTRL2_OFFS 112
-#define PIO_INSTR2_OFFS 116
-#define PIO_PUSH2_OFFS 120
-#define PIO_PULL2_OFFS 124
-#define PIO_FSTAT2_OFFS 128
-#define PIO_FCTRL2_OFFS 132
-#define PIO_CLKDIV3_OFFS 136
-#define PIO_PINCTRL3_OFFS 140
-#define PIO_EXECCTRL3_OFFS 144
-#define PIO_SHIFTCTRL3_OFFS 148
-#define PIO_INSTR3_OFFS 152
-#define PIO_PUSH3_OFFS 156
-#define PIO_PULL3_OFFS 160
-#define PIO_FSTAT3_OFFS 164
-#define PIO_FCTRL3_OFFS 168
-#define PIO_INSTRMEM0_OFFS 172
-#define PIO_INSTRMEM1_OFFS 176
-#define PIO_INSTRMEM2_OFFS 180
-#define PIO_INSTRMEM3_OFFS 184
-#define PIO_INSTRMEM4_OFFS 188
-#define PIO_INSTRMEM5_OFFS 192
-#define PIO_INSTRMEM6_OFFS 196
-#define PIO_INSTRMEM7_OFFS 200
-#define PIO_INSTRMEM8_OFFS 204
-#define PIO_INSTRMEM9_OFFS 208
-#define PIO_INSTRMEM10_OFFS 212
-#define PIO_INSTRMEM11_OFFS 216
-#define PIO_INSTRMEM12_OFFS 220
-#define PIO_INSTRMEM13_OFFS 224
-#define PIO_INSTRMEM14_OFFS 228
-#define PIO_INSTRMEM15_OFFS 232
-#define PIO_INSTRMEM16_OFFS 236
-#define PIO_INSTRMEM17_OFFS 240
-#define PIO_INSTRMEM18_OFFS 244
-#define PIO_INSTRMEM19_OFFS 248
-#define PIO_INSTRMEM20_OFFS 252
-#define PIO_INSTRMEM21_OFFS 256
-#define PIO_INSTRMEM22_OFFS 260
-#define PIO_INSTRMEM23_OFFS 264
-#define PIO_INSTRMEM24_OFFS 268
-#define PIO_INSTRMEM25_OFFS 272
-#define PIO_INSTRMEM26_OFFS 276
-#define PIO_INSTRMEM27_OFFS 280
-#define PIO_INSTRMEM28_OFFS 284
-#define PIO_INSTRMEM29_OFFS 288
-#define PIO_INSTRMEM30_OFFS 292
-#define PIO_INSTRMEM31_OFFS 296
+#define PIO_TFPSI0_OFFS 64
+#define PIO_TFPLI0_OFFS 68
+#define PIO_TFDC0_OFFS 72
+#define PIO_RFPSI0_OFFS 76
+#define PIO_RFPLI0_OFFS 80
+#define PIO_RFDC0_OFFS 84
+#define PIO_CLKDIV1_OFFS 88
+#define PIO_PINCTRL1_OFFS 92
+#define PIO_EXECCTRL1_OFFS 96
+#define PIO_SHIFTCTRL1_OFFS 100
+#define PIO_INSTR1_OFFS 104
+#define PIO_PUSH1_OFFS 108
+#define PIO_PULL1_OFFS 112
+#define PIO_FSTAT1_OFFS 116
+#define PIO_FCTRL1_OFFS 120
+#define PIO_TFPSI1_OFFS 124
+#define PIO_TFPLI1_OFFS 128
+#define PIO_TFDC1_OFFS 132
+#define PIO_RFPSI1_OFFS 136
+#define PIO_RFPLI1_OFFS 140
+#define PIO_RFDC1_OFFS 144
+#define PIO_CLKDIV2_OFFS 148
+#define PIO_PINCTRL2_OFFS 152
+#define PIO_EXECCTRL2_OFFS 156
+#define PIO_SHIFTCTRL2_OFFS 160
+#define PIO_INSTR2_OFFS 164
+#define PIO_PUSH2_OFFS 168
+#define PIO_PULL2_OFFS 172
+#define PIO_FSTAT2_OFFS 176
+#define PIO_FCTRL2_OFFS 180
+#define PIO_TFPSI2_OFFS 184
+#define PIO_TFPLI2_OFFS 188
+#define PIO_TFDC2_OFFS 192
+#define PIO_RFPSI2_OFFS 196
+#define PIO_RFPLI2_OFFS 200
+#define PIO_RFDC2_OFFS 204
+#define PIO_CLKDIV3_OFFS 208
+#define PIO_PINCTRL3_OFFS 212
+#define PIO_EXECCTRL3_OFFS 216
+#define PIO_SHIFTCTRL3_OFFS 220
+#define PIO_INSTR3_OFFS 224
+#define PIO_PUSH3_OFFS 228
+#define PIO_PULL3_OFFS 232
+#define PIO_FSTAT3_OFFS 236
+#define PIO_FCTRL3_OFFS 240
+#define PIO_TFPSI3_OFFS 244
+#define PIO_TFPLI3_OFFS 248
+#define PIO_TFDC3_OFFS 252
+#define PIO_RFPSI3_OFFS 256
+#define PIO_RFPLI3_OFFS 260
+#define PIO_RFDC3_OFFS 264
+#define PIO_INSTRMEM0_OFFS 268
+#define PIO_INSTRMEM1_OFFS 272
+#define PIO_INSTRMEM2_OFFS 276
+#define PIO_INSTRMEM3_OFFS 280
+#define PIO_INSTRMEM4_OFFS 284
+#define PIO_INSTRMEM5_OFFS 288
+#define PIO_INSTRMEM6_OFFS 292
+#define PIO_INSTRMEM7_OFFS 296
+#define PIO_INSTRMEM8_OFFS 300
+#define PIO_INSTRMEM9_OFFS 304
+#define PIO_INSTRMEM10_OFFS 308
+#define PIO_INSTRMEM11_OFFS 312
+#define PIO_INSTRMEM12_OFFS 316
+#define PIO_INSTRMEM13_OFFS 320
+#define PIO_INSTRMEM14_OFFS 324
+#define PIO_INSTRMEM15_OFFS 328
+#define PIO_INSTRMEM16_OFFS 332
+#define PIO_INSTRMEM17_OFFS 336
+#define PIO_INSTRMEM18_OFFS 340
+#define PIO_INSTRMEM19_OFFS 344
+#define PIO_INSTRMEM20_OFFS 348
+#define PIO_INSTRMEM21_OFFS 352
+#define PIO_INSTRMEM22_OFFS 356
+#define PIO_INSTRMEM23_OFFS 360
+#define PIO_INSTRMEM24_OFFS 364
+#define PIO_INSTRMEM25_OFFS 368
+#define PIO_INSTRMEM26_OFFS 372
+#define PIO_INSTRMEM27_OFFS 376
+#define PIO_INSTRMEM28_OFFS 380
+#define PIO_INSTRMEM29_OFFS 384
+#define PIO_INSTRMEM30_OFFS 388
+#define PIO_INSTRMEM31_OFFS 392
 
 /*******************************************************************************
 *                                     CTRL                                     *
@@ -539,28 +563,28 @@
 
 // Field: FSTAT0_TXLEVEL  Access: ROV
 #define PIO_FSTAT0_TXLEVEL_LSB  0
-#define PIO_FSTAT0_TXLEVEL_BITS 4
-#define PIO_FSTAT0_TXLEVEL_MASK 0xf
+#define PIO_FSTAT0_TXLEVEL_BITS 5
+#define PIO_FSTAT0_TXLEVEL_MASK 0x1f
 // Field: FSTAT0_TXFULL  Access: ROV
-#define PIO_FSTAT0_TXFULL_LSB  4
+#define PIO_FSTAT0_TXFULL_LSB  5
 #define PIO_FSTAT0_TXFULL_BITS 1
-#define PIO_FSTAT0_TXFULL_MASK 0x10
+#define PIO_FSTAT0_TXFULL_MASK 0x20
 // Field: FSTAT0_TXEMPTY  Access: ROV
-#define PIO_FSTAT0_TXEMPTY_LSB  5
+#define PIO_FSTAT0_TXEMPTY_LSB  6
 #define PIO_FSTAT0_TXEMPTY_BITS 1
-#define PIO_FSTAT0_TXEMPTY_MASK 0x20
+#define PIO_FSTAT0_TXEMPTY_MASK 0x40
 // Field: FSTAT0_RXLEVEL  Access: ROV
-#define PIO_FSTAT0_RXLEVEL_LSB  6
-#define PIO_FSTAT0_RXLEVEL_BITS 4
-#define PIO_FSTAT0_RXLEVEL_MASK 0x3c0
+#define PIO_FSTAT0_RXLEVEL_LSB  7
+#define PIO_FSTAT0_RXLEVEL_BITS 5
+#define PIO_FSTAT0_RXLEVEL_MASK 0xf80
 // Field: FSTAT0_RXFULL  Access: ROV
-#define PIO_FSTAT0_RXFULL_LSB  10
+#define PIO_FSTAT0_RXFULL_LSB  12
 #define PIO_FSTAT0_RXFULL_BITS 1
-#define PIO_FSTAT0_RXFULL_MASK 0x400
+#define PIO_FSTAT0_RXFULL_MASK 0x1000
 // Field: FSTAT0_RXEMPTY  Access: ROV
-#define PIO_FSTAT0_RXEMPTY_LSB  11
+#define PIO_FSTAT0_RXEMPTY_LSB  13
 #define PIO_FSTAT0_RXEMPTY_BITS 1
-#define PIO_FSTAT0_RXEMPTY_MASK 0x800
+#define PIO_FSTAT0_RXEMPTY_MASK 0x2000
 
 /*******************************************************************************
 *                                    FCTRL0                                    *
@@ -568,46 +592,88 @@
 
 // FIFO control register for SM0
 
-// Field: FCTRL0_TXFIFO_PUSH_INDEX  Access: RWF
-// tx fifo push index
-#define PIO_FCTRL0_TXFIFO_PUSH_INDEX_LSB  0
-#define PIO_FCTRL0_TXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL0_TXFIFO_PUSH_INDEX_MASK 0x3
-// Field: FCTRL0_TXFIFO_PULL_INDEX  Access: RWF
-// tx fifo pull index
-#define PIO_FCTRL0_TXFIFO_PULL_INDEX_LSB  2
-#define PIO_FCTRL0_TXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL0_TXFIFO_PULL_INDEX_MASK 0xc
 // Field: FCTRL0_TXFIFO_READ_EN  Access: RW
 // tx fifo read enable
-#define PIO_FCTRL0_TXFIFO_READ_EN_LSB  4
+#define PIO_FCTRL0_TXFIFO_READ_EN_LSB  0
 #define PIO_FCTRL0_TXFIFO_READ_EN_BITS 1
-#define PIO_FCTRL0_TXFIFO_READ_EN_MASK 0x10
-// Field: FCTRL0_RXFIFO_PUSH_INDEX  Access: RWF
-// rx fifo push index
-#define PIO_FCTRL0_RXFIFO_PUSH_INDEX_LSB  5
-#define PIO_FCTRL0_RXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL0_RXFIFO_PUSH_INDEX_MASK 0x60
-// Field: FCTRL0_RXFIFO_PULL_INDEX  Access: RWF
-// rx fifo pull index
-#define PIO_FCTRL0_RXFIFO_PULL_INDEX_LSB  7
-#define PIO_FCTRL0_RXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL0_RXFIFO_PULL_INDEX_MASK 0x180
+#define PIO_FCTRL0_TXFIFO_READ_EN_MASK 0x1
 // Field: FCTRL0_RXFIFO_WRITE_EN  Access: RW
 // rx fifo write enable
-#define PIO_FCTRL0_RXFIFO_WRITE_EN_LSB  9
+#define PIO_FCTRL0_RXFIFO_WRITE_EN_LSB  1
 #define PIO_FCTRL0_RXFIFO_WRITE_EN_BITS 1
-#define PIO_FCTRL0_RXFIFO_WRITE_EN_MASK 0x200
-// Field: FCTRL0_TX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_FCTRL0_RXFIFO_WRITE_EN_MASK 0x2
+
+/*******************************************************************************
+*                                    TFPSI0                                    *
+*******************************************************************************/
+
+// TX FIFO push index register for SM0
+
+// Field: TFPSI0_TXFIFO_PUSH_INDEX  Access: RWF
+// set tx fifo push index
+#define PIO_TFPSI0_TXFIFO_PUSH_INDEX_LSB  0
+#define PIO_TFPSI0_TXFIFO_PUSH_INDEX_BITS 3
+#define PIO_TFPSI0_TXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFPLI0                                    *
+*******************************************************************************/
+
+// TX FIFO pull index register for SM0
+
+// Field: TFPLI0_TXFIFO_PULL_INDEX  Access: RWF
+// set tx fifo pull index
+#define PIO_TFPLI0_TXFIFO_PULL_INDEX_LSB  0
+#define PIO_TFPLI0_TXFIFO_PULL_INDEX_BITS 3
+#define PIO_TFPLI0_TXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFDC0                                     *
+*******************************************************************************/
+
+// TX FIFO data count register for SM0
+
+// Field: TFDC0_TX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in tx fifo
-#define PIO_FCTRL0_TX_FIFO_DATA_COUNT_LSB  10
-#define PIO_FCTRL0_TX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL0_TX_FIFO_DATA_COUNT_MASK 0x1c00
-// Field: FCTRL0_RX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_TFDC0_TX_FIFO_DATA_COUNT_LSB  0
+#define PIO_TFDC0_TX_FIFO_DATA_COUNT_BITS 4
+#define PIO_TFDC0_TX_FIFO_DATA_COUNT_MASK 0xf
+
+/*******************************************************************************
+*                                    RFPSI0                                    *
+*******************************************************************************/
+
+// RX FIFO push index register for SM0
+
+// Field: RFPSI0_RXFIFO_PUSH_INDEX  Access: RWF
+// set rx fifo push index
+#define PIO_RFPSI0_RXFIFO_PUSH_INDEX_LSB  0
+#define PIO_RFPSI0_RXFIFO_PUSH_INDEX_BITS 3
+#define PIO_RFPSI0_RXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFPLI0                                    *
+*******************************************************************************/
+
+// RX FIFO pull index register for SM0
+
+// Field: RFPLI0_RXFIFO_PULL_INDEX  Access: RWF
+// set rx fifo pull index
+#define PIO_RFPLI0_RXFIFO_PULL_INDEX_LSB  0
+#define PIO_RFPLI0_RXFIFO_PULL_INDEX_BITS 3
+#define PIO_RFPLI0_RXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFDC0                                     *
+*******************************************************************************/
+
+// RX FIFO data count register for SM0
+
+// Field: RFDC0_RX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in rx fifo
-#define PIO_FCTRL0_RX_FIFO_DATA_COUNT_LSB  13
-#define PIO_FCTRL0_RX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL0_RX_FIFO_DATA_COUNT_MASK 0xe000
+#define PIO_RFDC0_RX_FIFO_DATA_COUNT_LSB  0
+#define PIO_RFDC0_RX_FIFO_DATA_COUNT_BITS 4
+#define PIO_RFDC0_RX_FIFO_DATA_COUNT_MASK 0xf
 
 /*******************************************************************************
 *                                   CLKDIV1                                    *
@@ -845,28 +911,28 @@
 
 // Field: FSTAT1_TXLEVEL  Access: ROV
 #define PIO_FSTAT1_TXLEVEL_LSB  0
-#define PIO_FSTAT1_TXLEVEL_BITS 4
-#define PIO_FSTAT1_TXLEVEL_MASK 0xf
+#define PIO_FSTAT1_TXLEVEL_BITS 5
+#define PIO_FSTAT1_TXLEVEL_MASK 0x1f
 // Field: FSTAT1_TXFULL  Access: ROV
-#define PIO_FSTAT1_TXFULL_LSB  4
+#define PIO_FSTAT1_TXFULL_LSB  5
 #define PIO_FSTAT1_TXFULL_BITS 1
-#define PIO_FSTAT1_TXFULL_MASK 0x10
+#define PIO_FSTAT1_TXFULL_MASK 0x20
 // Field: FSTAT1_TXEMPTY  Access: ROV
-#define PIO_FSTAT1_TXEMPTY_LSB  5
+#define PIO_FSTAT1_TXEMPTY_LSB  6
 #define PIO_FSTAT1_TXEMPTY_BITS 1
-#define PIO_FSTAT1_TXEMPTY_MASK 0x20
+#define PIO_FSTAT1_TXEMPTY_MASK 0x40
 // Field: FSTAT1_RXLEVEL  Access: ROV
-#define PIO_FSTAT1_RXLEVEL_LSB  6
-#define PIO_FSTAT1_RXLEVEL_BITS 4
-#define PIO_FSTAT1_RXLEVEL_MASK 0x3c0
+#define PIO_FSTAT1_RXLEVEL_LSB  7
+#define PIO_FSTAT1_RXLEVEL_BITS 5
+#define PIO_FSTAT1_RXLEVEL_MASK 0xf80
 // Field: FSTAT1_RXFULL  Access: ROV
-#define PIO_FSTAT1_RXFULL_LSB  10
+#define PIO_FSTAT1_RXFULL_LSB  12
 #define PIO_FSTAT1_RXFULL_BITS 1
-#define PIO_FSTAT1_RXFULL_MASK 0x400
+#define PIO_FSTAT1_RXFULL_MASK 0x1000
 // Field: FSTAT1_RXEMPTY  Access: ROV
-#define PIO_FSTAT1_RXEMPTY_LSB  11
+#define PIO_FSTAT1_RXEMPTY_LSB  13
 #define PIO_FSTAT1_RXEMPTY_BITS 1
-#define PIO_FSTAT1_RXEMPTY_MASK 0x800
+#define PIO_FSTAT1_RXEMPTY_MASK 0x2000
 
 /*******************************************************************************
 *                                    FCTRL1                                    *
@@ -874,46 +940,88 @@
 
 // FIFO control register for SM1
 
-// Field: FCTRL1_TXFIFO_PUSH_INDEX  Access: RWF
-// tx fifo push index
-#define PIO_FCTRL1_TXFIFO_PUSH_INDEX_LSB  0
-#define PIO_FCTRL1_TXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL1_TXFIFO_PUSH_INDEX_MASK 0x3
-// Field: FCTRL1_TXFIFO_PULL_INDEX  Access: RWF
-// tx fifo pull index
-#define PIO_FCTRL1_TXFIFO_PULL_INDEX_LSB  2
-#define PIO_FCTRL1_TXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL1_TXFIFO_PULL_INDEX_MASK 0xc
 // Field: FCTRL1_TXFIFO_READ_EN  Access: RW
 // tx fifo read enable
-#define PIO_FCTRL1_TXFIFO_READ_EN_LSB  4
+#define PIO_FCTRL1_TXFIFO_READ_EN_LSB  0
 #define PIO_FCTRL1_TXFIFO_READ_EN_BITS 1
-#define PIO_FCTRL1_TXFIFO_READ_EN_MASK 0x10
-// Field: FCTRL1_RXFIFO_PUSH_INDEX  Access: RWF
-// rx fifo push index
-#define PIO_FCTRL1_RXFIFO_PUSH_INDEX_LSB  5
-#define PIO_FCTRL1_RXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL1_RXFIFO_PUSH_INDEX_MASK 0x60
-// Field: FCTRL1_RXFIFO_PULL_INDEX  Access: RWF
-// rx fifo pull index
-#define PIO_FCTRL1_RXFIFO_PULL_INDEX_LSB  7
-#define PIO_FCTRL1_RXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL1_RXFIFO_PULL_INDEX_MASK 0x180
+#define PIO_FCTRL1_TXFIFO_READ_EN_MASK 0x1
 // Field: FCTRL1_RXFIFO_WRITE_EN  Access: RW
 // rx fifo write enable
-#define PIO_FCTRL1_RXFIFO_WRITE_EN_LSB  9
+#define PIO_FCTRL1_RXFIFO_WRITE_EN_LSB  1
 #define PIO_FCTRL1_RXFIFO_WRITE_EN_BITS 1
-#define PIO_FCTRL1_RXFIFO_WRITE_EN_MASK 0x200
-// Field: FCTRL1_TX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_FCTRL1_RXFIFO_WRITE_EN_MASK 0x2
+
+/*******************************************************************************
+*                                    TFPSI1                                    *
+*******************************************************************************/
+
+// TX FIFO push index register for SM1
+
+// Field: TFPSI1_TXFIFO_PUSH_INDEX  Access: RWF
+// set tx fifo push index
+#define PIO_TFPSI1_TXFIFO_PUSH_INDEX_LSB  0
+#define PIO_TFPSI1_TXFIFO_PUSH_INDEX_BITS 3
+#define PIO_TFPSI1_TXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFPLI1                                    *
+*******************************************************************************/
+
+// TX FIFO pull index register for SM1
+
+// Field: TFPLI1_TXFIFO_PULL_INDEX  Access: RWF
+// set tx fifo pull index
+#define PIO_TFPLI1_TXFIFO_PULL_INDEX_LSB  0
+#define PIO_TFPLI1_TXFIFO_PULL_INDEX_BITS 3
+#define PIO_TFPLI1_TXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFDC1                                     *
+*******************************************************************************/
+
+// TX FIFO data count register for SM1
+
+// Field: TFDC1_TX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in tx fifo
-#define PIO_FCTRL1_TX_FIFO_DATA_COUNT_LSB  10
-#define PIO_FCTRL1_TX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL1_TX_FIFO_DATA_COUNT_MASK 0x1c00
-// Field: FCTRL1_RX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_TFDC1_TX_FIFO_DATA_COUNT_LSB  0
+#define PIO_TFDC1_TX_FIFO_DATA_COUNT_BITS 4
+#define PIO_TFDC1_TX_FIFO_DATA_COUNT_MASK 0xf
+
+/*******************************************************************************
+*                                    RFPSI1                                    *
+*******************************************************************************/
+
+// RX FIFO push index register for SM1
+
+// Field: RFPSI1_RXFIFO_PUSH_INDEX  Access: RWF
+// set rx fifo push index
+#define PIO_RFPSI1_RXFIFO_PUSH_INDEX_LSB  0
+#define PIO_RFPSI1_RXFIFO_PUSH_INDEX_BITS 3
+#define PIO_RFPSI1_RXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFPLI1                                    *
+*******************************************************************************/
+
+// RX FIFO pull index register for SM1
+
+// Field: RFPLI1_RXFIFO_PULL_INDEX  Access: RWF
+// set rx fifo pull index
+#define PIO_RFPLI1_RXFIFO_PULL_INDEX_LSB  0
+#define PIO_RFPLI1_RXFIFO_PULL_INDEX_BITS 3
+#define PIO_RFPLI1_RXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFDC1                                     *
+*******************************************************************************/
+
+// RX FIFO data count register for SM1
+
+// Field: RFDC1_RX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in rx fifo
-#define PIO_FCTRL1_RX_FIFO_DATA_COUNT_LSB  13
-#define PIO_FCTRL1_RX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL1_RX_FIFO_DATA_COUNT_MASK 0xe000
+#define PIO_RFDC1_RX_FIFO_DATA_COUNT_LSB  0
+#define PIO_RFDC1_RX_FIFO_DATA_COUNT_BITS 4
+#define PIO_RFDC1_RX_FIFO_DATA_COUNT_MASK 0xf
 
 /*******************************************************************************
 *                                   CLKDIV2                                    *
@@ -1151,28 +1259,28 @@
 
 // Field: FSTAT2_TXLEVEL  Access: ROV
 #define PIO_FSTAT2_TXLEVEL_LSB  0
-#define PIO_FSTAT2_TXLEVEL_BITS 4
-#define PIO_FSTAT2_TXLEVEL_MASK 0xf
+#define PIO_FSTAT2_TXLEVEL_BITS 5
+#define PIO_FSTAT2_TXLEVEL_MASK 0x1f
 // Field: FSTAT2_TXFULL  Access: ROV
-#define PIO_FSTAT2_TXFULL_LSB  4
+#define PIO_FSTAT2_TXFULL_LSB  5
 #define PIO_FSTAT2_TXFULL_BITS 1
-#define PIO_FSTAT2_TXFULL_MASK 0x10
+#define PIO_FSTAT2_TXFULL_MASK 0x20
 // Field: FSTAT2_TXEMPTY  Access: ROV
-#define PIO_FSTAT2_TXEMPTY_LSB  5
+#define PIO_FSTAT2_TXEMPTY_LSB  6
 #define PIO_FSTAT2_TXEMPTY_BITS 1
-#define PIO_FSTAT2_TXEMPTY_MASK 0x20
+#define PIO_FSTAT2_TXEMPTY_MASK 0x40
 // Field: FSTAT2_RXLEVEL  Access: ROV
-#define PIO_FSTAT2_RXLEVEL_LSB  6
-#define PIO_FSTAT2_RXLEVEL_BITS 4
-#define PIO_FSTAT2_RXLEVEL_MASK 0x3c0
+#define PIO_FSTAT2_RXLEVEL_LSB  7
+#define PIO_FSTAT2_RXLEVEL_BITS 5
+#define PIO_FSTAT2_RXLEVEL_MASK 0xf80
 // Field: FSTAT2_RXFULL  Access: ROV
-#define PIO_FSTAT2_RXFULL_LSB  10
+#define PIO_FSTAT2_RXFULL_LSB  12
 #define PIO_FSTAT2_RXFULL_BITS 1
-#define PIO_FSTAT2_RXFULL_MASK 0x400
+#define PIO_FSTAT2_RXFULL_MASK 0x1000
 // Field: FSTAT2_RXEMPTY  Access: ROV
-#define PIO_FSTAT2_RXEMPTY_LSB  11
+#define PIO_FSTAT2_RXEMPTY_LSB  13
 #define PIO_FSTAT2_RXEMPTY_BITS 1
-#define PIO_FSTAT2_RXEMPTY_MASK 0x800
+#define PIO_FSTAT2_RXEMPTY_MASK 0x2000
 
 /*******************************************************************************
 *                                    FCTRL2                                    *
@@ -1180,46 +1288,88 @@
 
 // FIFO control register for SM2
 
-// Field: FCTRL2_TXFIFO_PUSH_INDEX  Access: RWF
-// tx fifo push index
-#define PIO_FCTRL2_TXFIFO_PUSH_INDEX_LSB  0
-#define PIO_FCTRL2_TXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL2_TXFIFO_PUSH_INDEX_MASK 0x3
-// Field: FCTRL2_TXFIFO_PULL_INDEX  Access: RWF
-// tx fifo pull index
-#define PIO_FCTRL2_TXFIFO_PULL_INDEX_LSB  2
-#define PIO_FCTRL2_TXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL2_TXFIFO_PULL_INDEX_MASK 0xc
 // Field: FCTRL2_TXFIFO_READ_EN  Access: RW
 // tx fifo read enable
-#define PIO_FCTRL2_TXFIFO_READ_EN_LSB  4
+#define PIO_FCTRL2_TXFIFO_READ_EN_LSB  0
 #define PIO_FCTRL2_TXFIFO_READ_EN_BITS 1
-#define PIO_FCTRL2_TXFIFO_READ_EN_MASK 0x10
-// Field: FCTRL2_RXFIFO_PUSH_INDEX  Access: RWF
-// rx fifo push index
-#define PIO_FCTRL2_RXFIFO_PUSH_INDEX_LSB  5
-#define PIO_FCTRL2_RXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL2_RXFIFO_PUSH_INDEX_MASK 0x60
-// Field: FCTRL2_RXFIFO_PULL_INDEX  Access: RWF
-// rx fifo pull index
-#define PIO_FCTRL2_RXFIFO_PULL_INDEX_LSB  7
-#define PIO_FCTRL2_RXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL2_RXFIFO_PULL_INDEX_MASK 0x180
+#define PIO_FCTRL2_TXFIFO_READ_EN_MASK 0x1
 // Field: FCTRL2_RXFIFO_WRITE_EN  Access: RW
 // rx fifo write enable
-#define PIO_FCTRL2_RXFIFO_WRITE_EN_LSB  9
+#define PIO_FCTRL2_RXFIFO_WRITE_EN_LSB  1
 #define PIO_FCTRL2_RXFIFO_WRITE_EN_BITS 1
-#define PIO_FCTRL2_RXFIFO_WRITE_EN_MASK 0x200
-// Field: FCTRL2_TX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_FCTRL2_RXFIFO_WRITE_EN_MASK 0x2
+
+/*******************************************************************************
+*                                    TFPSI2                                    *
+*******************************************************************************/
+
+// TX FIFO push index register for SM2
+
+// Field: TFPSI2_TXFIFO_PUSH_INDEX  Access: RWF
+// set tx fifo push index
+#define PIO_TFPSI2_TXFIFO_PUSH_INDEX_LSB  0
+#define PIO_TFPSI2_TXFIFO_PUSH_INDEX_BITS 3
+#define PIO_TFPSI2_TXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFPLI2                                    *
+*******************************************************************************/
+
+// TX FIFO pull index register for SM2
+
+// Field: TFPLI2_TXFIFO_PULL_INDEX  Access: RWF
+// set tx fifo pull index
+#define PIO_TFPLI2_TXFIFO_PULL_INDEX_LSB  0
+#define PIO_TFPLI2_TXFIFO_PULL_INDEX_BITS 3
+#define PIO_TFPLI2_TXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFDC2                                     *
+*******************************************************************************/
+
+// TX FIFO data count register for SM2
+
+// Field: TFDC2_TX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in tx fifo
-#define PIO_FCTRL2_TX_FIFO_DATA_COUNT_LSB  10
-#define PIO_FCTRL2_TX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL2_TX_FIFO_DATA_COUNT_MASK 0x1c00
-// Field: FCTRL2_RX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_TFDC2_TX_FIFO_DATA_COUNT_LSB  0
+#define PIO_TFDC2_TX_FIFO_DATA_COUNT_BITS 4
+#define PIO_TFDC2_TX_FIFO_DATA_COUNT_MASK 0xf
+
+/*******************************************************************************
+*                                    RFPSI2                                    *
+*******************************************************************************/
+
+// RX FIFO push index register for SM2
+
+// Field: RFPSI2_RXFIFO_PUSH_INDEX  Access: RWF
+// set rx fifo push index
+#define PIO_RFPSI2_RXFIFO_PUSH_INDEX_LSB  0
+#define PIO_RFPSI2_RXFIFO_PUSH_INDEX_BITS 3
+#define PIO_RFPSI2_RXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFPLI2                                    *
+*******************************************************************************/
+
+// RX FIFO pull index register for SM2
+
+// Field: RFPLI2_RXFIFO_PULL_INDEX  Access: RWF
+// set rx fifo pull index
+#define PIO_RFPLI2_RXFIFO_PULL_INDEX_LSB  0
+#define PIO_RFPLI2_RXFIFO_PULL_INDEX_BITS 3
+#define PIO_RFPLI2_RXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFDC2                                     *
+*******************************************************************************/
+
+// RX FIFO data count register for SM2
+
+// Field: RFDC2_RX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in rx fifo
-#define PIO_FCTRL2_RX_FIFO_DATA_COUNT_LSB  13
-#define PIO_FCTRL2_RX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL2_RX_FIFO_DATA_COUNT_MASK 0xe000
+#define PIO_RFDC2_RX_FIFO_DATA_COUNT_LSB  0
+#define PIO_RFDC2_RX_FIFO_DATA_COUNT_BITS 4
+#define PIO_RFDC2_RX_FIFO_DATA_COUNT_MASK 0xf
 
 /*******************************************************************************
 *                                   CLKDIV3                                    *
@@ -1457,28 +1607,28 @@
 
 // Field: FSTAT3_TXLEVEL  Access: ROV
 #define PIO_FSTAT3_TXLEVEL_LSB  0
-#define PIO_FSTAT3_TXLEVEL_BITS 4
-#define PIO_FSTAT3_TXLEVEL_MASK 0xf
+#define PIO_FSTAT3_TXLEVEL_BITS 5
+#define PIO_FSTAT3_TXLEVEL_MASK 0x1f
 // Field: FSTAT3_TXFULL  Access: ROV
-#define PIO_FSTAT3_TXFULL_LSB  4
+#define PIO_FSTAT3_TXFULL_LSB  5
 #define PIO_FSTAT3_TXFULL_BITS 1
-#define PIO_FSTAT3_TXFULL_MASK 0x10
+#define PIO_FSTAT3_TXFULL_MASK 0x20
 // Field: FSTAT3_TXEMPTY  Access: ROV
-#define PIO_FSTAT3_TXEMPTY_LSB  5
+#define PIO_FSTAT3_TXEMPTY_LSB  6
 #define PIO_FSTAT3_TXEMPTY_BITS 1
-#define PIO_FSTAT3_TXEMPTY_MASK 0x20
+#define PIO_FSTAT3_TXEMPTY_MASK 0x40
 // Field: FSTAT3_RXLEVEL  Access: ROV
-#define PIO_FSTAT3_RXLEVEL_LSB  6
-#define PIO_FSTAT3_RXLEVEL_BITS 4
-#define PIO_FSTAT3_RXLEVEL_MASK 0x3c0
+#define PIO_FSTAT3_RXLEVEL_LSB  7
+#define PIO_FSTAT3_RXLEVEL_BITS 5
+#define PIO_FSTAT3_RXLEVEL_MASK 0xf80
 // Field: FSTAT3_RXFULL  Access: ROV
-#define PIO_FSTAT3_RXFULL_LSB  10
+#define PIO_FSTAT3_RXFULL_LSB  12
 #define PIO_FSTAT3_RXFULL_BITS 1
-#define PIO_FSTAT3_RXFULL_MASK 0x400
+#define PIO_FSTAT3_RXFULL_MASK 0x1000
 // Field: FSTAT3_RXEMPTY  Access: ROV
-#define PIO_FSTAT3_RXEMPTY_LSB  11
+#define PIO_FSTAT3_RXEMPTY_LSB  13
 #define PIO_FSTAT3_RXEMPTY_BITS 1
-#define PIO_FSTAT3_RXEMPTY_MASK 0x800
+#define PIO_FSTAT3_RXEMPTY_MASK 0x2000
 
 /*******************************************************************************
 *                                    FCTRL3                                    *
@@ -1486,46 +1636,88 @@
 
 // FIFO control register for SM3
 
-// Field: FCTRL3_TXFIFO_PUSH_INDEX  Access: RWF
-// tx fifo push index
-#define PIO_FCTRL3_TXFIFO_PUSH_INDEX_LSB  0
-#define PIO_FCTRL3_TXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL3_TXFIFO_PUSH_INDEX_MASK 0x3
-// Field: FCTRL3_TXFIFO_PULL_INDEX  Access: RWF
-// tx fifo pull index
-#define PIO_FCTRL3_TXFIFO_PULL_INDEX_LSB  2
-#define PIO_FCTRL3_TXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL3_TXFIFO_PULL_INDEX_MASK 0xc
 // Field: FCTRL3_TXFIFO_READ_EN  Access: RW
 // tx fifo read enable
-#define PIO_FCTRL3_TXFIFO_READ_EN_LSB  4
+#define PIO_FCTRL3_TXFIFO_READ_EN_LSB  0
 #define PIO_FCTRL3_TXFIFO_READ_EN_BITS 1
-#define PIO_FCTRL3_TXFIFO_READ_EN_MASK 0x10
-// Field: FCTRL3_RXFIFO_PUSH_INDEX  Access: RWF
-// rx fifo push index
-#define PIO_FCTRL3_RXFIFO_PUSH_INDEX_LSB  5
-#define PIO_FCTRL3_RXFIFO_PUSH_INDEX_BITS 2
-#define PIO_FCTRL3_RXFIFO_PUSH_INDEX_MASK 0x60
-// Field: FCTRL3_RXFIFO_PULL_INDEX  Access: RWF
-// rx fifo pull index
-#define PIO_FCTRL3_RXFIFO_PULL_INDEX_LSB  7
-#define PIO_FCTRL3_RXFIFO_PULL_INDEX_BITS 2
-#define PIO_FCTRL3_RXFIFO_PULL_INDEX_MASK 0x180
+#define PIO_FCTRL3_TXFIFO_READ_EN_MASK 0x1
 // Field: FCTRL3_RXFIFO_WRITE_EN  Access: RW
 // rx fifo write enable
-#define PIO_FCTRL3_RXFIFO_WRITE_EN_LSB  9
+#define PIO_FCTRL3_RXFIFO_WRITE_EN_LSB  1
 #define PIO_FCTRL3_RXFIFO_WRITE_EN_BITS 1
-#define PIO_FCTRL3_RXFIFO_WRITE_EN_MASK 0x200
-// Field: FCTRL3_TX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_FCTRL3_RXFIFO_WRITE_EN_MASK 0x2
+
+/*******************************************************************************
+*                                    TFPSI3                                    *
+*******************************************************************************/
+
+// TX FIFO push index register for SM3
+
+// Field: TFPSI3_TXFIFO_PUSH_INDEX  Access: RWF
+// set tx fifo push index
+#define PIO_TFPSI3_TXFIFO_PUSH_INDEX_LSB  0
+#define PIO_TFPSI3_TXFIFO_PUSH_INDEX_BITS 3
+#define PIO_TFPSI3_TXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFPLI3                                    *
+*******************************************************************************/
+
+// TX FIFO pull index register for SM3
+
+// Field: TFPLI3_TXFIFO_PULL_INDEX  Access: RWF
+// set tx fifo pull index
+#define PIO_TFPLI3_TXFIFO_PULL_INDEX_LSB  0
+#define PIO_TFPLI3_TXFIFO_PULL_INDEX_BITS 3
+#define PIO_TFPLI3_TXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    TFDC3                                     *
+*******************************************************************************/
+
+// TX FIFO data count register for SM3
+
+// Field: TFDC3_TX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in tx fifo
-#define PIO_FCTRL3_TX_FIFO_DATA_COUNT_LSB  10
-#define PIO_FCTRL3_TX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL3_TX_FIFO_DATA_COUNT_MASK 0x1c00
-// Field: FCTRL3_RX_FIFO_DATA_COUNT  Access: RWF
+#define PIO_TFDC3_TX_FIFO_DATA_COUNT_LSB  0
+#define PIO_TFDC3_TX_FIFO_DATA_COUNT_BITS 4
+#define PIO_TFDC3_TX_FIFO_DATA_COUNT_MASK 0xf
+
+/*******************************************************************************
+*                                    RFPSI3                                    *
+*******************************************************************************/
+
+// RX FIFO push index register for SM3
+
+// Field: RFPSI3_RXFIFO_PUSH_INDEX  Access: RWF
+// set rx fifo push index
+#define PIO_RFPSI3_RXFIFO_PUSH_INDEX_LSB  0
+#define PIO_RFPSI3_RXFIFO_PUSH_INDEX_BITS 3
+#define PIO_RFPSI3_RXFIFO_PUSH_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFPLI3                                    *
+*******************************************************************************/
+
+// RX FIFO pull index register for SM3
+
+// Field: RFPLI3_RXFIFO_PULL_INDEX  Access: RWF
+// set rx fifo pull index
+#define PIO_RFPLI3_RXFIFO_PULL_INDEX_LSB  0
+#define PIO_RFPLI3_RXFIFO_PULL_INDEX_BITS 3
+#define PIO_RFPLI3_RXFIFO_PULL_INDEX_MASK 0x7
+
+/*******************************************************************************
+*                                    RFDC3                                     *
+*******************************************************************************/
+
+// RX FIFO data count register for SM3
+
+// Field: RFDC3_RX_FIFO_DATA_COUNT  Access: RWF
 // set how many data count in rx fifo
-#define PIO_FCTRL3_RX_FIFO_DATA_COUNT_LSB  13
-#define PIO_FCTRL3_RX_FIFO_DATA_COUNT_BITS 3
-#define PIO_FCTRL3_RX_FIFO_DATA_COUNT_MASK 0xe000
+#define PIO_RFDC3_RX_FIFO_DATA_COUNT_LSB  0
+#define PIO_RFDC3_RX_FIFO_DATA_COUNT_BITS 4
+#define PIO_RFDC3_RX_FIFO_DATA_COUNT_MASK 0xf
 
 /*******************************************************************************
 *                                  INSTRMEM0                                   *

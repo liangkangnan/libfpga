@@ -23,6 +23,8 @@ module pio #(
 	output wire [NUM_MACHINES-1:0]  pclk
 );
 
+	`include "fifo_config.vh"
+
 	// Shared instructions memory
 	wire [15:0] instr [0:31];
 
@@ -75,13 +77,13 @@ module pio #(
 	wire [31:0] pin_directions_wen  [0:NUM_MACHINES-1];
 	wire [31:0] pin_directions      [0:NUM_MACHINES-1];
 	wire [4:0]  pc                  [0:NUM_MACHINES-1];
-	wire [31:0] mdin                [0:NUM_MACHINES-1];
+	wire [FIFO_WIDTH-1:0] mdin      [0:NUM_MACHINES-1];
 	wire [31:0] mdout               [0:NUM_MACHINES-1];
-	wire [31:0] pdout               [0:NUM_MACHINES-1];
+	wire [FIFO_WIDTH-1:0] pdout     [0:NUM_MACHINES-1];
 	wire [7:0]  irq_flags_out       [0:NUM_MACHINES-1];
 	wire [7:0]  irq_flags_out_write [0:NUM_MACHINES-1];
-	wire [2:0]  rx_level            [0:NUM_MACHINES-1];
-	wire [2:0]  tx_level            [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL:0]  rx_level   [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL:0]  tx_level   [0:NUM_MACHINES-1];
 
 	wire [NUM_MACHINES-1:0]  mempty;
 	wire [NUM_MACHINES-1:0]  mfull;
@@ -106,37 +108,37 @@ module pio #(
 	reg [NUM_MACHINES-1:0]  fifo_tx_pull;
 	reg [NUM_MACHINES-1:0]  fifo_tx_empty;
 	reg [NUM_MACHINES-1:0]  fifo_tx_full;
-	reg [3:0]   fifo_tx_level [0:NUM_MACHINES-1];
-	reg [31:0]  fifo_tx_din   [0:NUM_MACHINES-1];
-	reg [31:0]  fifo_tx_dout  [0:NUM_MACHINES-1];
+	reg [4:0]             fifo_tx_level [0:NUM_MACHINES-1];
+	reg [FIFO_WIDTH-1:0]  fifo_tx_din   [0:NUM_MACHINES-1];
+	reg [FIFO_WIDTH-1:0]  fifo_tx_dout  [0:NUM_MACHINES-1];
 
 	reg [NUM_MACHINES-1:0]  fifo_rx_push;
 	reg [NUM_MACHINES-1:0]  fifo_rx_pull;
 	reg [NUM_MACHINES-1:0]  fifo_rx_empty;
 	reg [NUM_MACHINES-1:0]  fifo_rx_full;
-	reg [3:0]   fifo_rx_level [0:NUM_MACHINES-1];
-	reg [31:0]  fifo_rx_din   [0:NUM_MACHINES-1];
-	reg [31:0]  fifo_rx_dout  [0:NUM_MACHINES-1];
+	reg [4:0]             fifo_rx_level [0:NUM_MACHINES-1];
+	reg [FIFO_WIDTH-1:0]  fifo_rx_din   [0:NUM_MACHINES-1];
+	reg [FIFO_WIDTH-1:0]  fifo_rx_dout  [0:NUM_MACHINES-1];
 
-	wire [1:0] fctrl_txfifo_push_index     [0:NUM_MACHINES-1];
-	wire       fctrl_txfifo_push_index_wen [0:NUM_MACHINES-1];
-	wire [1:0] fctrl_txfifo_pull_index     [0:NUM_MACHINES-1];
-	wire       fctrl_txfifo_pull_index_wen [0:NUM_MACHINES-1];
-	wire [1:0] fctrl_rxfifo_push_index     [0:NUM_MACHINES-1];
-	wire       fctrl_rxfifo_push_index_wen [0:NUM_MACHINES-1];
-	wire [1:0] fctrl_rxfifo_pull_index     [0:NUM_MACHINES-1];
-	wire       fctrl_rxfifo_pull_index_wen [0:NUM_MACHINES-1];
-	wire       fctrl_txfifo_read_en        [0:NUM_MACHINES-1];
-	wire       fctrl_rxfifo_write_en       [0:NUM_MACHINES-1];
-	wire [2:0] fctrl_txfifo_data_count     [0:NUM_MACHINES-1];
-	wire       fctrl_txfifo_data_count_wen [0:NUM_MACHINES-1];
-	wire [2:0] fctrl_rxfifo_data_count     [0:NUM_MACHINES-1];
-	wire       fctrl_rxfifo_data_count_wen [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] fctrl_txfifo_push_index     [0:NUM_MACHINES-1];
+	wire                  fctrl_txfifo_push_index_wen [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] fctrl_txfifo_pull_index     [0:NUM_MACHINES-1];
+	wire                  fctrl_txfifo_pull_index_wen [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] fctrl_rxfifo_push_index     [0:NUM_MACHINES-1];
+	wire                  fctrl_rxfifo_push_index_wen [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] fctrl_rxfifo_pull_index     [0:NUM_MACHINES-1];
+	wire                  fctrl_rxfifo_pull_index_wen [0:NUM_MACHINES-1];
+	wire                  fctrl_txfifo_read_en        [0:NUM_MACHINES-1];
+	wire                  fctrl_rxfifo_write_en       [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL:0]   fctrl_txfifo_data_count     [0:NUM_MACHINES-1];
+	wire                  fctrl_txfifo_data_count_wen [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL:0]   fctrl_rxfifo_data_count     [0:NUM_MACHINES-1];
+	wire                  fctrl_rxfifo_data_count_wen [0:NUM_MACHINES-1];
 
-	wire [1:0] txfifo_pull_index_out [0:NUM_MACHINES-1];
-	wire [1:0] txfifo_push_index_out [0:NUM_MACHINES-1];
-	wire [1:0] rxfifo_pull_index_out [0:NUM_MACHINES-1];
-	wire [1:0] rxfifo_push_index_out [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] txfifo_pull_index_out [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] txfifo_push_index_out [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] rxfifo_pull_index_out [0:NUM_MACHINES-1];
+	wire [FIFO_LEVEL-1:0] rxfifo_push_index_out [0:NUM_MACHINES-1];
 
 	reg  [7:0] irq_pending;
 	wire [7:0] irq_pending_wdata;
@@ -201,7 +203,7 @@ module pio #(
 
 	(* mem2reg *) reg [15:0]  curr_instr      [0:NUM_MACHINES-1];
 
-	wire [127:0] fifo_rx_data_out [0:NUM_MACHINES-1];
+	wire [FIFO_WIDTH*FIFO_COUNT-1:0] fifo_rx_data_out [0:NUM_MACHINES-1];
 
 	integer i, k;
 	integer gpio_idx;
@@ -428,7 +430,10 @@ module pio #(
 				.full              (fifo_rx_full[j])
 			);
 
-			fifo fifo_tx (
+			fifo #(
+				.WIDTH(FIFO_WIDTH),
+				.COUNT(FIFO_COUNT)
+			) fifo_tx (
 				.clk                (clk),
 				.rst_n              (rst_n),
 				.reset              ((clear_txfifo[j] & clear_txfifo_en[j]) || fjoin_reset_fifo[j]),
@@ -455,7 +460,10 @@ module pio #(
 				.level              (tx_level[j])
 			);
 
-			fifo fifo_rx (
+			fifo #(
+				.WIDTH(FIFO_WIDTH),
+				.COUNT(FIFO_COUNT)
+			) fifo_rx (
 				.clk                (clk),
 				.rst_n              (rst_n),
 				.reset              ((clear_rxfifo[j] & clear_rxfifo_en[j]) || fjoin_reset_fifo[j]),
@@ -757,89 +765,89 @@ module pio #(
 		.fstat3_rxfull_i(fifo_rx_full[3]),
 		.fstat3_rxempty_i(fifo_rx_empty[3]),
 
-		.fctrl0_txfifo_push_index_i(txfifo_push_index_out[0]),
-		.fctrl0_txfifo_push_index_o(fctrl_txfifo_push_index[0]),
-		.fctrl0_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[0]),
-		.fctrl0_txfifo_pull_index_i(txfifo_pull_index_out[0]),
-		.fctrl0_txfifo_pull_index_o(fctrl_txfifo_pull_index[0]),
-		.fctrl0_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[0]),
 		.fctrl0_txfifo_read_en_o(fctrl_txfifo_read_en[0]),
-		.fctrl0_rxfifo_push_index_i(rxfifo_push_index_out[0]),
-		.fctrl0_rxfifo_push_index_o(fctrl_rxfifo_push_index[0]),
-		.fctrl0_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[0]),
-		.fctrl0_rxfifo_pull_index_i(rxfifo_pull_index_out[0]),
-		.fctrl0_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[0]),
-		.fctrl0_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[0]),
 		.fctrl0_rxfifo_write_en_o(fctrl_rxfifo_write_en[0]),
-		.fctrl0_tx_fifo_data_count_i(tx_level[0]),
-		.fctrl0_tx_fifo_data_count_o(fctrl_txfifo_data_count[0]),
-		.fctrl0_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[0]),
-		.fctrl0_rx_fifo_data_count_i(rx_level[0]),
-		.fctrl0_rx_fifo_data_count_o(fctrl_rxfifo_data_count[0]),
-		.fctrl0_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[0]),
+		.tfpsi0_txfifo_push_index_i(txfifo_push_index_out[0]),
+		.tfpsi0_txfifo_push_index_o(fctrl_txfifo_push_index[0]),
+		.tfpsi0_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[0]),
+		.tfpli0_txfifo_pull_index_i(txfifo_pull_index_out[0]),
+		.tfpli0_txfifo_pull_index_o(fctrl_txfifo_pull_index[0]),
+		.tfpli0_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[0]),
+		.tfdc0_tx_fifo_data_count_i(tx_level[0]),
+		.tfdc0_tx_fifo_data_count_o(fctrl_txfifo_data_count[0]),
+		.tfdc0_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[0]),
+		.rfpsi0_rxfifo_push_index_i(rxfifo_push_index_out[0]),
+		.rfpsi0_rxfifo_push_index_o(fctrl_rxfifo_push_index[0]),
+		.rfpsi0_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[0]),
+		.rfpli0_rxfifo_pull_index_i(rxfifo_pull_index_out[0]),
+		.rfpli0_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[0]),
+		.rfpli0_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[0]),
+		.rfdc0_rx_fifo_data_count_i(rx_level[0]),
+		.rfdc0_rx_fifo_data_count_o(fctrl_rxfifo_data_count[0]),
+		.rfdc0_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[0]),
 
-		.fctrl1_txfifo_push_index_i(txfifo_push_index_out[1]),
-		.fctrl1_txfifo_push_index_o(fctrl_txfifo_push_index[1]),
-		.fctrl1_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[1]),
-		.fctrl1_txfifo_pull_index_i(txfifo_pull_index_out[1]),
-		.fctrl1_txfifo_pull_index_o(fctrl_txfifo_pull_index[1]),
-		.fctrl1_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[1]),
 		.fctrl1_txfifo_read_en_o(fctrl_txfifo_read_en[1]),
-		.fctrl1_rxfifo_push_index_i(rxfifo_push_index_out[1]),
-		.fctrl1_rxfifo_push_index_o(fctrl_rxfifo_push_index[1]),
-		.fctrl1_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[1]),
-		.fctrl1_rxfifo_pull_index_i(rxfifo_pull_index_out[1]),
-		.fctrl1_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[1]),
-		.fctrl1_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[1]),
 		.fctrl1_rxfifo_write_en_o(fctrl_rxfifo_write_en[1]),
-		.fctrl1_tx_fifo_data_count_i(tx_level[1]),
-		.fctrl1_tx_fifo_data_count_o(fctrl_txfifo_data_count[1]),
-		.fctrl1_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[1]),
-		.fctrl1_rx_fifo_data_count_i(rx_level[1]),
-		.fctrl1_rx_fifo_data_count_o(fctrl_rxfifo_data_count[1]),
-		.fctrl1_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[1]),
+		.tfpsi1_txfifo_push_index_i(txfifo_push_index_out[1]),
+		.tfpsi1_txfifo_push_index_o(fctrl_txfifo_push_index[1]),
+		.tfpsi1_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[1]),
+		.tfpli1_txfifo_pull_index_i(txfifo_pull_index_out[1]),
+		.tfpli1_txfifo_pull_index_o(fctrl_txfifo_pull_index[1]),
+		.tfpli1_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[1]),
+		.tfdc1_tx_fifo_data_count_i(tx_level[1]),
+		.tfdc1_tx_fifo_data_count_o(fctrl_txfifo_data_count[1]),
+		.tfdc1_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[1]),
+		.rfpsi1_rxfifo_push_index_i(rxfifo_push_index_out[1]),
+		.rfpsi1_rxfifo_push_index_o(fctrl_rxfifo_push_index[1]),
+		.rfpsi1_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[1]),
+		.rfpli1_rxfifo_pull_index_i(rxfifo_pull_index_out[1]),
+		.rfpli1_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[1]),
+		.rfpli1_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[1]),
+		.rfdc1_rx_fifo_data_count_i(rx_level[1]),
+		.rfdc1_rx_fifo_data_count_o(fctrl_rxfifo_data_count[1]),
+		.rfdc1_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[1]),
 
-		.fctrl2_txfifo_push_index_i(txfifo_push_index_out[2]),
-		.fctrl2_txfifo_push_index_o(fctrl_txfifo_push_index[2]),
-		.fctrl2_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[2]),
-		.fctrl2_txfifo_pull_index_i(txfifo_pull_index_out[2]),
-		.fctrl2_txfifo_pull_index_o(fctrl_txfifo_pull_index[2]),
-		.fctrl2_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[2]),
 		.fctrl2_txfifo_read_en_o(fctrl_txfifo_read_en[2]),
-		.fctrl2_rxfifo_push_index_i(rxfifo_push_index_out[2]),
-		.fctrl2_rxfifo_push_index_o(fctrl_rxfifo_push_index[2]),
-		.fctrl2_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[2]),
-		.fctrl2_rxfifo_pull_index_i(rxfifo_pull_index_out[2]),
-		.fctrl2_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[2]),
-		.fctrl2_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[2]),
 		.fctrl2_rxfifo_write_en_o(fctrl_rxfifo_write_en[2]),
-		.fctrl2_tx_fifo_data_count_i(tx_level[2]),
-		.fctrl2_tx_fifo_data_count_o(fctrl_txfifo_data_count[2]),
-		.fctrl2_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[2]),
-		.fctrl2_rx_fifo_data_count_i(rx_level[2]),
-		.fctrl2_rx_fifo_data_count_o(fctrl_rxfifo_data_count[2]),
-		.fctrl2_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[2]),
+		.tfpsi2_txfifo_push_index_i(txfifo_push_index_out[2]),
+		.tfpsi2_txfifo_push_index_o(fctrl_txfifo_push_index[2]),
+		.tfpsi2_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[2]),
+		.tfpli2_txfifo_pull_index_i(txfifo_pull_index_out[2]),
+		.tfpli2_txfifo_pull_index_o(fctrl_txfifo_pull_index[2]),
+		.tfpli2_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[2]),
+		.tfdc2_tx_fifo_data_count_i(tx_level[2]),
+		.tfdc2_tx_fifo_data_count_o(fctrl_txfifo_data_count[2]),
+		.tfdc2_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[2]),
+		.rfpsi2_rxfifo_push_index_i(rxfifo_push_index_out[2]),
+		.rfpsi2_rxfifo_push_index_o(fctrl_rxfifo_push_index[2]),
+		.rfpsi2_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[2]),
+		.rfpli2_rxfifo_pull_index_i(rxfifo_pull_index_out[2]),
+		.rfpli2_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[2]),
+		.rfpli2_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[2]),
+		.rfdc2_rx_fifo_data_count_i(rx_level[2]),
+		.rfdc2_rx_fifo_data_count_o(fctrl_rxfifo_data_count[2]),
+		.rfdc2_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[2]),
 
-		.fctrl3_txfifo_push_index_i(txfifo_push_index_out[3]),
-		.fctrl3_txfifo_push_index_o(fctrl_txfifo_push_index[3]),
-		.fctrl3_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[3]),
-		.fctrl3_txfifo_pull_index_i(txfifo_pull_index_out[3]),
-		.fctrl3_txfifo_pull_index_o(fctrl_txfifo_pull_index[3]),
-		.fctrl3_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[3]),
 		.fctrl3_txfifo_read_en_o(fctrl_txfifo_read_en[3]),
-		.fctrl3_rxfifo_push_index_i(rxfifo_push_index_out[3]),
-		.fctrl3_rxfifo_push_index_o(fctrl_rxfifo_push_index[3]),
-		.fctrl3_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[3]),
-		.fctrl3_rxfifo_pull_index_i(rxfifo_pull_index_out[3]),
-		.fctrl3_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[3]),
-		.fctrl3_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[3]),
 		.fctrl3_rxfifo_write_en_o(fctrl_rxfifo_write_en[3]),
-		.fctrl3_tx_fifo_data_count_i(tx_level[3]),
-		.fctrl3_tx_fifo_data_count_o(fctrl_txfifo_data_count[3]),
-		.fctrl3_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[3]),
-		.fctrl3_rx_fifo_data_count_i(rx_level[3]),
-		.fctrl3_rx_fifo_data_count_o(fctrl_rxfifo_data_count[3]),
-		.fctrl3_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[3]),
+		.tfpsi3_txfifo_push_index_i(txfifo_push_index_out[3]),
+		.tfpsi3_txfifo_push_index_o(fctrl_txfifo_push_index[3]),
+		.tfpsi3_txfifo_push_index_wen(fctrl_txfifo_push_index_wen[3]),
+		.tfpli3_txfifo_pull_index_i(txfifo_pull_index_out[3]),
+		.tfpli3_txfifo_pull_index_o(fctrl_txfifo_pull_index[3]),
+		.tfpli3_txfifo_pull_index_wen(fctrl_txfifo_pull_index_wen[3]),
+		.tfdc3_tx_fifo_data_count_i(tx_level[3]),
+		.tfdc3_tx_fifo_data_count_o(fctrl_txfifo_data_count[3]),
+		.tfdc3_tx_fifo_data_count_wen(fctrl_txfifo_data_count_wen[3]),
+		.rfpsi3_rxfifo_push_index_i(rxfifo_push_index_out[3]),
+		.rfpsi3_rxfifo_push_index_o(fctrl_rxfifo_push_index[3]),
+		.rfpsi3_rxfifo_push_index_wen(fctrl_rxfifo_push_index_wen[3]),
+		.rfpli3_rxfifo_pull_index_i(rxfifo_pull_index_out[3]),
+		.rfpli3_rxfifo_pull_index_o(fctrl_rxfifo_pull_index[3]),
+		.rfpli3_rxfifo_pull_index_wen(fctrl_rxfifo_pull_index_wen[3]),
+		.rfdc3_rx_fifo_data_count_i(rx_level[3]),
+		.rfdc3_rx_fifo_data_count_o(fctrl_rxfifo_data_count[3]),
+		.rfdc3_rx_fifo_data_count_wen(fctrl_rxfifo_data_count_wen[3]),
 
 		.instrmem0_instr_o(instr[0]),
 		.instrmem1_instr_o(instr[1]),
