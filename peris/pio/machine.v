@@ -514,6 +514,12 @@ module machine (
                            endcase
                         1: case (mov_source) // X
                                 0: set_x(bit_op(in_pins, mov_op));      // PINS
+                                1: begin                                // X
+                                    if (mov_op == 2'b11)
+                                        decx = (x != 0);
+                                    else
+                                        set_x(bit_op(x, mov_op));
+                                end
                                 2: set_x(bit_op(y, mov_op));            // Y
                                 3: set_x(bit_op(null, mov_op));         // NULL
                                 6: set_x(bit_op(in_shift, mov_op));     // ISR
@@ -522,6 +528,12 @@ module machine (
                         2: case (mov_source) // Y
                                 0: set_y(bit_op(in_pins, mov_op));      // PINS
                                 1: set_y(bit_op(x, mov_op));            // X
+                                2: begin                                // Y
+                                    if (mov_op == 2'b11)
+                                        decy = (y != 0);
+                                    else
+                                        set_y(bit_op(y, mov_op));
+                                end
                                 3: set_y(bit_op(null, mov_op));         // NULL
                                 6: set_y(bit_op(in_shift, mov_op));     // ISR
                                 7: set_y(bit_op(out_shift, mov_op));    // OSR
