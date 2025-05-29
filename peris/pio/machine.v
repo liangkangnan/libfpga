@@ -20,6 +20,7 @@ module machine (
     input  wire [1:0]  mindex,
     input  wire [4:0]  wrap_top,
     input  wire [4:0]  wrap_bottom,
+    input  wire [4:0]  instr_offset,
     input  wire [4:0]  jmp_pin,
     input  wire        sideset_enable_bit,
     input  wire [4:0]  pins_out_base,
@@ -435,7 +436,7 @@ module machine (
                             4: begin jmp = (y != 0); decy = (y != 0); end          // Y--
                             5: jmp = (x != y);                                     // X != Y
                             6: jmp = pin_directions[jmp_pin] ? output_pins[jmp_pin] : input_pins[jmp_pin];   // PIN
-                            7: jmp = (osr_count < osr_threshold);                  // !OSRE(output shift register not empty)
+                            7: jmp = pin_directions[jmp_pin] ? !output_pins[jmp_pin] : !input_pins[jmp_pin]; // !PIN
                         endcase
                     end
                 WAIT: case (source2) // Source
@@ -637,6 +638,7 @@ module machine (
         .stalled    (waiting || auto || (imm & !jmp) || exec1 || delaying),
         .wrap_top   (wrap_top),
         .wrap_bottom(wrap_bottom),
+        .instr_offset(instr_offset),
         .dout       (pc)
     );
 

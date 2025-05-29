@@ -116,6 +116,7 @@ module pio_regs (
 	output reg  shiftctrl0_txfifo_shadow_update_o,
 	output reg shiftctrl0_txfifo_shadow_update_wen,
 	output reg shiftctrl0_txfifo_shadow_update_ren,
+	output reg [4:0] shiftctrl0_instr_offset_o,
 	output reg  shiftctrl0_fjoin_rx_o,
 	output reg  shiftctrl0_fjoin_tx_o,
 	output reg [15:0] instr0_instr_o,
@@ -190,6 +191,7 @@ module pio_regs (
 	output reg  shiftctrl1_txfifo_shadow_update_o,
 	output reg shiftctrl1_txfifo_shadow_update_wen,
 	output reg shiftctrl1_txfifo_shadow_update_ren,
+	output reg [4:0] shiftctrl1_instr_offset_o,
 	output reg  shiftctrl1_fjoin_rx_o,
 	output reg  shiftctrl1_fjoin_tx_o,
 	output reg [15:0] instr1_instr_o,
@@ -264,6 +266,7 @@ module pio_regs (
 	output reg  shiftctrl2_txfifo_shadow_update_o,
 	output reg shiftctrl2_txfifo_shadow_update_wen,
 	output reg shiftctrl2_txfifo_shadow_update_ren,
+	output reg [4:0] shiftctrl2_instr_offset_o,
 	output reg  shiftctrl2_fjoin_rx_o,
 	output reg  shiftctrl2_fjoin_tx_o,
 	output reg [15:0] instr2_instr_o,
@@ -338,6 +341,7 @@ module pio_regs (
 	output reg  shiftctrl3_txfifo_shadow_update_o,
 	output reg shiftctrl3_txfifo_shadow_update_wen,
 	output reg shiftctrl3_txfifo_shadow_update_ren,
+	output reg [4:0] shiftctrl3_instr_offset_o,
 	output reg  shiftctrl3_fjoin_rx_o,
 	output reg  shiftctrl3_fjoin_tx_o,
 	output reg [15:0] instr3_instr_o,
@@ -929,11 +933,13 @@ wire  shiftctrl0_txfifo_shadow_mode_wdata = wdata[12];
 wire  shiftctrl0_txfifo_shadow_mode_rdata;
 wire  shiftctrl0_txfifo_shadow_update_wdata = wdata[11];
 wire  shiftctrl0_txfifo_shadow_update_rdata;
+wire [4:0] shiftctrl0_instr_offset_wdata = wdata[10:6];
+wire [4:0] shiftctrl0_instr_offset_rdata;
 wire  shiftctrl0_fjoin_rx_wdata = wdata[1];
 wire  shiftctrl0_fjoin_rx_rdata;
 wire  shiftctrl0_fjoin_tx_wdata = wdata[0];
 wire  shiftctrl0_fjoin_tx_rdata;
-wire [31:0] __shiftctrl0_rdata = {shiftctrl0_osr_threshold_rdata, shiftctrl0_isr_threshold_rdata, shiftctrl0_out_shift_dir_rdata, shiftctrl0_in_shift_dir_rdata, shiftctrl0_auto_pull_rdata, shiftctrl0_auto_push_rdata, shiftctrl0_clear_rxfifo_rdata, shiftctrl0_clear_txfifo_rdata, 1'h0, shiftctrl0_txfifo_shadow_mode_rdata, shiftctrl0_txfifo_shadow_update_rdata, 9'h0, shiftctrl0_fjoin_rx_rdata, shiftctrl0_fjoin_tx_rdata};
+wire [31:0] __shiftctrl0_rdata = {shiftctrl0_osr_threshold_rdata, shiftctrl0_isr_threshold_rdata, shiftctrl0_out_shift_dir_rdata, shiftctrl0_in_shift_dir_rdata, shiftctrl0_auto_pull_rdata, shiftctrl0_auto_push_rdata, shiftctrl0_clear_rxfifo_rdata, shiftctrl0_clear_txfifo_rdata, 1'h0, shiftctrl0_txfifo_shadow_mode_rdata, shiftctrl0_txfifo_shadow_update_rdata, shiftctrl0_instr_offset_rdata, 4'h0, shiftctrl0_fjoin_rx_rdata, shiftctrl0_fjoin_tx_rdata};
 assign shiftctrl0_osr_threshold_rdata = shiftctrl0_osr_threshold_o;
 assign shiftctrl0_isr_threshold_rdata = shiftctrl0_isr_threshold_o;
 assign shiftctrl0_out_shift_dir_rdata = shiftctrl0_out_shift_dir_o;
@@ -944,6 +950,7 @@ assign shiftctrl0_clear_rxfifo_rdata = 1'h0;
 assign shiftctrl0_clear_txfifo_rdata = 1'h0;
 assign shiftctrl0_txfifo_shadow_mode_rdata = shiftctrl0_txfifo_shadow_mode_o;
 assign shiftctrl0_txfifo_shadow_update_rdata = shiftctrl0_txfifo_shadow_update_i;
+assign shiftctrl0_instr_offset_rdata = shiftctrl0_instr_offset_o;
 assign shiftctrl0_fjoin_rx_rdata = shiftctrl0_fjoin_rx_o;
 assign shiftctrl0_fjoin_tx_rdata = shiftctrl0_fjoin_tx_o;
 
@@ -1103,11 +1110,13 @@ wire  shiftctrl1_txfifo_shadow_mode_wdata = wdata[12];
 wire  shiftctrl1_txfifo_shadow_mode_rdata;
 wire  shiftctrl1_txfifo_shadow_update_wdata = wdata[11];
 wire  shiftctrl1_txfifo_shadow_update_rdata;
+wire [4:0] shiftctrl1_instr_offset_wdata = wdata[10:6];
+wire [4:0] shiftctrl1_instr_offset_rdata;
 wire  shiftctrl1_fjoin_rx_wdata = wdata[1];
 wire  shiftctrl1_fjoin_rx_rdata;
 wire  shiftctrl1_fjoin_tx_wdata = wdata[0];
 wire  shiftctrl1_fjoin_tx_rdata;
-wire [31:0] __shiftctrl1_rdata = {shiftctrl1_osr_threshold_rdata, shiftctrl1_isr_threshold_rdata, shiftctrl1_out_shift_dir_rdata, shiftctrl1_in_shift_dir_rdata, shiftctrl1_auto_pull_rdata, shiftctrl1_auto_push_rdata, shiftctrl1_clear_rxfifo_rdata, shiftctrl1_clear_txfifo_rdata, 1'h0, shiftctrl1_txfifo_shadow_mode_rdata, shiftctrl1_txfifo_shadow_update_rdata, 9'h0, shiftctrl1_fjoin_rx_rdata, shiftctrl1_fjoin_tx_rdata};
+wire [31:0] __shiftctrl1_rdata = {shiftctrl1_osr_threshold_rdata, shiftctrl1_isr_threshold_rdata, shiftctrl1_out_shift_dir_rdata, shiftctrl1_in_shift_dir_rdata, shiftctrl1_auto_pull_rdata, shiftctrl1_auto_push_rdata, shiftctrl1_clear_rxfifo_rdata, shiftctrl1_clear_txfifo_rdata, 1'h0, shiftctrl1_txfifo_shadow_mode_rdata, shiftctrl1_txfifo_shadow_update_rdata, shiftctrl1_instr_offset_rdata, 4'h0, shiftctrl1_fjoin_rx_rdata, shiftctrl1_fjoin_tx_rdata};
 assign shiftctrl1_osr_threshold_rdata = shiftctrl1_osr_threshold_o;
 assign shiftctrl1_isr_threshold_rdata = shiftctrl1_isr_threshold_o;
 assign shiftctrl1_out_shift_dir_rdata = shiftctrl1_out_shift_dir_o;
@@ -1118,6 +1127,7 @@ assign shiftctrl1_clear_rxfifo_rdata = 1'h0;
 assign shiftctrl1_clear_txfifo_rdata = 1'h0;
 assign shiftctrl1_txfifo_shadow_mode_rdata = shiftctrl1_txfifo_shadow_mode_o;
 assign shiftctrl1_txfifo_shadow_update_rdata = shiftctrl1_txfifo_shadow_update_i;
+assign shiftctrl1_instr_offset_rdata = shiftctrl1_instr_offset_o;
 assign shiftctrl1_fjoin_rx_rdata = shiftctrl1_fjoin_rx_o;
 assign shiftctrl1_fjoin_tx_rdata = shiftctrl1_fjoin_tx_o;
 
@@ -1277,11 +1287,13 @@ wire  shiftctrl2_txfifo_shadow_mode_wdata = wdata[12];
 wire  shiftctrl2_txfifo_shadow_mode_rdata;
 wire  shiftctrl2_txfifo_shadow_update_wdata = wdata[11];
 wire  shiftctrl2_txfifo_shadow_update_rdata;
+wire [4:0] shiftctrl2_instr_offset_wdata = wdata[10:6];
+wire [4:0] shiftctrl2_instr_offset_rdata;
 wire  shiftctrl2_fjoin_rx_wdata = wdata[1];
 wire  shiftctrl2_fjoin_rx_rdata;
 wire  shiftctrl2_fjoin_tx_wdata = wdata[0];
 wire  shiftctrl2_fjoin_tx_rdata;
-wire [31:0] __shiftctrl2_rdata = {shiftctrl2_osr_threshold_rdata, shiftctrl2_isr_threshold_rdata, shiftctrl2_out_shift_dir_rdata, shiftctrl2_in_shift_dir_rdata, shiftctrl2_auto_pull_rdata, shiftctrl2_auto_push_rdata, shiftctrl2_clear_rxfifo_rdata, shiftctrl2_clear_txfifo_rdata, 1'h0, shiftctrl2_txfifo_shadow_mode_rdata, shiftctrl2_txfifo_shadow_update_rdata, 9'h0, shiftctrl2_fjoin_rx_rdata, shiftctrl2_fjoin_tx_rdata};
+wire [31:0] __shiftctrl2_rdata = {shiftctrl2_osr_threshold_rdata, shiftctrl2_isr_threshold_rdata, shiftctrl2_out_shift_dir_rdata, shiftctrl2_in_shift_dir_rdata, shiftctrl2_auto_pull_rdata, shiftctrl2_auto_push_rdata, shiftctrl2_clear_rxfifo_rdata, shiftctrl2_clear_txfifo_rdata, 1'h0, shiftctrl2_txfifo_shadow_mode_rdata, shiftctrl2_txfifo_shadow_update_rdata, shiftctrl2_instr_offset_rdata, 4'h0, shiftctrl2_fjoin_rx_rdata, shiftctrl2_fjoin_tx_rdata};
 assign shiftctrl2_osr_threshold_rdata = shiftctrl2_osr_threshold_o;
 assign shiftctrl2_isr_threshold_rdata = shiftctrl2_isr_threshold_o;
 assign shiftctrl2_out_shift_dir_rdata = shiftctrl2_out_shift_dir_o;
@@ -1292,6 +1304,7 @@ assign shiftctrl2_clear_rxfifo_rdata = 1'h0;
 assign shiftctrl2_clear_txfifo_rdata = 1'h0;
 assign shiftctrl2_txfifo_shadow_mode_rdata = shiftctrl2_txfifo_shadow_mode_o;
 assign shiftctrl2_txfifo_shadow_update_rdata = shiftctrl2_txfifo_shadow_update_i;
+assign shiftctrl2_instr_offset_rdata = shiftctrl2_instr_offset_o;
 assign shiftctrl2_fjoin_rx_rdata = shiftctrl2_fjoin_rx_o;
 assign shiftctrl2_fjoin_tx_rdata = shiftctrl2_fjoin_tx_o;
 
@@ -1451,11 +1464,13 @@ wire  shiftctrl3_txfifo_shadow_mode_wdata = wdata[12];
 wire  shiftctrl3_txfifo_shadow_mode_rdata;
 wire  shiftctrl3_txfifo_shadow_update_wdata = wdata[11];
 wire  shiftctrl3_txfifo_shadow_update_rdata;
+wire [4:0] shiftctrl3_instr_offset_wdata = wdata[10:6];
+wire [4:0] shiftctrl3_instr_offset_rdata;
 wire  shiftctrl3_fjoin_rx_wdata = wdata[1];
 wire  shiftctrl3_fjoin_rx_rdata;
 wire  shiftctrl3_fjoin_tx_wdata = wdata[0];
 wire  shiftctrl3_fjoin_tx_rdata;
-wire [31:0] __shiftctrl3_rdata = {shiftctrl3_osr_threshold_rdata, shiftctrl3_isr_threshold_rdata, shiftctrl3_out_shift_dir_rdata, shiftctrl3_in_shift_dir_rdata, shiftctrl3_auto_pull_rdata, shiftctrl3_auto_push_rdata, shiftctrl3_clear_rxfifo_rdata, shiftctrl3_clear_txfifo_rdata, 1'h0, shiftctrl3_txfifo_shadow_mode_rdata, shiftctrl3_txfifo_shadow_update_rdata, 9'h0, shiftctrl3_fjoin_rx_rdata, shiftctrl3_fjoin_tx_rdata};
+wire [31:0] __shiftctrl3_rdata = {shiftctrl3_osr_threshold_rdata, shiftctrl3_isr_threshold_rdata, shiftctrl3_out_shift_dir_rdata, shiftctrl3_in_shift_dir_rdata, shiftctrl3_auto_pull_rdata, shiftctrl3_auto_push_rdata, shiftctrl3_clear_rxfifo_rdata, shiftctrl3_clear_txfifo_rdata, 1'h0, shiftctrl3_txfifo_shadow_mode_rdata, shiftctrl3_txfifo_shadow_update_rdata, shiftctrl3_instr_offset_rdata, 4'h0, shiftctrl3_fjoin_rx_rdata, shiftctrl3_fjoin_tx_rdata};
 assign shiftctrl3_osr_threshold_rdata = shiftctrl3_osr_threshold_o;
 assign shiftctrl3_isr_threshold_rdata = shiftctrl3_isr_threshold_o;
 assign shiftctrl3_out_shift_dir_rdata = shiftctrl3_out_shift_dir_o;
@@ -1466,6 +1481,7 @@ assign shiftctrl3_clear_rxfifo_rdata = 1'h0;
 assign shiftctrl3_clear_txfifo_rdata = 1'h0;
 assign shiftctrl3_txfifo_shadow_mode_rdata = shiftctrl3_txfifo_shadow_mode_o;
 assign shiftctrl3_txfifo_shadow_update_rdata = shiftctrl3_txfifo_shadow_update_i;
+assign shiftctrl3_instr_offset_rdata = shiftctrl3_instr_offset_o;
 assign shiftctrl3_fjoin_rx_rdata = shiftctrl3_fjoin_rx_o;
 assign shiftctrl3_fjoin_tx_rdata = shiftctrl3_fjoin_tx_o;
 
@@ -2009,6 +2025,7 @@ always @ (posedge clk or negedge rst_n) begin
 		shiftctrl0_auto_pull_o <= 1'h0;
 		shiftctrl0_auto_push_o <= 1'h0;
 		shiftctrl0_txfifo_shadow_mode_o <= 1'h0;
+		shiftctrl0_instr_offset_o <= 5'h0;
 		shiftctrl0_fjoin_rx_o <= 1'h0;
 		shiftctrl0_fjoin_tx_o <= 1'h0;
 		fctrl0_txfifo_read_en_o <= 1'h0;
@@ -2038,6 +2055,7 @@ always @ (posedge clk or negedge rst_n) begin
 		shiftctrl1_auto_pull_o <= 1'h0;
 		shiftctrl1_auto_push_o <= 1'h0;
 		shiftctrl1_txfifo_shadow_mode_o <= 1'h0;
+		shiftctrl1_instr_offset_o <= 5'h0;
 		shiftctrl1_fjoin_rx_o <= 1'h0;
 		shiftctrl1_fjoin_tx_o <= 1'h0;
 		fctrl1_txfifo_read_en_o <= 1'h0;
@@ -2067,6 +2085,7 @@ always @ (posedge clk or negedge rst_n) begin
 		shiftctrl2_auto_pull_o <= 1'h0;
 		shiftctrl2_auto_push_o <= 1'h0;
 		shiftctrl2_txfifo_shadow_mode_o <= 1'h0;
+		shiftctrl2_instr_offset_o <= 5'h0;
 		shiftctrl2_fjoin_rx_o <= 1'h0;
 		shiftctrl2_fjoin_tx_o <= 1'h0;
 		fctrl2_txfifo_read_en_o <= 1'h0;
@@ -2096,6 +2115,7 @@ always @ (posedge clk or negedge rst_n) begin
 		shiftctrl3_auto_pull_o <= 1'h0;
 		shiftctrl3_auto_push_o <= 1'h0;
 		shiftctrl3_txfifo_shadow_mode_o <= 1'h0;
+		shiftctrl3_instr_offset_o <= 5'h0;
 		shiftctrl3_fjoin_rx_o <= 1'h0;
 		shiftctrl3_fjoin_tx_o <= 1'h0;
 		fctrl3_txfifo_read_en_o <= 1'h0;
@@ -2224,6 +2244,8 @@ always @ (posedge clk or negedge rst_n) begin
 		if (__shiftctrl0_wen)
 			shiftctrl0_txfifo_shadow_mode_o <= shiftctrl0_txfifo_shadow_mode_wdata;
 		if (__shiftctrl0_wen)
+			shiftctrl0_instr_offset_o <= shiftctrl0_instr_offset_wdata;
+		if (__shiftctrl0_wen)
 			shiftctrl0_fjoin_rx_o <= shiftctrl0_fjoin_rx_wdata;
 		if (__shiftctrl0_wen)
 			shiftctrl0_fjoin_tx_o <= shiftctrl0_fjoin_tx_wdata;
@@ -2281,6 +2303,8 @@ always @ (posedge clk or negedge rst_n) begin
 			shiftctrl1_auto_push_o <= shiftctrl1_auto_push_wdata;
 		if (__shiftctrl1_wen)
 			shiftctrl1_txfifo_shadow_mode_o <= shiftctrl1_txfifo_shadow_mode_wdata;
+		if (__shiftctrl1_wen)
+			shiftctrl1_instr_offset_o <= shiftctrl1_instr_offset_wdata;
 		if (__shiftctrl1_wen)
 			shiftctrl1_fjoin_rx_o <= shiftctrl1_fjoin_rx_wdata;
 		if (__shiftctrl1_wen)
@@ -2340,6 +2364,8 @@ always @ (posedge clk or negedge rst_n) begin
 		if (__shiftctrl2_wen)
 			shiftctrl2_txfifo_shadow_mode_o <= shiftctrl2_txfifo_shadow_mode_wdata;
 		if (__shiftctrl2_wen)
+			shiftctrl2_instr_offset_o <= shiftctrl2_instr_offset_wdata;
+		if (__shiftctrl2_wen)
 			shiftctrl2_fjoin_rx_o <= shiftctrl2_fjoin_rx_wdata;
 		if (__shiftctrl2_wen)
 			shiftctrl2_fjoin_tx_o <= shiftctrl2_fjoin_tx_wdata;
@@ -2397,6 +2423,8 @@ always @ (posedge clk or negedge rst_n) begin
 			shiftctrl3_auto_push_o <= shiftctrl3_auto_push_wdata;
 		if (__shiftctrl3_wen)
 			shiftctrl3_txfifo_shadow_mode_o <= shiftctrl3_txfifo_shadow_mode_wdata;
+		if (__shiftctrl3_wen)
+			shiftctrl3_instr_offset_o <= shiftctrl3_instr_offset_wdata;
 		if (__shiftctrl3_wen)
 			shiftctrl3_fjoin_rx_o <= shiftctrl3_fjoin_rx_wdata;
 		if (__shiftctrl3_wen)

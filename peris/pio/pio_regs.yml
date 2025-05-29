@@ -168,6 +168,8 @@ regs:
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: [10, 6], name: instr_offset, access: rw, rst: 0,
+        info: "The instr start offset in instr memory."}
       - {b: 1, name: fjoin_rx, access: rw, rst: 0,
         info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
       - {b: 0, name: fjoin_tx, access: rw, rst: 0,
@@ -295,6 +297,8 @@ regs:
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: [10, 6], name: instr_offset, access: rw, rst: 0,
+        info: "The instr start offset in instr memory."}
       - {b: 1, name: fjoin_rx, access: rw, rst: 0,
         info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
       - {b: 0, name: fjoin_tx, access: rw, rst: 0,
@@ -422,6 +426,8 @@ regs:
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: [10, 6], name: instr_offset, access: rw, rst: 0,
+        info: "The instr start offset in instr memory."}
       - {b: 1, name: fjoin_rx, access: rw, rst: 0,
         info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
       - {b: 0, name: fjoin_tx, access: rw, rst: 0,
@@ -549,6 +555,8 @@ regs:
         info: "Use shadow mode in txfifo."}
       - {b: 11, name: txfifo_shadow_update, access: rwf, rst: 0,
         info: "Use shadow TX FIFO data to update worked TX FIFO data"}
+      - {b: [10, 6], name: instr_offset, access: rw, rst: 0,
+        info: "The instr start offset in instr memory."}
       - {b: 1, name: fjoin_rx, access: rw, rst: 0,
         info: "When 1, RX FIFO steals the TX FIFO’s storage, and becomes twice as deep."}
       - {b: 0, name: fjoin_tx, access: rw, rst: 0,

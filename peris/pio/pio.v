@@ -57,6 +57,7 @@ module pio #(
 
 	wire [4:0]   wrap_top        [0:NUM_MACHINES-1];
 	wire [4:0]   wrap_bottom     [0:NUM_MACHINES-1];
+	wire [4:0]   instr_offset    [0:NUM_MACHINES-1];
 	wire [31:0]  div             [0:NUM_MACHINES-1];
 	wire [4:0]   pins_in_base    [0:NUM_MACHINES-1];
 	wire [4:0]   pins_out_base   [0:NUM_MACHINES-1];
@@ -404,6 +405,7 @@ module pio #(
 				.imm               (imm[j]),
 				.wrap_top          (wrap_top[j]),
 				.wrap_bottom       (wrap_bottom[j]),
+				.instr_offset      (instr_offset[j]),
 				.pins_out_base     (pins_out_base[j]),
 				.pins_out_count    (pins_out_count[j]),
 				.pins_set_base     (pins_set_base[j]),
@@ -525,6 +527,11 @@ module pio #(
 		.shiftctrl2_fjoin_tx_o(fjoin_tx[2]),
 		.shiftctrl3_fjoin_rx_o(fjoin_rx[3]),
 		.shiftctrl3_fjoin_tx_o(fjoin_tx[3]),
+
+		.shiftctrl0_instr_offset_o(instr_offset[0]),
+		.shiftctrl1_instr_offset_o(instr_offset[1]),
+		.shiftctrl2_instr_offset_o(instr_offset[2]),
+		.shiftctrl3_instr_offset_o(instr_offset[3]),
 
 		.irq_inte_sm3_txempty_o(irq_inte_sm3_txempty),
 		.irq_inte_sm2_txempty_o(irq_inte_sm2_txempty),
