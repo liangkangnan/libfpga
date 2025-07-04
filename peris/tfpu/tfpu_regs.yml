@@ -1,0 +1,22 @@
+name: tfpu
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: csr
+    info: Control and status register
+    bits:
+      - {b: [4, 1], name: op, access: rw, info: "Operate type"}
+      - {b: 0, name: start, access: rwf, info: "Write 1 to start op, self clear when completed."}
+  - name: op_a
+    info: Operand a register
+    bits:
+      - {b: [31, 0], access: rw, rst: 0}
+  - name: op_b
+    info: Operand b register
+    bits:
+      - {b: [31, 0], access: rw, rst: 0}
+  - name: res_z
+    info: Operand result register
+    bits:
+      - {b: [31, 0], access: rf, rst: 0}
