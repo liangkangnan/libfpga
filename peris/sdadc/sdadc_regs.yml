@@ -1,0 +1,23 @@
+name: sdadc
+bus: apb
+addr: 16
+data: 32
+regs:
+  - name: csr
+    info: Control and status register
+    bits:
+      - {b: [8, 6], name: adc_ava, access: rw, rst: 3, info: "Set the avarage count of adc data."}
+      - {b: 5, name: rst_fifo, access: rwf, info: "Write 1 to reset data fifo."}
+      - {b: 4, name: fifo_full, access: rov, rst: 0, info: "If 1, the received data fifo is full"}
+      - {b: 3, name: fifo_empty, access: rov, rst: 1, info: "If 1, the received data fifo is empty"}
+      - {b: 2, name: int_pend, access: rwf, info: "If 0, SCLK low when idle. If 1, high when idle."}
+      - {b: 1, name: int_en, access: rw, info: "If 1, interrupt signal when convert completed."}
+      - {b: 0, name: enable, access: rw, info: "Write 1 to enable sdadc module"}
+  - name: div
+    info: Clock divider register
+    bits:
+      - {b: [7, 0], access: rw, rst: 1}
+  - name: data
+    info: "ADC data FIFO"
+    bits:
+      - {b: [15, 0], access: rf}
